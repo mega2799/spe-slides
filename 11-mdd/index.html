@@ -1,0 +1,1810 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+<title>Model Driven Development</title>
+<meta name="description" content="Practical introduction to Model Driven Development">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/reveal-js/dist/reveal.css">
+  <link rel="stylesheet" href="/css/custom-theme.min.f2c7adbc4e1966516650f994979920854f1f6804d229d73c7cb5f507ac9e61f7.css" id="theme"><link rel="stylesheet" href="/highlight-js/default.min.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/DanySK/css-blur-animation/master/blur.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<script src="https://unibo-spe.github.io//plantuml.js"></script>
+
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><style>
+.reveal blockquote {
+    font-family: 'Georgia';
+}
+</style>
+<h1 id="model-driven-development">Model Driven Development</h1>
+</section><section>
+<h2 id="lecture-goals">Lecture goals</h2>
+<ul>
+<li>Understand <strong>metamodelling</strong></li>
+<li>Understand <strong>domain specific languages</strong></li>
+<li>Practice with <strong>model driven development</strong> in <em>Xtext</em></li>
+</ul>
+</section><section>
+<h2 id="meta-modelling-nomenclature">Meta-modelling nomenclature</h2>
+<ol start="0">
+<li>
+<p>(Abstract) <strong>Language</strong> $\approx$ (abstract) <em>syntax</em> + <em>semantics</em></p>
+</li>
+<li>
+<p><strong>Model</strong> $\approx$ the abstract language by which we describe the possible entities involved in a <strong>domain</strong></p>
+<ul>
+<li>the model <strong>abstracts</strong> a number of similar systems rooted in the domain</li>
+<li>each system is an <em>instance</em> of the model it has been designed from</li>
+<li>a model is a <em>template</em> for several systems</li>
+</ul>
+</li>
+<li>
+<p>In which <em>language</em> is the model <strong>expressed</strong>?</p>
+<ul>
+<li><strong>Meta-model</strong> $\approx$ the abstract language by which we describe <strong>models</strong></li>
+<li>for instance <strong>UML</strong> is the meta-model behind <strong>object-oriented programming</strong>
+<ul>
+<li>UML $\equiv$ <a href="https://www.uml.org/">Unified Modeling Language</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>In which language is the <em>meta</em>-model expressed?</p>
+<ul>
+<li><strong>Meta-meta-model</strong> $\approx$ the abstract language by which we describe <strong>meta-models</strong></li>
+<li>for instance <strong>MOF</strong> is the meta-meta-model behind <strong>UML</strong> according to <strong>OMG</strong>
+<ul>
+<li>MOF $\equiv$ <a href="https://www.omg.org/spec/MOF">Meta-Object Facility</a></li>
+<li>OMG $\equiv$ <a href="https://www.omg.org/">Object Management Group</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="meta-model-hierarchy">Meta-model hierarchy</h2>
+<p>cf. <a href="https://www.omg.org/ocup-2/documents/Meta-ModelingAndtheMOF.pdf">https://www.omg.org/ocup-2/documents/Meta-ModelingAndtheMOF.pdf</a></p>
+<p><img src="metamodelling-architecture.png" alt="Meta-modelling architecture concept"></p>
+</section><section>
+<h2 id="meta-model-hierarchy-example">Meta-model hierarchy example</h2>
+<p><img src="metamodelling-architecture-example.png" alt="Meta-modelling architecture example"></p>
+</section><section>
+<h2 id="why-are-meta-models-important">Why are meta-models important?</h2>
+<ul>
+<li>
+<p><strong>Meta-models</strong> are the very first thing you should try to identify whenever approaching a new <strong>technology</strong></p>
+</li>
+<li>
+<p>If you grasp the meta-model, you grasp the <strong>essence</strong> of the technology</p>
+<ul>
+<li>which may be same for many other technologies</li>
+</ul>
+</li>
+<li>
+<p>E.g. after you learned the <em>basics of OOP</em> (classes, methods, objects, etc.) you may easily learn <em>any</em> <strong>other OOP language</strong></p>
+<ul>
+<li>by simply asking yourself how <em>each meta-model element</em> is <strong>expressed</strong> in the new language
+<ul>
+<li>e.g. how are classes / methods / objects expressed in the new language?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>When you model a domain (e.g. with DDD) you are always exploiting some <strong>meta-model</strong></p>
+<ul>
+<li>whether you are aware of it or not</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="model-driven-whatever">Model-driven whatever</h2>
+<ul>
+<li>
+<p>Several, slightly similar names, make create <em>confusion</em></p>
+<ul>
+<li>e.g. model-driven engineering / development / architecture / etc.</li>
+</ul>
+</li>
+<li>
+<p>Please read <em>Martin Fowler</em>’s article on <a href="https://martinfowler.com/bliki/ModelDrivenArchitecture.html">Model-Driven Software Architecture</a> to clarify</p>
+</li>
+<li>
+<p>Despite the name the key ideas can be summarised as follow:</p>
+<ol>
+<li>
+<p><em>software engineering</em> workflow should start by <strong>modelling the domain</strong> at hand carefully</p>
+<ul>
+<li>e.g. with DDD</li>
+<li>as opposed to focussing on algorithms and data structures</li>
+</ul>
+</li>
+<li>
+<p>the production of a runnable implementation should be <strong>automated</strong> as much as possible</p>
+<ul>
+<li>e.g. by <strong>generating</strong> code from models</li>
+<li>as opposed to writing code by hand</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</section><section>
+<h2 id="about-code-generation-from-models">About code generation from models</h2>
+<ul>
+<li>
+<p>Assumption: the model is expressed by means of some <strong>formal language</strong></p>
+</li>
+<li>
+<p><strong>Formal</strong> language $\approx$ interpretable by a machine</p>
+</li>
+<li>
+<p>Formality is a <strong>prerequisite</strong> for <strong>automation</strong></p>
+<ol>
+<li>the model is <strong>parsed</strong> by a machine</li>
+<li>the model is <strong>transformed</strong> into another formal language (e.g. <em>OO programming language</em>)</li>
+<li>the transformed model is <strong>rendered</strong> into a file (e.g. <em>source code</em>)</li>
+</ol>
+</li>
+<li>
+<p>Is <strong>UML</strong> adequate? Is it the only choice? <em>Any alternative?</em></p>
+<ul>
+<li>UML has a formal syntax and semantics (reified into <strong>graphical representation rules</strong>)</li>
+<li><strong>rarely enforced</strong> by software tools</li>
+<li>furthermore UML is focussing on <strong>software</strong>
+<ul>
+<li>only practical for <em>software engineers</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="towards-domain-specific-languages">Towards domain specific languages</h2>
+<ul>
+<li>
+<p><strong>Domain-specific Languages</strong> (DSL) are <em>programming</em> / <em>description</em> / <em>specification languages</em> targetting one <strong>particular</strong> class of problems</p>
+<ul>
+<li>e.g. they are <em>not</em> meant to address all possible problems, but just the ones they are designed for</li>
+</ul>
+</li>
+<li>
+<p>As opposed to <strong>general-purpose languages</strong> (GPL) which are targetting <strong>as many</strong> classes of problems <strong>as possible</strong></p>
+<ul>
+<li>the programming languages you learned so far are GPL</li>
+</ul>
+</li>
+<li>
+<p>DSL may act as <strong>custom meta-models</strong> for a given domain</p>
+</li>
+<li>
+<p>Examples of DSLs you may already know:</p>
+<ul>
+<li><em>regular expressions</em> for text processing</li>
+<li><em>SQL</em> for database querying</li>
+<li><em>CSS</em> for styling web pages</li>
+<li><em>HTML</em> for describing web pages content</li>
+<li><em>DOT</em> for graph visualisation</li>
+<li><em>PlantUML</em> for UML diagrams visualisation</li>
+<li><em>Gherkin</em> for Behavior-Driven Development (BDD)</li>
+<li><em>VHDL</em> for hardware description</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="dsl-examples-pt-1">DSL Examples (pt. 1)</h2>
+<h3 id="dot-a-dsl-to-visualise-graphs">DOT: a DSL to visualise graphs</h3>
+<div class="multiCol">
+    <div class="col  ">
+    <pre tabindex="0"><code class="nohighlight" data-noescape="">digraph G {
+    size ="4,4";
+    main [shape=box];
+    main -&gt; parse [weight=8];
+    parse -&gt; execute;
+    main -&gt; init [style=dotted];
+    main -&gt; cleanup;
+    execute -&gt; { make_string; printf}
+    init -&gt; make_string;
+    edge [color=red];
+    main -&gt; printf [style=bold,label="100 times"];
+    make_string [label="make a string"];
+    node [shape=box,style=filled,color=".7 .3 1.0"];
+    execute -&gt; compare;
+}
+</code></pre>
+</div>
+<div class="col  ">
+    <p><img src="./dot-examle.svg" alt="Graphical representation of the DOT code on the left"></p>
+</div>
+</div>
+<ul>
+<li>
+<p>DOT is a language that can describe graphs, for the sake of their visualisation</p>
+</li>
+<li>
+<p>The most common implementation is the <a href="https://graphviz.org/">Graphviz toolkit</a></p>
+</li>
+</ul>
+</section><section>
+<h2 id="dsl-examples-pt-2">DSL Examples (pt. 2)</h2>
+<h3 id="plantuml-a-dsl-to-visualise-uml-diagrams">PlantUML: a DSL to visualise UML diagrams</h3>
+<div class="multiCol">
+    <div class="col  ">
+    <pre tabindex="0"><code class="nohighlight" data-noescape="">interface Customer {
+    + CustomerID getID()
+    + String getName()
+    + void **setName**(name: String)
+    + String getEmail()
+    + void **setEmail**(email: String)
+}
+<p>note left: Entity</p>
+<p>interface CustomerID {
++ Object getValue()
+}
+note right: Value Object</p>
+<p>interface TaxCode {
++ String getValue()
+}
+note left: Value Object</p>
+<p>interface VatNumber {
++ long getValue()
+}
+note right: Value Object</p>
+<p>VatNumber -d-|&gt; CustomerID
+TaxCode -d-|&gt; CustomerID</p>
+</code><p><code class="nohighlight" data-noescape="">Customer *-r- CustomerID
+</code></p></pre><p></p>
+</div>
+<div class="col  ">
+    <figure id="plantuml-figure-0" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+<p>interface Customer {
++ CustomerID getID()
++ String getName()
++ void <strong>setName</strong>(name: String)
++ String getEmail()
++ void <strong>setEmail</strong>(email: String)
+}
+note left: Entity</p>
+<p>interface CustomerID {
++ Object getValue()
+}
+note right: Value Object</p>
+<p>interface TaxCode {
++ String getValue()
+}
+note left: Value Object</p>
+<p>interface VatNumber {
++ long getValue()
+}
+note right: Value Object</p>
+<p>VatNumber -d-|&gt; CustomerID
+TaxCode -d-|&gt; CustomerID</p>
+<p>Customer *-r- CustomerID</p>
+</figure>
+<script>
+    handlePlantumlFigureByID("plantuml-figure-0");
+</script>
+</div>
+</div>
+</section><section>
+<h2 id="dsl-examples-pt-3">DSL Examples (pt. 3)</h2>
+<h3 id="gherkin-a-dsl-to-write-bdd-tests-in-a-human-friendly-way">Gherkin: a DSL to write BDD tests in a human-friendly way</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">Scenario:</span><span style="color:#06b;font-weight:bold"> Verify withdraw at the ATM works correctly
+</span></span></span><span style="display:flex;"><span><span style="color:#06b;font-weight:bold"></span><span style="color:#080;font-weight:bold">Given </span><span style="color:#06b;font-weight:bold">John has </span><span style="color:#d20;background-color:#fff0f0">500</span><span style="color:#06b;font-weight:bold">$ on his account
+</span></span></span><span style="display:flex;"><span><span style="color:#06b;font-weight:bold"></span><span style="color:#080;font-weight:bold">When </span><span style="color:#06b;font-weight:bold">John ask to withdraw </span><span style="color:#d20;background-color:#fff0f0">200</span><span style="color:#06b;font-weight:bold">$
+</span></span></span><span style="display:flex;"><span><span style="color:#06b;font-weight:bold"></span><span style="color:#080;font-weight:bold">And </span><span style="color:#06b;font-weight:bold">John inserts the correct PIN
+</span></span></span><span style="display:flex;"><span><span style="color:#06b;font-weight:bold"></span><span style="color:#080;font-weight:bold">Then </span><span style="color:#d20;background-color:#fff0f0">200</span><span style="color:#06b;font-weight:bold">$ are dispensed by the ATM
+</span></span></span><span style="display:flex;"><span><span style="color:#06b;font-weight:bold"></span><span style="color:#080;font-weight:bold">And </span><span style="color:#06b;font-weight:bold">John has </span><span style="color:#d20;background-color:#fff0f0">300</span><span style="color:#06b;font-weight:bold">$ on his account
+</span></span></span></code></pre></div><ul>
+<li>
+<p>Gherkin is a language that can describe <strong>behavioural tests</strong> for software systems</p>
+<ul>
+<li>i.e. what system should do in given scenario</li>
+</ul>
+</li>
+<li>
+<p>Syntax if very flexible and it seems like <em>natural language</em></p>
+</li>
+<li>
+<p>Stakeholders and engineer will agree on a set of <strong>behavioural specifications</strong> for the system</p>
+<ul>
+<li>written in Gherking</li>
+</ul>
+</li>
+<li>
+<p>The most common implementation is <a href="https://cucumber.io/">Cucumber</a></p>
+<ul>
+<li>allowing the semi-automated translation of Gherkin specifications into <strong>executable tests</strong></li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="dsl-examples-pt-4">DSL Examples (pt. 4)</h2>
+<h3 id="vhdl-a-dsl-to-design-hardware-circuits">VHDL: a DSL to design hardware circuits</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>DFF : <span style="color:#080;font-weight:bold">process</span>(RST, CLK) <span style="color:#080;font-weight:bold">is</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">begin</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">if</span> RST = <span style="color:#d20;background-color:#fff0f0">'1'</span> <span style="color:#080;font-weight:bold">then</span>
+</span></span><span style="display:flex;"><span>Q &lt;= <span style="color:#d20;background-color:#fff0f0">'0'</span>;
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">elsif</span> rising_edge(CLK) <span style="color:#080;font-weight:bold">then</span>
+</span></span><span style="display:flex;"><span>Q &lt;= D;
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">end</span> <span style="color:#080;font-weight:bold">if</span>;
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">end</span> <span style="color:#080;font-weight:bold">process</span> <span style="color:#b06;font-weight:bold">DFF</span>;
+</span></span></code></pre></div><ul>
+<li>
+<p>VHDL is a language that can describe <strong>hardware circuits</strong></p>
+<ul>
+<li>i.e. the logic gates and their interconnections</li>
+</ul>
+</li>
+<li>
+<p>Seems like an ordinary programming language, but:</p>
+<ul>
+<li>“variables” are indeed signals</li>
+<li>“functions” are indeed circuits</li>
+</ul>
+</li>
+<li>
+<p>Technologies exist to <strong>automatically translate</strong> VHDL into <strong>hardware circuits</strong></p>
+<ul>
+<li>e.g. <a href="https://www.xilinx.com/products/design-tools/vivado.html">Xilinx Vivado</a></li>
+</ul>
+</li>
+<li>
+<p>… or to <strong>simulate</strong> the behaviour of the circuit (either <em>in software</em> or <em>in FPGA</em>)</p>
+</li>
+</ul>
+</section><section>
+<h2 id="dsl-examples-pt-5">DSL Examples (pt. 5)</h2>
+<h3 id="strumentahttpsstrumentacoms-dsl-for-financial-accounting"><a href="https://strumenta.com">Strumenta</a>’s DSL for financial accounting</h3>
+<p>Details here: <a href="https://tomassetti.me/financial-accounting-dsl">https://tomassetti.me/financial-accounting-dsl</a></p>
+<blockquote>
+<p><strong>Goal</strong>: use a DSL to describe taxes, pension contributions, and general financial calculations</p>
+</blockquote>
+<pre tabindex="0"><code>pension contribution InpsTerziario paid by owner {
+    considered_salary = (taxable of IRES for employer - amount of IRES for employer - amount of IRAP for employer) by ownership share
+    rate = brackets [to 46,123] -&gt; 22.74%,
+                    [to 76,872] -&gt; 23.74%,
+                    [above]     -&gt; 0%
+    amount = (rate for considered_salary) with minimum 3,535.61
+}
+
+pension contribution InpsGLA paid by employer 2/3 and employee 1/3 {
+    considered_salary = gross_compensation of employee
+    rate = brackets [to 100,323] -&gt; 27.72%,
+                    [above]      -&gt; 0%
+    amount = rate for considered_salary
+}
+</code></pre>
+</section>
+</section><section>
+<h2 id="benefits-of-adopting-dsl">Benefits of adopting DSL</h2>
+<ol>
+<li>
+<p>To communicate with domain experts in their own language</p>
+<ul>
+<li>e.g. Gherkin is a language that can be understood by both engineers and stakeholders</li>
+</ul>
+</li>
+<li>
+<p>To let domain experts <strong>write</strong> the specifications (i.e. the model) of the system they want</p>
+<ul>
+<li>hence reducing ambiguities among stakeholders and engineers</li>
+</ul>
+</li>
+<li>
+<p>To focus on the <strong>domain</strong> rather than on the <strong>implementation</strong></p>
+</li>
+<li>
+<p>To hide the <strong>implementation details</strong> from the domain experts</p>
+<ul>
+<li>e.g. exposing only business-related concepts, at the domain level</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="dsl-vs-gpl">DSL vs. GPL</h2>
+<ul>
+<li>
+<p>DSLs are <strong>not</strong> a replacement for GPLs</p>
+<ul>
+<li>they are <strong>complementary</strong></li>
+</ul>
+</li>
+<li>
+<p>Yet the difference is fuzzy, so lets try to clarify:</p>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center"></th>
+          <th style="text-align: center"><strong>GPL</strong></th>
+          <th style="text-align: center"><strong>DSL</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><strong>Domain</strong></td>
+          <td style="text-align: center">any</td>
+          <td style="text-align: center">clear boundary</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><strong>Syntactical constructs</strong></td>
+          <td style="text-align: center">many and composable</td>
+          <td style="text-align: center">few and static</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><strong>Expressiveness</strong></td>
+          <td style="text-align: center">Turing-complete</td>
+          <td style="text-align: center">possibly, less than Turing-complete</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><strong>Customisability</strong></td>
+          <td style="text-align: center">maximised</td>
+          <td style="text-align: center">minimised / confined / absent</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><strong>Defined by</strong></td>
+          <td style="text-align: center">companies or committees</td>
+          <td style="text-align: center">teams of domain expertes</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><strong>User base</strong></td>
+          <td style="text-align: center">large, anonymous, widespread</td>
+          <td style="text-align: center">small, accessible, local</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><strong>Evolution</strong></td>
+          <td style="text-align: center">slow, well-structured</td>
+          <td style="text-align: center">fast-paced</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><strong>Deprecation</strong></td>
+          <td style="text-align: center">very slow</td>
+          <td style="text-align: center">feasible, often abrupt</td>
+      </tr>
+  </tbody>
+</table>
+</section><section>
+<h1 id="dsl-engineering">DSL Engineering</h1>
+</section><section>
+<h2 id="semantics-of-dsl">Semantics of DSL</h2>
+<ul>
+<li>
+<p>Most often, the focus is on the <strong>syntax</strong> of the DSL</p>
+<ul>
+<li>as that’s how users will perceive it</li>
+</ul>
+</li>
+<li>
+<p>Yet, the <strong>semantics</strong> of the DSL is equally important</p>
+<ul>
+<li>that dictates how the DSL <strong>works</strong></li>
+<li>and this is what engineers (DSL implementers) focus upon</li>
+</ul>
+</li>
+<li>
+<p>Intuitively, <strong>semantics</strong> is given to languages by writing the machinery supporting their execution</p>
+<ul>
+<li>three main aspects:
+<ol>
+<li><strong>conversion</strong> into <em>runnable code</em> (e.g. <em>translation</em> or <em>interpretation</em>) …</li>
+<li>… leveraging onto a <strong>execution engine</strong> (i.e. <em>library functionalities</em> supporting the runnable code) …</li>
+<li>… in turn relying on a <strong>software platform</strong> (e.g. JVM, .NET, etc.)</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>The role of <em>DSL engineers</em> mostly focuses on <strong>steps 1</strong> &amp; <strong>2</strong> (other than defining the <strong>syntax</strong>)</p>
+</blockquote>
+</section><section>
+<h2 id="converting-dsl-into-runnable-code">Converting DSL into runnable code</h2>
+<p>Two main approaches:</p>
+<ul>
+<li>
+<p><strong>Translation</strong>: translates a DSL script into a language for which an <em>execution engine</em> on a given <em>target platform</em> exists</p>
+<ul>
+<li>a.k.a. <strong>code generation</strong> or <em>transpilation</em> if the target language is high-level (e.g. Java, JS, or C#)
+<ul>
+<li>e.g. <a href="https://eclipse.dev/Xtext/xtend/">Xtend</a>, or <a href="https://www.typescriptlang.org/">TypeScript</a>, despite being GPL, are transpiled into Java and JS respectively</li>
+</ul>
+</li>
+<li>a.k.a. <strong>compilation</strong> if the target language is low-level (e.g. assembly, JVM bytecode, CRL, etc.)
+<ul>
+<li>e.g. Java is compiled into JVM bytecode (despite being a GPL)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Interpretation</strong>: the execution engine is able to <em>parse and execute</em> the DSL script <em>directly</em></p>
+<ul>
+<li>a.k.a. <strong>runtime interpretation</strong> or <em>runtime compilation</em> if the execution engine is able to compile the DSL script into a runnable code
+<ul>
+<li>e.g. <a href="https://github.com/tuProlog/2p-kt">2P-Kt</a> is a GPL interpreted by a custom execution engine, written in Kotlin, running on the JVM</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+<p>In both cases, there are technical <strong>prerequisites</strong>:</p>
+<ul>
+<li>a <strong>parser</strong> for the actual syntax of the DSL should exist / be generated</li>
+<li>the <strong>execution engine</strong> for the target platform should exist</li>
+</ul>
+</section><section>
+
+
+<section data-shortcode-section="">
+<h2 id="external-vs-internal-dsl">External vs. internal DSL</h2>
+<ul>
+<li>
+<p>So far we discussed the so-called <strong>external DSLs</strong></p>
+<ul>
+<li>i.e. where the syntax is totally custom, hence requiring a <strong>custom parser</strong></li>
+</ul>
+</li>
+<li>
+<p>As opposed to <strong>internal</strong> (a.k.a. <em>embedded</em>) <strong>DSLs</strong></p>
+<ul>
+<li>i.e. where the syntax is a subset of some pre-existing GPL…</li>
+<li>… whose syntax is <strong>flexible</strong> enough to allow <em>costimisation</em></li>
+</ul>
+</li>
+<li>
+<p>Creating <em>internal</em> DSL is a recent trend enabled by the wide adoption of flexible GPL</p>
+<ul>
+<li>e.g. Kotlin, Groovy, or Scala, which come with <em>ad-hoc constructs</em>
+<ul>
+<li>e.g. trailing-lambda convention, infix notation, operator overloading, etc.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Examples of <em>internal</em> DSL you may already know:</p>
+<ul>
+<li><a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html">Kotlin DSL for Gradle</a></li>
+<li><a href="https://www.scala-sbt.org/1.x/docs/sbt-by-example.html">SBT</a></li>
+</ul>
+</li>
+<li>
+<p>More on this topic in prof. Pianini’s slides</p>
+</li>
+</ul>
+</section><section>
+<h2 id="example-of-internal-dsl-buildgradlekts">Example of internal DSL: <code>build.gradle.kts</code></h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>plugins {
+</span></span><span style="display:flex;"><span>    <span style="color:#a61717;background-color:#e3d2d2">`</span>java-library<span style="color:#a61717;background-color:#e3d2d2">`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dependencies {
+</span></span><span style="display:flex;"><span>    api(<span style="color:#d20;background-color:#fff0f0">"junit:junit:4.13"</span>)
+</span></span><span style="display:flex;"><span>    implementation(<span style="color:#d20;background-color:#fff0f0">"junit:junit:4.13"</span>)
+</span></span><span style="display:flex;"><span>    testImplementation(<span style="color:#d20;background-color:#fff0f0">"junit:junit:4.13"</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>configurations {
+</span></span><span style="display:flex;"><span>    implementation {
+</span></span><span style="display:flex;"><span>        resolutionStrategy.failOnVersionConflict()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sourceSets {
+</span></span><span style="display:flex;"><span>    main {
+</span></span><span style="display:flex;"><span>        java.srcDir(<span style="color:#d20;background-color:#fff0f0">"src/core/java"</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>java {
+</span></span><span style="display:flex;"><span>    sourceCompatibility = <span style="color:#b06;font-weight:bold">JavaVersion</span>.VERSION_11
+</span></span><span style="display:flex;"><span>    targetCompatibility = <span style="color:#b06;font-weight:bold">JavaVersion</span>.VERSION_11
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tasks {
+</span></span><span style="display:flex;"><span>    test {
+</span></span><span style="display:flex;"><span>        testLogging.showExceptions = <span style="color:#080;font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>        useJUnit()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>domain: build-automation</li>
+<li>this is pure Kotlin + Gradle library (containing an “<em>execution engine</em>”)</li>
+<li>Gradle library is designed to be used as Kotlin DSL</li>
+</ul>
+</section><section>
+<h2 id="key-aspects-of-_internal_-dsl">Key aspects of <em>internal</em> DSL</h2>
+<ul>
+<li>
+<p>Internal DSL may <strong>ease adoption</strong> of the DSL it self</p>
+<ul>
+<li>users may <em>already know</em> the GPL
+<ul>
+<li>hence they may be able to use the DSL <em>without learning a new language</em></li>
+<li>hence they may use the same <strong>toolkits</strong> <em>available for the GPL</em> (e.g. debugger, IDE, etc.)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Internal DSL <strong>simplify</strong> the <strong>DSL engineering</strong> process</p>
+<ul>
+<li><em>no need</em> to write and maintain a <strong>custom parser</strong>
+<ul>
+<li>as the parser is <em>already</em> provided by the GPL</li>
+</ul>
+</li>
+<li><em>no need</em> to write and maintain <strong>custom toolkits</strong>
+<ul>
+<li>as the GPL toolkits may be <em>reused</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>The <strong>integration</strong> among the GPL and the DSL is <strong>tight</strong></p>
+<ul>
+<li>the DSL may exploit the <strong>constructs of the GPL</strong>, and this is commonly <em>desired</em></li>
+<li>the DSL is <strong>technologically</strong> and <strong>syntactically bound</strong> to the GPL, and this is commonly <em>undesired</em></li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="about-the-execution-engine">About the execution engine</h2>
+<ul>
+<li>
+<p>Be it internal/external or transpiled/interpreted, the DSL needs an <strong>execution engine</strong></p>
+<ul>
+<li>i.e. a library providing the <strong>functionalities</strong> of the DSL</li>
+</ul>
+</li>
+<li>
+<p>This is <em>no different</em> from <strong>any other library</strong> supporting some given domain</p>
+</li>
+<li>
+<p>Except that hacks could exploit to ease the adoption of the <strong>target DSL syntax</strong></p>
+</li>
+</ul>
+
+</section>
+</section><section>
+<h1 id="mdd-in-practice">MDD in Practice</h1>
+</section><section>
+<h2 id="tools-for-mdd">Tools for MDD</h2>
+<ul>
+<li>
+<p>Eclipse’s <a href="https://eclipse.dev/Xtext/">Xtext</a> widespread tool for MDD</p>
+</li>
+<li>
+<p>JetBrains’ <a href="https://www.jetbrains.com/mps/">MPS</a> main competitor of Xtext</p>
+</li>
+<li>
+<p><a href="https://langium.org">Langium</a> clone of Xtext, but based on TypeScript</p>
+</li>
+</ul>
+<h3 id="other-relevant-tools-for-language-engineering">Other relevant tools for language engineering</h3>
+<ul>
+<li>
+<p><a href="https://www.antlr.org/">ANTLR</a> only parser generation for Java, JS, Python, .Net, C++</p>
+</li>
+<li>
+<p><a href="https://microsoft.github.io/language-server-protocol/overviews/lsp/overview/">Language Server Protocol</a> (LSP)</p>
+</li>
+</ul>
+</section><section>
+<h2 id="key-idea-behind-lsp">Key idea behind LSP</h2>
+<p><img src="./lsp.png" alt="LSP concept"></p>
+<ul>
+<li>
+<p>de-facto standard protocol among IDEs</p>
+</li>
+<li>
+<p>providing various IDE-like capabilities as-a-service</p>
+</li>
+<li>
+<p>making it easier to support multiple IDEs for the same language</p>
+</li>
+<li>
+<p>must-have feature for any MDD tool we may consider for our DSL</p>
+</li>
+</ul>
+</section><section>
+<h2 id="about-xtext">About Xtext</h2>
+<ul>
+<li>
+<p>A framework for MDD and, in particular, <strong>external DSL</strong></p>
+</li>
+<li>
+<p>Xtext provides a language for defining languages…</p>
+</li>
+<li>
+<p>… which is also a <strong>meta-modelling language</strong></p>
+</li>
+<li>
+<p><strong>Meta-modelling</strong> and <strong>DSL definition</strong> are done <em>simultaneously</em></p>
+</li>
+<li>
+<p>It automatically generates the full language infrastructure, including</p>
+<ul>
+<li>model interfaces / classes (<a href="https://eclipse.dev/modeling/emf/">EMF</a> compliant)</li>
+<li>parser</li>
+<li>validator (with pluggable rules)</li>
+<li>transpiler stub</li>
+<li>scoping (with pluggable rules)</li>
+<li>IDE support via LSP</li>
+<li>syntax colouring</li>
+<li>etc.</li>
+<li>test stubs</li>
+</ul>
+</li>
+<li>
+<p>Exercises and examples about MDD will be based on Xtext</p>
+</li>
+</ul>
+</section><section>
+<h2 id="running-example-the-task-scheduling-domain">Running example: the <strong>task scheduling</strong> domain</h2>
+<ul>
+<li>
+<p>Users may be willing to <strong>schedule</strong> custom <em>tasks</em> on a machine</p>
+</li>
+<li>
+<p><strong>Task</strong> $\equiv$ running any <em>command</em> available on the OS</p>
+<ul>
+<li>via some <em>shell</em> (e.g. <code>bash</code>, <code>cmd</code>, <code>powershell</code>, etc.) of choice</li>
+</ul>
+</li>
+<li>
+<p><strong>Scheduling</strong> implied defining <em>when</em> the task should be executed</p>
+<ul>
+<li><em>relatively</em> to now: e.g. <em><strong>in</strong> 5 minutes</em>, <em><strong>in</strong> 1 hour</em>, etc.</li>
+<li><em>absolutely</em>: e.g. <em>today <strong>at</strong> 10:00</em>, <em>tomorrow <strong>at</strong> 12:00</em>, <em><strong>on</strong> 2023/11/23 <strong>at</strong> 13:16</em> etc.</li>
+<li><em>before</em> or <em>after</em> <strong>some other task</strong></li>
+<li><em>periodically</em>: e.g. <em><strong>every</strong> 5 minutes</em>, <em><strong>every</strong> 48 hours</em>, etc.</li>
+</ul>
+</li>
+<li>
+<p>Notice that tasks may be <em>inter-<strong>dependent</strong></em> (e.g. because of before/after relations)</p>
+</li>
+</ul>
+</section><section>
+<h2 id="running-example-the-sheduler-dsl-pt-1">Running example: the <code>Sheduler</code> DSL (pt. 1)</h2>
+<blockquote>
+<p><strong>Sheduler</strong> $\equiv$ <strong>Sh</strong>ell + Sch<strong>eduler</strong></p>
+<p>¯\<em>(ツ)</em>/¯</p>
+</blockquote>
+<ol>
+<li>
+<p>We shall use <strong>Xtext’s meta-modelling language</strong> to define the domain of <em>task scheduling</em></p>
+</li>
+<li>
+<p>Simultaneously, we will define the <strong>syntax</strong> of the DSL</p>
+</li>
+<li>
+<p>We will then add <strong>scoping</strong> and <strong>validation</strong> rules to the DSL, via the Xtext framework</p>
+</li>
+<li>
+<p>The next step is designing and implementing the <strong>execution engine</strong> for the DSL</p>
+<ul>
+<li>we shall exploit Java’s <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html"><code>ScheduledExecutorService</code>s</a> for this purpose</li>
+</ul>
+</li>
+<li>
+<p>Finally, we will create a <strong>code generator</strong> creating Java code from the DSL</p>
+</li>
+</ol>
+</section><section>
+<h2 id="running-example-the-sheduler-dsl-pt-2">Running example: the <code>Sheduler</code> DSL (pt. 2)</h2>
+<p>Code: <a href="https://github.com/unibo-spe/sheduler-lang">https://github.com/unibo-spe/sheduler-lang</a></p>
+<ol>
+<li>
+<p>Clone with Git the <code>exercises</code> branch</p>
+</li>
+<li>
+<p>The cloned repository is and <a href="https://www.eclipse.org/downloads/">Ecplise</a> project</p>
+<ul>
+<li>please install <a href="https://eclipse.dev/Xtext/download.html">Eclipse for DSL developers</a> from Xtext’s website</li>
+</ul>
+</li>
+<li>
+<p>In Eclipse, import the <em>repository root</em> directory as a <strong>Gradle project</strong></p>
+</li>
+<li>
+<p>You may also use <strong>IntelliJ</strong>, in that case just import the <code>sheduler-lang/</code> directory as <em>Gradle project</em></p>
+<ul>
+<li>no syntax colouring or Xtext support on IntelliJ or VSCode</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="xtext-project-structure-pt-1">Xtext project structure (pt. 1)</h2>
+<pre tabindex="0"><code>sheduler-lang/
+├── build.gradle
+├── gradle/
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+├── it.unibo.spe.mdd.sheduler/
+│&nbsp;&nbsp; ├── build.gradle
+│&nbsp;&nbsp; └── src/
+│&nbsp;&nbsp;     └── main/
+│&nbsp;&nbsp;      &nbsp;&nbsp; └── java/
+│&nbsp;&nbsp;      &nbsp;&nbsp;  &nbsp;&nbsp; └── it/unibo/spe/mdd/sheduler/
+│&nbsp;&nbsp;      &nbsp;&nbsp;  &nbsp;&nbsp;     └── sheduler
+│&nbsp;&nbsp;      &nbsp;&nbsp;  &nbsp;&nbsp;         ├── GenerateSheduler.mwe2
+│&nbsp;&nbsp;      &nbsp;&nbsp;  &nbsp;&nbsp;         └── Sheduler.xtext
+├── it.unibo.spe.mdd.sheduler.ide/
+│&nbsp;&nbsp; └── build.gradle
+├── it.unibo.spe.mdd.sheduler.web/
+│&nbsp;&nbsp; └── build.gradle
+└── settings.gradle
+</code></pre></section><section>
+<h2 id="xtext-project-structure-pt-2">Xtext project structure (pt. 2)</h2>
+<ul>
+<li><em>root</em> project is just the container of others</li>
+<li><code>sheduler</code> project is where the domain is modelled, and the language is defined
+<ul>
+<li>including parser, validator, scoping, etc.</li>
+<li>2 very important files:
+<ul>
+<li><code>Sheduler.xtext</code>: this is where modelling and language definition occurs</li>
+<li><code>GenerateSheduler.mwe2</code>: this is where the automated generation of scoping, validation, generation, testing facilities is configured</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>ide</code> project is where the generic IDE support via LSP is defined
+<ul>
+<li>depends on <code>sheduler</code> project</li>
+<li>you don’t really need to touch anything in here: LSP code is generated by Xtext</li>
+<li>this project may be packed into a runnable Jar for starting the LSP server</li>
+</ul>
+</li>
+<li><code>web</code> project is where the web-based playground for our language is defined
+<ul>
+<li>depends on <code>ide</code> project</li>
+<li>you don’t really need to touch anything in here: the web playground is generated by Xtext</li>
+<li>this project may be packed into a runnable Jar for starting the web playground</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="relevant-gradle-tasks-for-xtext">Relevant Gradle tasks for Xtext</h2>
+<ul>
+<li>
+<p><code>generateXtextLanguage</code> generates the language infrastructure</p>
+<ul>
+<li>there including:
+<ul>
+<li>domain model interfaces / classes</li>
+<li>parser</li>
+<li>validator stub</li>
+<li>scoping stub</li>
+<li>code generation stub</li>
+</ul>
+</li>
+<li>this task is automatically executed by Gradle before compilation</li>
+<li>you may run it manually if you want to force the generation of the language infrastructure</li>
+</ul>
+</li>
+<li>
+<p><code>shadowJar</code> generates the runnable Jar for the LSP server</p>
+<ul>
+<li>this task should be run manually if you want to deploy the LSP server</li>
+</ul>
+</li>
+<li>
+<p><code>jettyRun</code> starts the Web-playground for the Sheduler language</p>
+<ul>
+<li>this task should be run manually during manual testing of the language</li>
+</ul>
+</li>
+<li>
+<p>ordinary Gradle tasks for compilation, testing, etc. are as usual</p>
+</li>
+</ul>
+</section><section>
+<h2 id="the-generateshedulermwe2-file">The <code>GenerateSheduler.mwe2</code> file</h2>
+<ul>
+<li>
+<p>This is automatically generated by Eclipse when setting up an Xtext project</p>
+</li>
+<li>
+<p>Pretty self-explanatory:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>module <span style="color:#080;font-weight:bold">it</span>.unibo.spe.mdd.sheduler.GenerateSheduler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">import</span> <span style="color:#b06;font-weight:bold">org.eclipse.xtext.xtext.generator.*</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">import</span> <span style="color:#b06;font-weight:bold">org.eclipse.xtext.xtext.generator.model.project.*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">var</span> <span style="color:#369;font-weight:bold">rootPath</span> = <span style="color:#d20;background-color:#fff0f0">".."</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Workflow {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    component = XtextGenerator {
+</span></span><span style="display:flex;"><span>        configuration = {
+</span></span><span style="display:flex;"><span>            project = StandardProjectConfig {
+</span></span><span style="display:flex;"><span>                baseName = <span style="color:#d20;background-color:#fff0f0">"it.unibo.spe.mdd.sheduler"</span>
+</span></span><span style="display:flex;"><span>                rootPath = rootPath
+</span></span><span style="display:flex;"><span>                runtimeTest = { enabled = <span style="color:#080;font-weight:bold">true</span> }
+</span></span><span style="display:flex;"><span>                web = { enabled = <span style="color:#080;font-weight:bold">true</span> }
+</span></span><span style="display:flex;"><span>                mavenLayout = <span style="color:#080;font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            code = {
+</span></span><span style="display:flex;"><span>                encoding = <span style="color:#d20;background-color:#fff0f0">"UTF-8"</span>
+</span></span><span style="display:flex;"><span>                lineDelimiter = <span style="color:#d20;background-color:#fff0f0">"</span><span style="color:#04d;background-color:#fff0f0">\r\n</span><span style="color:#d20;background-color:#fff0f0">"</span>
+</span></span><span style="display:flex;"><span>                fileHeader = <span style="color:#d20;background-color:#fff0f0">"/*</span><span style="color:#04d;background-color:#fff0f0">\n</span><span style="color:#d20;background-color:#fff0f0"> * generated by Xtext </span><span style="color:#04d;background-color:#fff0f0">\$</span><span style="color:#d20;background-color:#fff0f0">{version}</span><span style="color:#04d;background-color:#fff0f0">\n</span><span style="color:#d20;background-color:#fff0f0"> */"</span>
+</span></span><span style="display:flex;"><span>                preferXtendStubs = <span style="color:#080;font-weight:bold">false</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        language = StandardLanguage {
+</span></span><span style="display:flex;"><span>            name = <span style="color:#d20;background-color:#fff0f0">"it.unibo.spe.mdd.sheduler.Sheduler"</span>
+</span></span><span style="display:flex;"><span>            fileExtensions = <span style="color:#d20;background-color:#fff0f0">"shed"</span>
+</span></span><span style="display:flex;"><span>            serializer = { generateStub = <span style="color:#080;font-weight:bold">false</span> }
+</span></span><span style="display:flex;"><span>            validator = { generateDeprecationValidation = <span style="color:#080;font-weight:bold">true</span> }
+</span></span><span style="display:flex;"><span>            generator = {
+</span></span><span style="display:flex;"><span>                generateXtendStub = <span style="color:#080;font-weight:bold">false</span>
+</span></span><span style="display:flex;"><span>                generateJavaMain = <span style="color:#080;font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            junitSupport = {
+</span></span><span style="display:flex;"><span>                junitVersion = <span style="color:#d20;background-color:#fff0f0">"5"</span>
+</span></span><span style="display:flex;"><span>                generateXtendStub = <span style="color:#080;font-weight:bold">false</span>
+</span></span><span style="display:flex;"><span>                generateStub = <span style="color:#080;font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ul>
+</section><section>
+<h2 id="lets-model-a-bit">Let’s model a bit</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>grammar it.<span style="color:#369">unibo</span>.<span style="color:#369">spe</span>.<span style="color:#369">mdd</span>.<span style="color:#369">sheduler</span>.<span style="color:#369">Sheduler</span> with org.<span style="color:#369">eclipse</span>.<span style="color:#369">xtext</span>.<span style="color:#369">common</span>.<span style="color:#369">Terminals</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>generate sheduler <span style="color:#d20;background-color:#fff0f0">"http://www.unibo.it/spe/mdd/sheduler/Sheduler"</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#369;font-style:italic">TaskPoolSet:</span> pools+=TaskPool+ ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#369;font-style:italic">TaskPool:</span> <span style="color:#d20;background-color:#fff0f0">'pool'</span> name=ID? <span style="color:#d20;background-color:#fff0f0">'{'</span> tasks+=Task+ <span style="color:#d20;background-color:#fff0f0">'}'</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#369;font-style:italic">Task:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#d20;background-color:#fff0f0">'schedule'</span> (<span style="color:#d20;background-color:#fff0f0">'task'</span> name=ID)? <span style="color:#d20;background-color:#fff0f0">'{'</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#d20;background-color:#fff0f0">'command'</span> command=STRING
+</span></span><span style="display:flex;"><span>        (<span style="color:#d20;background-color:#fff0f0">'entry'</span> <span style="color:#d20;background-color:#fff0f0">'point'</span> entrypoint=STRING)?
+</span></span><span style="display:flex;"><span>        (
+</span></span><span style="display:flex;"><span>            <span style="color:#d20;background-color:#fff0f0">'in'</span> relative=RelativeTime |
+</span></span><span style="display:flex;"><span>            <span style="color:#d20;background-color:#fff0f0">'at'</span> absolute=AbsoluteTime |
+</span></span><span style="display:flex;"><span>            <span style="color:#d20;background-color:#fff0f0">'before'</span> before=[Task] |            <span style="color:#888">// square brackets denote references to other model elements
+</span></span></span><span style="display:flex;"><span><span style="color:#888"></span>            <span style="color:#d20;background-color:#fff0f0">'after'</span> after=[Task]
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        (<span style="color:#d20;background-color:#fff0f0">'repeat'</span> <span style="color:#d20;background-color:#fff0f0">'every'</span> period=RelativeTime)?
+</span></span><span style="display:flex;"><span>    <span style="color:#d20;background-color:#fff0f0">'}'</span>
+</span></span><span style="display:flex;"><span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#369;font-style:italic">AbsoluteTime:</span> date=Date time=ClockTime ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#369;font-style:italic">Date:</span> year=INT <span style="color:#d20;background-color:#fff0f0">'/'</span> month=INT <span style="color:#d20;background-color:#fff0f0">'/'</span> day=INT;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#369;font-style:italic">ClockTime:</span> hour=INT <span style="color:#d20;background-color:#fff0f0">':'</span> minute=INT (<span style="color:#d20;background-color:#fff0f0">':'</span> second=INT (<span style="color:#d20;background-color:#fff0f0">':'</span> millisecond=INT (<span style="color:#d20;background-color:#fff0f0">':'</span> nanosecond=INT)?)?)? ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#369;font-style:italic">RelativeTime:</span> timeSpans += TimeSpan ((<span style="color:#d20;background-color:#fff0f0">'and'</span> | <span style="color:#d20;background-color:#fff0f0">','</span> | <span style="color:#d20;background-color:#fff0f0">'+'</span>) timeSpans += TimeSpan)* ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#369;font-style:italic">TimeSpan:</span> duration=INT unit=(TimeUnit|LongTimeUnit);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">enum</span> <span style="color:#b06;font-weight:bold">TimeUnit</span>: NANOSECONDS = <span style="color:#d20;background-color:#fff0f0">'ns'</span> | MILLISECONDS = <span style="color:#d20;background-color:#fff0f0">'ms'</span> | SECONDS = <span style="color:#d20;background-color:#fff0f0">'s'</span> | MINUTES = <span style="color:#d20;background-color:#fff0f0">'m'</span> | HOURS = <span style="color:#d20;background-color:#fff0f0">'h'</span> | DAYS = <span style="color:#d20;background-color:#fff0f0">'d'</span> | WEEKS = <span style="color:#d20;background-color:#fff0f0">'w'</span> | 	YEARS = <span style="color:#d20;background-color:#fff0f0">'y'</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">enum</span> <span style="color:#b06;font-weight:bold">LongTimeUnit</span> returns <span style="color:#369;font-style:italic">TimeUnit:</span>
+</span></span><span style="display:flex;"><span>    NANOSECONDS = <span style="color:#d20;background-color:#fff0f0">'nanoseconds'</span> |
+</span></span><span style="display:flex;"><span>    MILLISECONDS = <span style="color:#d20;background-color:#fff0f0">'milliseconds'</span> |
+</span></span><span style="display:flex;"><span>    SECONDS = <span style="color:#d20;background-color:#fff0f0">'seconds'</span> |
+</span></span><span style="display:flex;"><span>    MINUTES = <span style="color:#d20;background-color:#fff0f0">'minutes'</span> |
+</span></span><span style="display:flex;"><span>    HOURS = <span style="color:#d20;background-color:#fff0f0">'hours'</span> |
+</span></span><span style="display:flex;"><span>    DAYS = <span style="color:#d20;background-color:#fff0f0">'days'</span> |
+</span></span><span style="display:flex;"><span>    WEEKS = <span style="color:#d20;background-color:#fff0f0">'weeks'</span> |
+</span></span><span style="display:flex;"><span>    YEARS = <span style="color:#d20;background-color:#fff0f0">'years'</span> ;
+</span></span></code></pre></div></section><section>
+<h2 id="generated-interfaces">Generated interfaces</h2>
+
+<figure id="plantuml-figure-2" class="plantuml" alt="" style="width: 100%;max-width: 95vw;max-height: 80vh;">
+    
+@startuml
+left to right direction
+
+interface AbsoluteTime  {
+  + getDate(): Date
+  + setDate(Date): void
+  + setTime(ClockTime): void
+  + getTime(): ClockTime
+}
+interface ClockTime  {
+  + getMinute(): int
+  + setMinute(int): void
+  + getNanosecond(): int
+  + setSecond(int): void
+  + getMillisecond(): int
+  + getHour(): int
+  + setMillisecond(int): void
+  + setHour(int): void
+  + getSecond(): int
+  + setNanosecond(int): void
+}
+interface Date  {
+  + getYear(): int
+  + getMonth(): int
+  + setMonth(int): void
+  + setDay(int): void
+  + setYear(int): void
+  + getDay(): int
+}
+interface RelativeTime  {
+  + getTimeSpans(): EList<timespan>
+}
+interface ShedulerFactory  {
+  + createTask(): Task
+  + createClockTime(): ClockTime
+  + createTimeSpan(): TimeSpan
+  + createDate(): Date
+  + createRelativeTime(): RelativeTime
+  + createTaskPoolSet(): TaskPoolSet
+  + getShedulerPackage(): ShedulerPackage
+  + createTaskPool(): TaskPool
+  + createAbsoluteTime(): AbsoluteTime
+}
+interface Task  {
+  + getCommand(): String
+  + setPeriod(RelativeTime): void
+  + setBefore(Task): void
+  + setName(String): void
+  + setEntrypoint(String): void
+  + getAfter(): Task
+  + setRelative(RelativeTime): void
+  + getEntrypoint(): String
+  + getName(): String
+  + getAbsolute(): AbsoluteTime
+  + setAfter(Task): void
+  + setCommand(String): void
+  + getPeriod(): RelativeTime
+  + getRelative(): RelativeTime
+  + setAbsolute(AbsoluteTime): void
+  + getBefore(): Task
+}
+interface TaskPool  {
+  + getName(): String
+  + setName(String): void
+  + getTasks(): EList<task>
+}
+interface TaskPoolSet  {
+  + getPools(): EList<taskpool>
+}
+interface TimeSpan  {
+  + setUnit(TimeUnit): void
+  + getUnit(): TimeUnit
+  + getDuration(): int
+  + setDuration(int): void
+}
+enum TimeUnit  {
+  + getName(): String
+  + values(): TimeUnit[]
+  + get(String): TimeUnit?
+  + valueOf(String): TimeUnit
+  + get(int): TimeUnit?
+  + getLiteral(): String
+  + getByName(String): TimeUnit?
+  + getValue(): int
+  + toString(): String
+}
+
+TaskPoolSet *-- TaskPool
+TaskPool *-- Task
+Task *-- RelativeTime
+Task *-- AbsoluteTime
+RelativeTime *-- TimeSpan
+TimeSpan *-- TimeUnit
+RelativeTime *-- Date
+RelativeTime *-- ClockTime
+@enduml
+
+</taskpool></task></timespan></figure>
+<script>
+    handlePlantumlFigureByID("plantuml-figure-2");
+</script>
+
+<p>Classes are generated too!</p>
+</section><section>
+<h2 id="try-the-syntax">Try the syntax</h2>
+<ul>
+<li>
+<p>Run task <code>jettyRun</code> to start the web playground</p>
+</li>
+<li>
+<p>Open <a href="http://localhost:8080">http://localhost:8080</a></p>
+</li>
+<li>
+<p>Copy-paste the following example program:</p>
+<pre tabindex="0"><code>pool {
+    schedule task greetWorldFrequently {
+        command "echo hello"
+        entry point "/bin/sh -c"
+        in 5 minutes
+        repeat every 1 hours
+    }
+}
+</code></pre></li>
+<li>
+<p>What you should see (press <strong>Ctrl+Space</strong> to see the <em>auto-completion</em> menu)
+<img src="./web-shed.png" alt="Web playground"></p>
+</li>
+</ul>
+</section><section>
+<h2 id="about-validation-rules-pt-1">About validation rules (pt. 1)</h2>
+<ul>
+<li>
+<p>Validation rules are defined in the <code>ShedulerValidator</code> class</p>
+<ul>
+<li>package: <code>it.unibo.spe.mdd.sheduler.validation</code></li>
+<li>Gradle sub-project: <code>sheduler-lang/</code><strong><code>it.unibo.spe.mdd.sheduler</code></strong></li>
+</ul>
+</li>
+<li>
+<p>Stub class is generated by Xtext when running the <code>generateXtextLanguage</code> task</p>
+<ul>
+<li>which simply triggers the execution of the <code>GenerateSheduler.mwe2</code> file</li>
+</ul>
+</li>
+<li>
+<p>Content of the stub and validation rule example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">package</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">it.unibo.spe.mdd.sheduler.validation</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">it.unibo.spe.mdd.sheduler.sheduler.*</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">org.eclipse.xtext.validation.Check</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">org.eclipse.xtext.validation.CheckType</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">ShedulerValidator</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">extends</span><span style="color:#bbb"> </span>AbstractShedulerValidator<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#555">@Check</span>(CheckType.<span style="color:#369">FAST</span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">ensureDateIsValid</span>(Date<span style="color:#bbb"> </span>date)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">if</span><span style="color:#bbb"> </span>(date.<span style="color:#369">getYear</span>()<span style="color:#bbb"> </span>&lt;<span style="color:#bbb"> </span>0)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>error(<span style="color:#d20;background-color:#fff0f0">"Year must be positive"</span>,<span style="color:#bbb"> </span>date,<span style="color:#bbb"> </span>ShedulerPackage.<span style="color:#369">Literals</span>.<span style="color:#369">DATE__YEAR</span>,<span style="color:#bbb"> </span>0);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">if</span><span style="color:#bbb"> </span>(date.<span style="color:#369">getMonth</span>()<span style="color:#bbb"> </span>&lt;<span style="color:#bbb"> </span>1<span style="color:#bbb"> </span>||<span style="color:#bbb"> </span>date.<span style="color:#369">getMonth</span>()<span style="color:#bbb"> </span>&gt;<span style="color:#bbb"> </span>12)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>error(<span style="color:#d20;background-color:#fff0f0">"Month must be between 1 and 12"</span>,<span style="color:#bbb"> </span>date,<span style="color:#bbb"> </span>ShedulerPackage.<span style="color:#369">Literals</span>.<span style="color:#369">DATE__MONTH</span>,<span style="color:#bbb"> </span>0);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">if</span><span style="color:#bbb"> </span>(date.<span style="color:#369">getDay</span>()<span style="color:#bbb"> </span>&lt;<span style="color:#bbb"> </span>1<span style="color:#bbb"> </span>||<span style="color:#bbb"> </span>date.<span style="color:#369">getDay</span>()<span style="color:#bbb"> </span>&gt;<span style="color:#bbb"> </span>31)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>error(<span style="color:#d20;background-color:#fff0f0">"Day must be between 1 and 31"</span>,<span style="color:#bbb"> </span>date,<span style="color:#bbb"> </span>ShedulerPackage.<span style="color:#369">Literals</span>.<span style="color:#369">DATE__DAY</span>,<span style="color:#bbb"> </span>0);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div><ul>
+<li>documentation here: <a href="https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation">https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation</a></li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="about-validation-rules-pt-2">About validation rules (pt. 2)</h2>
+<p>Remarks:</p>
+<ul>
+<li>the name of the validation method is meaning-less</li>
+<li>only the <strong>type</strong> of the parameter matters</li>
+<li>plus the presence of the <code>@Check</code> annotation</li>
+<li>the <code>@CheckType</code> annotation is optional, and defaults to <code>CheckType.NORMAL</code>
+<ul>
+<li><code>FAST</code> will run whenever a file is modified</li>
+<li><code>NORMAL</code> checks will run when saving the file, and</li>
+<li><code>EXPENSIVE</code> checks will run when explicitly validating the file via the menu option</li>
+</ul>
+</li>
+<li>method <code>error(...)</code> may be replaced by <code>warning(...)</code> for minor issues</li>
+</ul>
+</section><section>
+<h2 id="exercise-1-custom-validation-rules-pt-1">Exercise 1: custom validation rules (pt. 1)</h2>
+<p>Write custom validation rules covering the following constraints:</p>
+<ol>
+<li>
+<p>Warning if attempting to represent some <code>RelativeTime</code> as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/Duration.html"><code>java.time.Duration</code></a> object would result in an overflow</p>
+<ul>
+<li>cf. the utility methods in class <code>TimeUtils</code></li>
+</ul>
+</li>
+<li>
+<p>Warning if attempting to represent some <code>AbsoluteTime</code> as <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDateTime.html"><code>java.time.LocalDateTime</code></a> object would result in an overflow</p>
+<ul>
+<li>cf. the utility methods in class <code>TimeUtils</code></li>
+</ul>
+</li>
+<li>
+<p>Warning if some <code>AbsoluteTime</code> is in the past or in the present (only future admitted)</p>
+<ul>
+<li>cf. the utility methods in class <code>TimeUtils</code></li>
+<li>cf. <code>LocalDateTime.now()</code></li>
+<li>cf. <code>LocalDateTime.isBefore()</code></li>
+</ul>
+</li>
+<li>
+<p>Error is some <code>ClockTime</code> is invalid</p>
+<ul>
+<li>hour must be between 0 and 23</li>
+<li>minute must be between 0 and 59</li>
+<li>second must be between 0 and 59</li>
+<li>millisecond must be between 0 and 999</li>
+<li>nanosecond must be between 0 and 999</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="exercise-1-custom-validation-rules-pt-2">Exercise 1: custom validation rules (pt. 2)</h2>
+<ol start="5">
+<li>
+<p>Error if some <code>TimeSpan</code> is invalid</p>
+<ul>
+<li>negative duration</li>
+<li>1000 or more when the unit is nano/milli seconds</li>
+<li>60 or more when the unit is minutes/seconds</li>
+<li>24 or more when the unit is hours</li>
+</ul>
+</li>
+<li>
+<p>Error if any two tasks from the same pool have the same name</p>
+</li>
+<li>
+<p>Error if any two pools have the same name</p>
+</li>
+<li>
+<p>No periodicity should be allowed for tasks that are scheduled before/after some other task</p>
+</li>
+</ol>
+</section><section>
+<h2 id="about-scoping-rules">About scoping rules</h2>
+<ul>
+<li>
+<p>Validation rules are defined in the <code>ShedulerScopeProvider</code> class</p>
+<ul>
+<li>package: <code>it.unibo.spe.mdd.sheduler.scoping</code></li>
+<li>Gradle sub-project: <code>sheduler-lang/</code><strong><code>it.unibo.spe.mdd.sheduler</code></strong></li>
+</ul>
+</li>
+<li>
+<p>Stub class is generated by Xtext when running the <code>generateXtextLanguage</code> task</p>
+</li>
+<li>
+<p>Content of the stub and validation rule example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">ShedulerScopeProvider</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">extends</span><span style="color:#bbb"> </span>AbstractShedulerScopeProvider<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#555">@Override</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span>IScope<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">getScope</span>(EObject<span style="color:#bbb"> </span>context,<span style="color:#bbb"> </span>EReference<span style="color:#bbb"> </span>reference)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">return</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">super</span>.<span style="color:#369">getScope</span>(context,<span style="color:#bbb"> </span>reference);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div><ul>
+<li>Documentation here: <a href="https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping">https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping</a></li>
+</ul>
+</li>
+<li>
+<p>Remarks</p>
+<ul>
+<li>only one method should be overridden</li>
+<li>it should return an <code>IScope</code> object, for each <code>EObject</code> containing some <code>EReference</code></li>
+<li>in our case, this could only happen in <code>Task</code>s’ <code>before</code> and <code>after</code> properties</li>
+<li>the scope is essentially a container of <code>EObject</code>s, which are the possible values for the <code>EReference</code>
+<ul>
+<li>the implementer of the scope provide should select which <code>EObject</code>s to include in the scope</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="exercise-2-custom-scoping-rules">Exercise 2: custom scoping rules</h2>
+<h3 id="to-do">TO-DO</h3>
+<p>Write a custom scoping policy for the <code>before</code> and <code>after</code> properties of <code>Task</code>s, such that:</p>
+<ul>
+<li>only <code>Task</code>s from the same <code>TaskPool</code> can be referenced by some <code>Task</code></li>
+<li><code>Task</code>s from some <code>TaskPool</code> cannot be referenced by <code>Task</code> from other <code>TaskPool</code>s</li>
+<li>anonymous <code>Task</code>s (i.e. those without a name) cannot be referenced at all</li>
+</ul>
+<br>
+<p>Documentation here: <a href="https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping">https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping</a></p>
+</section><section>
+<h2 id="giving-semantics-to-the-language">Giving semantics to the language</h2>
+<ul>
+<li>
+<p>Two approaches:</p>
+<ul>
+<li><strong>interpretation</strong>: the DSL is interpreted by some <strong>execution engine</strong></li>
+<li><strong>translation</strong>: the DSL is translated into some <em>executable code</em>, leveraging on the API of some <strong>execution engine</strong></li>
+</ul>
+</li>
+<li>
+<p>Both approaches require the definition of an <strong>execution engine</strong></p>
+<ul>
+<li>i.e. a library providing the <strong>functionalities</strong> of the DSL</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="focus-on-the-execution-engine">Focus on the execution engine</h2>
+<ol>
+<li>
+<p>Is there functionality in the JDK which supports the <strong>scheduling</strong> of tasks in the future?</p>
+<ul>
+<li>if <em>yes</em>: let’s use it! <em>otherwise</em>, let’s look for some <em>third-party library</em>, or <em>implement</em> it ourselves</li>
+<li>luckily, we may use <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html"><code>ScheduledExecutorService</code>s</a> !</li>
+</ul>
+</li>
+<li>
+<p>Same question for the <strong>execution</strong> of custom <strong>commands</strong> via some <em>shell</em>?</p>
+<ul>
+<li>luckily, we may use <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ProcessBuilder.html"><code>ProcessBuilder</code>s</a>!</li>
+</ul>
+</li>
+<li>
+<p>Design insights:</p>
+<ol>
+<li>we may define some <em>custom</em> notion of <code>ShedulerTask</code> encapsulating:
+<ul>
+<li>the <em>command</em> to be executed</li>
+<li>optionally, the <em>shell</em> to be used</li>
+<li>the initial <em>delay</em></li>
+<li>optionally, the <em>period</em></li>
+<li>optionally, the tasks to be executed <em>before/after</em></li>
+<li>the functionalities for <strong>executing</strong> the command via <code>ProcessBuilder</code>s</li>
+</ul>
+</li>
+<li>we may define some custom notion of <code>ShedulerRuntime</code>
+<ul>
+<li>leveraging on the <code>ScheduledExecutorService</code> API…</li>
+<li>… to schedule the <code>ShedulerTask</code>s for execution</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</section><section>
+<h2 id="example-the-shedulerruntime-and-shedulertask-classes">Example: the <code>ShedulerRuntime</code> and <code>ShedulerTask</code> classes</h2>
+
+<div class="multiCol">
+    <div class="col  ">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">ShedulerRuntime</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>ScheduledExecutorService<span style="color:#bbb"> </span>delegate;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">ShedulerRuntime</span>(ScheduledExecutorService<span style="color:#bbb"> </span>delegate)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">this</span>.<span style="color:#369">delegate</span><span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>Objects.<span style="color:#369">requireNonNull</span>(delegate);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">schedule</span>(SheduleTask<span style="color:#bbb"> </span>task)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">if</span><span style="color:#bbb"> </span>(task.<span style="color:#369">isPeriodic</span>())<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>delegate.<span style="color:#369">scheduleWithFixedDelay</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>task.<span style="color:#369">asRunnable</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>task.<span style="color:#369">getDelay</span>().<span style="color:#369">toMillis</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>task.<span style="color:#369">getPeriod</span>().<span style="color:#369">toMillis</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>TimeUnit.<span style="color:#369">MILLISECONDS</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">else</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>delegate.<span style="color:#369">schedule</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>task.<span style="color:#369">asRunnable</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>task.<span style="color:#369">getDelay</span>().<span style="color:#369">toMillis</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>TimeUnit.<span style="color:#369">MILLISECONDS</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div>
+</div>
+<div class="col  ">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">ShedulerTask</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">ShedulerTask</span>(String<span style="color:#bbb"> </span>name,<span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>command,<span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>entrypoint,<span style="color:#bbb"> </span>Duration<span style="color:#bbb"> </span>delay)<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span>String<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">getName</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span>String<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">getCommand</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span>String<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">getEntrypoint</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span>Duration<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">getPeriod</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">boolean</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">isPeriodic</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span>SheduleTask<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">setPeriod</span>(Duration<span style="color:#bbb"> </span>period)<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span>Duration<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">getDelay</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span>Process<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">executeAsync</span>()<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">throws</span><span style="color:#bbb"> </span>IOException<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">return</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>ProcessBuilder(entrypoint,<span style="color:#bbb"> </span>command).<span style="color:#369">inheritIO</span>().<span style="color:#369">start</span>();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span>Runnable<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">asRunnable</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">return</span><span style="color:#bbb"> </span>()<span style="color:#bbb"> </span>-&gt;<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#080;font-weight:bold">try</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>executeAsync();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>}<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">catch</span><span style="color:#bbb"> </span>(IOException<span style="color:#bbb"> </span>e)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>e.<span style="color:#369">printStackTrace</span>();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>};<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span>ShedulerTask<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">in</span>(String<span style="color:#bbb"> </span>name,<span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>command,<span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>entrypoint,<span style="color:#bbb"> </span>Duration<span style="color:#bbb"> </span>delay)<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span>ShedulerTask<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">in</span>(String<span style="color:#bbb"> </span>command,<span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>entrypoint,<span style="color:#bbb"> </span>Duration<span style="color:#bbb"> </span>delay)<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span>ShedulerTask<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">at</span>(String<span style="color:#bbb"> </span>name,<span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>command,<span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>entrypoint,<span style="color:#bbb"> </span>LocalDateTime<span style="color:#bbb"> </span>dateTime)<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span>ShedulerTask<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">at</span>(String<span style="color:#bbb"> </span>command,<span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>entrypoint,<span style="color:#bbb"> </span>LocalDateTime<span style="color:#bbb"> </span>dateTime)<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#888">/*...*/</span><span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div>
+</div>
+
+</div>
+
+</section><section>
+<h3 id="usage-example">Usage example:</h3>
+
+<div class="multiCol">
+    <div class="col  ">
+    <pre tabindex="0"><code>pool myPool {
+    schedule task greetFrequently {
+        command "echo hello"
+        entry point "/bin/sh -c"
+        in 5 minutes
+        repeat every 1 hours
+    }
+    schedule task greetOnce {
+        command "echo hello"
+        entry point "/bin/bash -c"
+        at 2030/10/11 12:13
+    }
+}
+pool otherPool {
+    schedule task shutdownAfter1Day {
+        command "sudo shutdown now"
+        entry point "/bin/zsh -c"
+        in 1 days
+    }
+}
+</code></pre>
+</div>
+<div class="col  ">
+    <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">main</span>(String[]<span style="color:#bbb"> </span>args)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>ShedulerRuntime<span style="color:#bbb"> </span>runtime<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>ShedulerRuntime(Executors.<span style="color:#369">newScheduledThreadPool</span>(1));<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>pool_myPool(runtime);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>pool_otherPool(runtime);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">pool_myPool</span>(ShedulerRuntime<span style="color:#bbb"> </span>runtime)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>ShedulerTask<span style="color:#bbb"> </span>task0<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>ShedulerTask.<span style="color:#369">in</span>(<span style="color:#d20;background-color:#fff0f0">"greetFrequently"</span>,<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"echo hello"</span>,<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"/bin/sh -c"</span>,<span style="color:#bbb"> </span>Duration.<span style="color:#369">parse</span>(<span style="color:#d20;background-color:#fff0f0">"PT5M"</span>));<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>task0.<span style="color:#369">setPeriodic</span>(Duration.<span style="color:#369">parse</span>(<span style="color:#d20;background-color:#fff0f0">"PT1H"</span>));<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>runtime.<span style="color:#369">schedule</span>(task0);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>ShedulerTask<span style="color:#bbb"> </span>task1<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>ShedulerTask.<span style="color:#369">at</span>(<span style="color:#d20;background-color:#fff0f0">"greetOnce"</span>,<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"echo hello"</span>,<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"/bin/bash -c"</span>,<span style="color:#bbb"> </span>LocalDateTime.<span style="color:#369">parse</span>(<span style="color:#d20;background-color:#fff0f0">"2030-10-11T12:13"</span>));<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>runtime.<span style="color:#369">schedule</span>(task1);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">pool_otherPool</span>(ShedulerRuntime<span style="color:#bbb"> </span>runtime)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>ShedulerTask<span style="color:#bbb"> </span>task0<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>ShedulerTask.<span style="color:#369">in</span>(<span style="color:#d20;background-color:#fff0f0">"shutdownAfter1Day"</span>,<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"sudo shutdown now"</span>,<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"/bin/zsh -c"</span>,<span style="color:#bbb"> </span>Duration.<span style="color:#369">parse</span>(<span style="color:#d20;background-color:#fff0f0">"PT24H"</span>));<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>runtime.<span style="color:#369">schedule</span>(task0);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div>
+</div>
+
+</div>
+
+</section><section>
+<h2 id="exercise-3-write-a-code-generator-for-the-sheduler-dsl">Exercise 3: write a code generator for the <code>Sheduler</code> DSL</h2>
+<ul>
+<li>
+<p>The code generator should output code having a structure similar to the one shown in the previous slide</p>
+</li>
+<li>
+<p>The <code>ShedulerRuntime</code> and <code>ShedulerTask</code> classes may be generated as they are in the example</p>
+</li>
+<li>
+<p>The key part is generating the <em>main</em>, where components are assembled together</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">ShedulerGenerator</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">extends</span><span style="color:#bbb"> </span>AbstractShedulerGenerator<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#555">@Override</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">doGenerate</span>(Resource<span style="color:#bbb"> </span>resource,<span style="color:#bbb"> </span>IFileSystemAccess2<span style="color:#bbb"> </span>fsa,<span style="color:#bbb"> </span>IGeneratorContext<span style="color:#bbb"> </span>context)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>File<span style="color:#bbb"> </span>inputFile<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>File(resource.<span style="color:#369">getURI</span>().<span style="color:#369">toFileString</span>());<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>TaskPoolSet<span style="color:#bbb"> </span>taskPools<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>(TaskPoolSet)<span style="color:#bbb"> </span>resource.<span style="color:#369">getContents</span>().<span style="color:#369">get</span>(0);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>String<span style="color:#bbb"> </span>inputFileName<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>inputFile.<span style="color:#369">getName</span>().<span style="color:#369">split</span>(<span style="color:#d20;background-color:#fff0f0">"\\."</span>)[0];<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>fsa.<span style="color:#369">generateFile</span>(<span style="color:#d20;background-color:#fff0f0">"ShedulerRuntime.java"</span>,<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"CODE HERE"</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>fsa.<span style="color:#369">generateFile</span>(<span style="color:#d20;background-color:#fff0f0">"ShedulerTask.java"</span>,<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"CODE HERE"</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>fsa.<span style="color:#369">generateFile</span>(<span style="color:#d20;background-color:#fff0f0">"ShedulerSystem_"</span><span style="color:#bbb"> </span>+<span style="color:#bbb"> </span>inputFileName<span style="color:#bbb"> </span>+<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">".java"</span>,<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"CODE HERE"</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div></section><section>
+<h2 id="exercise-4-write-an-interpreter-for-the-sheduler-dsl">Exercise 4: write an interpreter for the <code>Sheduler</code> DSL</h2>
+<ul>
+<li>
+<p>No code generation, just a <code>main</code></p>
+<ol>
+<li>parsing the DSL</li>
+<li>and converting each <code>Task</code> into a <code>ShedulerTask</code></li>
+<li>and running each task via some <code>ShedulerRuntime</code></li>
+</ol>
+</li>
+<li>
+<p>The <code>ShedulerRuntime</code> and <code>ShedulerTask</code> classes should be part of the runtime</p>
+</li>
+<li>
+<p>The key part is writing the <code>main</code>:</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">ShedulerInterpreter</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">main</span>(String[]<span style="color:#bbb"> </span>args)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">if</span><span style="color:#bbb"> </span>(args.<span style="color:#369">length</span><span style="color:#bbb"> </span>==<span style="color:#bbb"> </span>0)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>System.<span style="color:#369">err</span>.<span style="color:#369">println</span>(<span style="color:#d20;background-color:#fff0f0">"Aborting: no path to .shed file provided!"</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#080;font-weight:bold">return</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>Injector<span style="color:#bbb"> </span>injector<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>ShedulerStandaloneSetup().<span style="color:#369">createInjectorAndDoEMFRegistration</span>();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>ShedulerInterpreter<span style="color:#bbb"> </span>interpreter<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>injector.<span style="color:#369">getInstance</span>(ShedulerInterpreter.<span style="color:#369">class</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>interpreter.<span style="color:#369">runFile</span>(args[0]);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#555">@Inject</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span>Provider&lt;ResourceSet&gt;<span style="color:#bbb"> </span>resourceSetProvider;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#555">@Inject</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span>IResourceValidator<span style="color:#bbb"> </span>validator;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">protected</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">runFile</span>(String<span style="color:#bbb"> </span>string)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#888">// Load the resource</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>ResourceSet<span style="color:#bbb"> </span>set<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>resourceSetProvider.<span style="color:#369">get</span>();<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>Resource<span style="color:#bbb"> </span>resource<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>set.<span style="color:#369">getResource</span>(URI.<span style="color:#369">createFileURI</span>(string),<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">true</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>TaskPoolSet<span style="color:#bbb"> </span>taskPools<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>(TaskPoolSet)<span style="color:#bbb"> </span>resource.<span style="color:#369">getContents</span>().<span style="color:#369">get</span>(0);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>ShedulerRuntime<span style="color:#bbb"> </span>runtime<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>ShedulerRuntime(Executors.<span style="color:#369">newScheduledThreadPool</span>(1));<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">for</span><span style="color:#bbb"> </span>(TaskPool<span style="color:#bbb"> </span>pool<span style="color:#bbb"> </span>:<span style="color:#bbb"> </span>taskPools.<span style="color:#369">getPools</span>())<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span><span style="color:#080;font-weight:bold">for</span><span style="color:#bbb"> </span>(Task<span style="color:#bbb"> </span>task<span style="color:#bbb"> </span>:<span style="color:#bbb"> </span>pool.<span style="color:#369">getTasks</span>())<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>runtime.<span style="color:#369">schedule</span>(toShedulerTask(task));<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span>ShedulerTask<span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">toShedulerTask</span>(Task<span style="color:#bbb"> </span>task)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#888">// TODO</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div></section><section>
+<h2 id="exercise-5-support-for-task-dependencies">Exercise 5: support for task dependencies</h2>
+<ul>
+<li>
+<p>Add support for <strong>task dependencies</strong> (before/after) to the <em>execution engine</em></p>
+<ul>
+<li>the <em>parser</em> already supports that</li>
+<li>the <em>execution engine</em> requires some <em>refactoring</em></li>
+</ul>
+</li>
+<li>
+<p>Update the <strong>code generator</strong> accordingly</p>
+</li>
+<li>
+<p>Update the <strong>interpreter</strong> accordingly</p>
+</li>
+</ul>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src="/reveal-hugo/object-assign.js"></script>
+
+<a href="/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
+
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"height":"1080","history":true,"mermaid":[{"fontFamily":"Inconsolata","gitGraph":{"mainBranchName":"master","rotateCommitLabel":true},"startOnLoad":false,"theme":"default","useMaxWidth":false}],"pdfseparatefragments":false,"slide_number":true,"theme":"white","transition":"slide","transition_speed":"fast","width":"1920"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"}}</script>
+
+<script src="/reveal-js/dist/reveal.js"></script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom/zoom.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+
+  var revealHugoPlugins = {
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+   };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams),
+    camelize(revealHugoPlugins));
+  Reveal.initialize(options);
+</script>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+  
+    
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.3/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({"fontFamily":"Inconsolata","gitGraph":{"mainBranchName":"master","rotateCommitLabel":true},"startOnLoad":false,"theme":"default","useMaxWidth":false});
+
+    let render = (event) => {
+      let mermaidElems = event.currentSlide.querySelectorAll('.mermaid');
+      if (!mermaidElems.length){
+          return
+      }
+      mermaidElems.forEach(mermaidElem => {
+          let processed = mermaidElem.getAttribute('data-processed');
+          if (!processed){
+              
+              mermaid.init(undefined, mermaidElem);
+          }
+      });
+    };
+    
+    render({currentSlide: Reveal.getCurrentSlide()});
+
+    Reveal.on('slidechanged', render);
+    Reveal.on('ready', render);
+  </script>
+
+
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+</script>
+
+<script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+<script>
+  if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
+      var ytVideos = document.getElementsByTagName("iframe")
+      for (let i = 0; i < ytVideos.length; i++) {
+          var videoFrame = ytVideos[i]
+          var isYouTube = /^https?:\/\/(www.)youtube\.com\/.*/.test(videoFrame.src)
+          if (isYouTube) {
+              var div = videoFrame.parentElement
+              var parent = div.parentElement
+              videoFrame.remove()
+              div.remove()
+              var p = document.createElement('p')
+              p.append(
+                  document.createTextNode(
+                      "There was an embedded video here, but it is disabled in the printed version of the slides."
+                  )
+              )
+              p.append(document.createElement('br'))
+              p.append(document.createTextNode("Visit instead:"))
+              p.append(document.createElement('br'))
+              const anchor1 = document.createElement('a');
+              anchor1.href = videoFrame.src;
+              anchor1.textContent = videoFrame.src;
+              p.append(anchor1);
+              p.append(document.createElement('br'))
+              const altSrc = videoFrame.src.replace(
+                  /(^https?:\/\/(www.)youtube\.com)\/(embed\/)(\w+).*/,
+                  "https://www.youtube.com/watch?v=$4"
+              );
+              const anchor2 = document.createElement('a');
+              anchor2.href = altSrc;
+              anchor2.textContent = altSrc;
+              p.append(document.createTextNode("or:"))
+              p.append(document.createElement('br'))
+              p.append(anchor2);
+              p.append(document.createElement('br'))
+              p.append(document.createTextNode("to watch the content."))
+              parent.appendChild(p)
+          }
+      }
+  }
+</script>
+
+    
+  
+
+</body></html>

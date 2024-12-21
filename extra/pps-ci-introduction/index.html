@@ -1,0 +1,2129 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+<title>DevOps in a nutshell</title>
+<meta name="description" content="Make things work, keep them working, move fast">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/reveal-js/dist/reveal.css">
+  <link rel="stylesheet" href="/css/custom-theme.min.f2c7adbc4e1966516650f994979920854f1f6804d229d73c7cb5f507ac9e61f7.css" id="theme"><link rel="stylesheet" href="/highlight-js/default.min.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/DanySK/css-blur-animation/master/blur.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<script src="https://unibo-spe.github.io//plantuml.js"></script>
+
+  </head>
+  <body>
+    
+    <div class="reveal">
+      <div class="slides">
+  
+
+    <section><h1 id="programming-and-development-paradigms">Programming and development paradigms</h1>
+<h2 id="devops-in-a-nutshell">DevOps in a nutshell</h2>
+<h3 id="danilo-pianinimailtodanilopianiniuniboit"><a href="mailto:danilo.pianini@unibo.it">Danilo Pianini</a></h3>
+2024-12-21
+
+</section><section>
+<h1 id="development">Development</h1>
+<ul>
+<li>Analysis of a domain</li>
+<li>Design of a solution</li>
+<li>Implementation</li>
+<li>Testing</li>
+</ul>
+</section><section>
+<h1 id="operations">Operations</h1>
+<ul>
+<li>IT infrastructure</li>
+<li>Deployment</li>
+<li>Maintenance</li>
+</ul>
+</section><section>
+<h1 id="silo-mentality">Silo mentality</h1>
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/devops/silos.svg" alt="silos"></p>
+</section><section>
+<h1 id="no-silos"><strong>No</strong> silos</h1>
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/devops/no-silos.svg" alt="silos"></p>
+</section><section>
+<h1 id="devops-culture">DevOps culture</h1>
+<ul>
+<li>
+<p><strong>Increased collaboration</strong></p>
+<ul>
+<li>Dev and Ops should <em>exchange information</em> and <em>work together</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Shared responsibility</strong></p>
+<ul>
+<li>A team is responsible for the (sub) product for its <em>whole lifetime</em></li>
+<li><em>No handing over</em> projects from devs to ops</li>
+</ul>
+</li>
+<li>
+<p><strong>Autonomous teams</strong></p>
+<ul>
+<li><em>Lightweight decision making</em> process</li>
+</ul>
+</li>
+<li>
+<p><strong>Focus on the process, not just the product</strong></p>
+<ul>
+<li>Promote small, <em>incremental changes</em></li>
+<li><em>Automate</em> as much as possible</li>
+<li>Leverage the right <em>tool</em> for the job at hand</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h1 id="why-bother">Why bother?</h1>
+<ol>
+<li>
+<p><strong>Risk management</strong></p>
+<ul>
+<li>Reduce the probability of <em>failure</em></li>
+<li>Detect <em>defects</em> before hitting the market</li>
+<li>Quickly <em>react</em> to problems</li>
+</ul>
+</li>
+<li>
+<p><strong>Resource exploitation</strong></p>
+<ul>
+<li>Use <em>human resources</em> for human-y work</li>
+<li>Reduce <em>time to market</em></li>
+<li>Embrace <em>innovation</em></li>
+<li>Exploit <em>emerging technologies</em></li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h1 id="devops">DevOps</h1>
+<ol>
+<li><strong>Principles</strong></li>
+<li><strong>Practices</strong></li>
+<li><strong>Tools</strong></li>
+</ol>
+<p><strong>Principles</strong> <em>inspire</em> <strong>practices</strong></p>
+<p><strong>Practices</strong> <em>require</em> <strong>tools</strong></p>
+</section><section>
+<h1 id="devops-principles">DevOps principles</h1>
+<h3 id="not-exhaustive">(not exhaustive)</h3>
+<ul>
+<li>Collaboration</li>
+<li>Reproducibility</li>
+<li>Automation</li>
+<li>Incrementality</li>
+<li>Robustness</li>
+</ul>
+</section><section>
+<h1 id="devops-practices">DevOps practices</h1>
+<ul>
+<li>Workflow organization</li>
+<li>Build automation</li>
+<li>Self-testing code</li>
+<li>Code quality control</li>
+<li>Continuous Integration</li>
+<li>Continuous Delivery</li>
+<li>Continuous Deployment</li>
+<li>Continuous Monitoring</li>
+</ul>
+</section><section>
+<h1 id="worflow-organization">Worflow organization</h1>
+<ul>
+<li>Design a workflow that <strong>fits the team</strong>
+<ul>
+<li>Delicate balance between <em>chaotic organization</em> and <em>excessive bureaucracy</em></li>
+<li>The larger the team, the more control is usually needed more control is usually needed</li>
+<li>Sparse teams and localized teams have different requisites</li>
+</ul>
+</li>
+<li>Project progress is marked also by progress <strong>version control system</strong></li>
+<li>Select a <em>branching model</em> model that matches the organization
+<ul>
+<li>possibly, a <em>forking model</em> for certain kinds of organization</li>
+</ul>
+</li>
+<li><strong>Standardize</strong> the development environment
+<ul>
+<li>Which newlines on which kind of files?</li>
+<li>What should be in tracking?</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h1 id="version-control-systems">Version Control Systems</h1>
+<p>A system responsible for managing changes to the project files</p>
+<ul>
+<li>Records the history</li>
+<li>Enables roll-backs</li>
+<li>Promotes collaborative workflows</li>
+<li><strong>Distributed</strong> vs. <em>Centralized</em>
+<ul>
+<li><strong>Every developer has a whole copy of the entire history</strong></li>
+<li><em>There exist a central point of synchronization</em></li>
+</ul>
+</li>
+<li>Also called Source Content Management (SCM)</li>
+</ul>
+</section><section>
+<h2 id="centralized-version-control-systems">Centralized Version Control Systems</h2>
+<img src="2021-04-14-centralized-vcs.svg" style="
+    
+    
+    max-width: 95vw;
+    max-height: 55vh;
+    object-fit: contain;
+">
+
+</section><section>
+<h2 id="decentralized-vcs">Decentralized VCS</h2>
+<img src="2021-04-14-decentralized-vcs.svg" style="
+    
+    
+    max-width: 95vw;
+    max-height: 55vh;
+    object-fit: contain;
+">
+
+</section><section>
+<h2 id="real-world-dvcs">Real-world DVCS</h2>
+<img src="2021-04-14-dvcs-sink.svg" style="
+    
+    
+    max-width: 95vw;
+    max-height: 55vh;
+    object-fit: contain;
+">
+
+</section><section>
+<h2 id="reference-dvcs-git">Reference DVCS: Git</h2>
+<p>De-facto reference distributed version control system</p>
+<ul>
+<li><em>Distributed</em></li>
+<li><em>Differential tracking</em></li>
+<li>Born in <em>2005</em> to replace BitKeeper as SCM for the Linux kernel
+<ul>
+<li>Performance was a major concern</li>
+<li>Written in C</li>
+</ul>
+</li>
+<li>Developed by Linus Torvalds
+<ul>
+<li>Now maintained by Hamano and others</li>
+</ul>
+</li>
+<li><em>Unix-oriented</em>
+<ul>
+<li>Tracks Unix file permissions</li>
+</ul>
+</li>
+<li>Very <em>fast</em>
+<ul>
+<li>At conception, 10 times faster than Mercurial¹, 100 times faster than Bazaar</li>
+</ul>
+</li>
+</ul>
+<p>¹ Less difference now, Facebook vastly improved Mercurial</p>
+</section><section>
+<h2 id="funny-historical-introduction">Funny historical introduction</h2>
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/4XpnKHJAok8?autoplay=1&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=1&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="Linus Torvalds introduces Git at Google"></iframe>
+    </div>
+
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap">Distributed version control with git: a recap</h2>
+<p>You should already be acquainted with the tool, this is an express guide/recap</p>
+<p>Sub-commands and files are in <code>monospace</code>, concepts in <em>italic</em></p>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-1">Distributed version control with git: a recap</h2>
+<h3 id="repository"><em>Repository</em></h3>
+<ul>
+<li>Collection of metadata containing the history of the project</li>
+<li>Reified in the <code>.git</code> folder</li>
+<li>The location of the <code>.git</code> folder marks the root of the repository</li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-2">Distributed version control with git: a recap</h2>
+<h3 id="working-tree"><em>Working tree</em></h3>
+<ul>
+<li>The directory associated with the root of your repository and its contents</li>
+<li>Contains the files tracked by git</li>
+<li>Not all files in the working tree are tracked</li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-3">Distributed version control with git: a recap</h2>
+<h3 id="git-init"><code>git init</code></h3>
+<ul>
+<li>Initializes a new repository from the current directory</li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-4">Distributed version control with git: a recap</h2>
+<h3 id="stage"><em>Stage</em></h3>
+<p>The <strong>changes</strong> that will be saved next</p>
+<img src="staging.png" style="
+    
+    
+    max-width: 95vw;
+    max-height: 80vh;
+    object-fit: contain;
+">
+
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-5">Distributed version control with git: a recap</h2>
+<h3 id="git-add-files"><code>git add &lt;files&gt;</code></h3>
+<ul>
+<li>Moves the current <strong>changes</strong> in <code>&lt;files&gt;</code> into the <em>stage</em></li>
+</ul>
+<h3 id="git-reset-files"><code>git reset &lt;files&gt;</code></h3>
+<ul>
+<li>Removes the current <strong>changes</strong> to <code>&lt;files&gt;</code> from the <em>stage</em></li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-6">Distributed version control with git: a recap</h2>
+<h3 id="gitignore"><code>.gitignore</code></h3>
+<ul>
+<li>A file listing the pathspecs that git should <strong>ignore</strong> even if added</li>
+<li>Adding is still possible via <code>--force</code></li>
+</ul>
+<h3 id="gitattributes"><code>.gitattributes</code></h3>
+<ul>
+<li>Defines attributes for path names</li>
+<li>Can enforce the correct line ending</li>
+<li>Can provide ways to diff binary file (by conversion to text, needs configuration)</li>
+<li>Example:</li>
+</ul>
+<pre tabindex="0"><code>* text=auto eol=lf
+*.[cC][mM][dD] text eol=crlf
+*.[bB][aA][tT] text eol=crlf
+*.[pP][sS]1 text eol=crlf
+</code></pre></section><section>
+<h2 id="distributed-version-control-with-git-a-recap-7">Distributed version control with git: a recap</h2>
+<h3 id="git-commit"><code>git commit</code></h3>
+<ul>
+<li>Create a new <em>changeset</em> with the contents of the stage</li>
+<li>Requires a <strong>message</strong></li>
+<li>Using appropriate messages is <strong>extremely important</strong></li>
+</ul>
+<h3 id="head"><em>HEAD</em></h3>
+<ul>
+<li>Pointer to the current commit</li>
+<li>Can be <strong>attached</strong> to a <em>branch</em> or <strong>detached</strong></li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-8">Distributed version control with git: a recap</h2>
+<h3 id="git-tag--a"><code>git tag -a</code></h3>
+<ul>
+<li>Associates a <strong>symbolic name</strong> to a commit</li>
+<li>Often used for <strong>versioning</strong></li>
+<li>Advanced uses in <strong>Software Process Engineering</strong></li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-9">Distributed version control with git: a recap</h2>
+<h3 id="branch"><em>Branch</em></h3>
+<ul>
+<li>A <strong>named</strong> development line
+<br></li>
+</ul>
+<div class="mermaid" data-processed="true" pre-rendered="true"><svg aria-roledescription="gitGraph" role="graphics-document document" viewBox="-153.609375 -18 1311.609375 488" style="max-width: 1311.609375px;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="100%" id="my-svg"><style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .commit-id,#my-svg .commit-msg,#my-svg .branch-label{fill:lightgrey;color:lightgrey;font-family:'trebuchet ms',verdana,arial,sans-serif;font-family:var(--mermaid-font-family);}#my-svg .branch-label0{fill:#ffffff;}#my-svg .commit0{stroke:hsl(240, 100%, 46.2745098039%);fill:hsl(240, 100%, 46.2745098039%);}#my-svg .commit-highlight0{stroke:hsl(60, 100%, 3.7254901961%);fill:hsl(60, 100%, 3.7254901961%);}#my-svg .label0{fill:hsl(240, 100%, 46.2745098039%);}#my-svg .arrow0{stroke:hsl(240, 100%, 46.2745098039%);}#my-svg .branch-label1{fill:black;}#my-svg .commit1{stroke:hsl(60, 100%, 43.5294117647%);fill:hsl(60, 100%, 43.5294117647%);}#my-svg .commit-highlight1{stroke:rgb(0, 0, 160.5);fill:rgb(0, 0, 160.5);}#my-svg .label1{fill:hsl(60, 100%, 43.5294117647%);}#my-svg .arrow1{stroke:hsl(60, 100%, 43.5294117647%);}#my-svg .branch-label2{fill:black;}#my-svg .commit2{stroke:hsl(80, 100%, 46.2745098039%);fill:hsl(80, 100%, 46.2745098039%);}#my-svg .commit-highlight2{stroke:rgb(48.8333333334, 0, 146.5000000001);fill:rgb(48.8333333334, 0, 146.5000000001);}#my-svg .label2{fill:hsl(80, 100%, 46.2745098039%);}#my-svg .arrow2{stroke:hsl(80, 100%, 46.2745098039%);}#my-svg .branch-label3{fill:#ffffff;}#my-svg .commit3{stroke:hsl(210, 100%, 46.2745098039%);fill:hsl(210, 100%, 46.2745098039%);}#my-svg .commit-highlight3{stroke:rgb(146.5000000001, 73.2500000001, 0);fill:rgb(146.5000000001, 73.2500000001, 0);}#my-svg .label3{fill:hsl(210, 100%, 46.2745098039%);}#my-svg .arrow3{stroke:hsl(210, 100%, 46.2745098039%);}#my-svg .branch-label4{fill:black;}#my-svg .commit4{stroke:hsl(180, 100%, 46.2745098039%);fill:hsl(180, 100%, 46.2745098039%);}#my-svg .commit-highlight4{stroke:rgb(146.5000000001, 0, 0);fill:rgb(146.5000000001, 0, 0);}#my-svg .label4{fill:hsl(180, 100%, 46.2745098039%);}#my-svg .arrow4{stroke:hsl(180, 100%, 46.2745098039%);}#my-svg .branch-label5{fill:black;}#my-svg .commit5{stroke:hsl(150, 100%, 46.2745098039%);fill:hsl(150, 100%, 46.2745098039%);}#my-svg .commit-highlight5{stroke:rgb(146.5000000001, 0, 73.2500000001);fill:rgb(146.5000000001, 0, 73.2500000001);}#my-svg .label5{fill:hsl(150, 100%, 46.2745098039%);}#my-svg .arrow5{stroke:hsl(150, 100%, 46.2745098039%);}#my-svg .branch-label6{fill:black;}#my-svg .commit6{stroke:hsl(300, 100%, 46.2745098039%);fill:hsl(300, 100%, 46.2745098039%);}#my-svg .commit-highlight6{stroke:rgb(0, 146.5000000001, 0);fill:rgb(0, 146.5000000001, 0);}#my-svg .label6{fill:hsl(300, 100%, 46.2745098039%);}#my-svg .arrow6{stroke:hsl(300, 100%, 46.2745098039%);}#my-svg .branch-label7{fill:black;}#my-svg .commit7{stroke:hsl(0, 100%, 46.2745098039%);fill:hsl(0, 100%, 46.2745098039%);}#my-svg .commit-highlight7{stroke:rgb(0, 146.5000000001, 146.5000000001);fill:rgb(0, 146.5000000001, 146.5000000001);}#my-svg .label7{fill:hsl(0, 100%, 46.2745098039%);}#my-svg .arrow7{stroke:hsl(0, 100%, 46.2745098039%);}#my-svg .branch{stroke-width:1;stroke:#333333;stroke-dasharray:2;}#my-svg .commit-label{font-size:10px;fill:#000021;}#my-svg .commit-label-bkg{font-size:10px;fill:#ffffde;opacity:0.5;}#my-svg .tag-label{font-size:10px;fill:#131300;}#my-svg .tag-label-bkg{fill:#ECECFF;stroke:hsl(240, 60%, 86.2745098039%);}#my-svg .tag-hole{fill:#333;}#my-svg .commit-merge{stroke:#ECECFF;fill:#ECECFF;}#my-svg .commit-reverse{stroke:#ECECFF;fill:#ECECFF;stroke-width:3;}#my-svg .commit-highlight-inner{stroke:#ECECFF;fill:#ECECFF;}#my-svg .arrow{stroke-width:8;stroke-linecap:round;fill:none;}#my-svg .gitTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g></g><g class="commit-bullets"></g><g class="commit-labels"></g><g><line class="branch branch0" y2="0" x2="1150" y1="0" x1="0"></line><rect transform="translate(-19, -8.5)" height="21" width="67.5703125" y="-0.5" x="-83.5703125" ry="4" rx="4" class="branchLabelBkg label0"></rect><g class="branchLabel"><g transform="translate(-93.5703125, -9.5)" class="label branch-label0"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">master</tspan></text></g></g><line class="branch branch1" y2="90" x2="1150" y1="90" x1="0"></line><rect transform="translate(-19, 81.5)" height="21" width="74.1484375" y="-0.5" x="-90.1484375" ry="4" rx="4" class="branchLabelBkg label1"></rect><g class="branchLabel"><g transform="translate(-100.1484375, 80.5)" class="label branch-label1"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">develop</tspan></text></g></g><line class="branch branch2" y2="180" x2="1150" y1="180" x1="0"></line><rect transform="translate(-19, 171.5)" height="21" width="110.609375" y="-0.5" x="-126.609375" ry="4" rx="4" class="branchLabelBkg label2"></rect><g class="branchLabel"><g transform="translate(-136.609375, 170.5)" class="label branch-label2"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">release/1.0.0</tspan></text></g></g><line class="branch branch3" y2="270" x2="1150" y1="270" x1="0"></line><rect transform="translate(-19, 261.5)" height="21" width="94.6015625" y="-0.5" x="-110.6015625" ry="4" rx="4" class="branchLabelBkg label3"></rect><g class="branchLabel"><g transform="translate(-120.6015625, 260.5)" class="label branch-label3"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">feature/foo</tspan></text></g></g><line class="branch branch4" y2="360" x2="1150" y1="360" x1="0"></line><rect transform="translate(-19, 351.5)" height="21" width="96.375" y="-0.5" x="-112.375" ry="4" rx="4" class="branchLabelBkg label4"></rect><g class="branchLabel"><g transform="translate(-122.375, 350.5)" class="label branch-label4"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">hotfix/1.0.1</tspan></text></g></g><line class="branch branch5" y2="450" x2="1150" y1="450" x1="0"></line><rect transform="translate(-19, 441.5)" height="21" width="96.0546875" y="-0.5" x="-112.0546875" ry="4" rx="4" class="branchLabelBkg label5"></rect><g class="branchLabel"><g transform="translate(-122.0546875, 440.5)" class="label branch-label5"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">feature/bar</tspan></text></g></g></g><g class="commit-arrows"><path class="arrow arrow1" d="M 10 0 L 10 70 A 20 20, 0, 0, 0, 30 90 L 60 90"></path><path class="arrow arrow1" d="M 60 90 L 110 90"></path><path class="arrow arrow1" d="M 110 90 L 160 90"></path><path class="arrow arrow2" d="M 110 90 L 110 160 A 20 20, 0, 0, 0, 130 180 L 210 180"></path><path class="arrow arrow0" d="M 10 0 L 260 0"></path><path class="arrow arrow2" d="M 210 180 L 240 180 A 20 20, 0, 0, 0, 260 160 L 260 0"></path><path class="arrow arrow1" d="M 160 90 L 310 90"></path><path class="arrow arrow2" d="M 210 180 L 290 180 A 20 20, 0, 0, 0, 310 160 L 310 90"></path><path class="arrow arrow1" d="M 310 90 L 360 90"></path><path class="arrow arrow4" d="M 260 0 L 260 340 A 20 20, 0, 0, 0, 280 360 L 410 360"></path><path class="arrow arrow4" d="M 410 360 L 460 360"></path><path class="arrow arrow0" d="M 260 0 L 510 0"></path><path class="arrow arrow4" d="M 460 360 L 490 360 A 20 20, 0, 0, 0, 510 340 L 510 0"></path><path class="arrow arrow1" d="M 360 90 L 560 90"></path><path class="arrow arrow4" d="M 460 360 L 540 360 A 20 20, 0, 0, 0, 560 340 L 560 90"></path><path class="arrow arrow1" d="M 560 90 L 610 90"></path><path class="arrow arrow3" d="M 360 90 L 360 250 A 20 20, 0, 0, 0, 380 270 L 660 270"></path><path class="arrow arrow1" d="M 610 90 L 710 90"></path><path class="arrow arrow1" d="M 710 90 L 760 90"></path><path class="arrow arrow3" d="M 660 270 L 810 270"></path><path class="arrow arrow1" d="M 760 90 L 790 90 A 20 20, 0, 0, 1, 810 110 L 810 270"></path><path class="arrow arrow1" d="M 760 90 L 860 90"></path><path class="arrow arrow5" d="M 710 90 L 710 430 A 20 20, 0, 0, 0, 730 450 L 910 450"></path><path class="arrow arrow5" d="M 910 450 L 960 450"></path><path class="arrow arrow1" d="M 860 90 L 860 224 A 10 10, 0, 0, 0, 870 234 L 950 234 A 10 10, 0, 0, 1, 960 244 L 960 450"></path><path class="arrow arrow5" d="M 960 450 L 1010 450"></path><path class="arrow arrow1" d="M 860 90 L 1060 90"></path><path class="arrow arrow5" d="M 1010 450 L 1040 450 A 20 20, 0, 0, 0, 1060 430 L 1060 90"></path><path class="arrow arrow1" d="M 1060 90 L 1110 90"></path></g><g class="commit-bullets"><circle class="commit 0-de22b0c commit0" r="10" cy="0" cx="10"></circle><circle class="commit 1-c338dba commit1" r="10" cy="90" cx="60"></circle><circle class="commit 2-6e04534 commit1" r="10" cy="90" cx="110"></circle><circle class="commit 3-37b692b commit1" r="10" cy="90" cx="160"></circle><circle class="commit 4-f586f3c commit2" r="10" cy="180" cx="210"></circle><circle class="commit 5-8682b0b commit0" r="9" cy="0" cx="260"></circle><circle class="commit commit-merge 5-8682b0b commit0" r="6" cy="0" cx="260"></circle><circle class="commit 6-b925cb6 commit1" r="9" cy="90" cx="310"></circle><circle class="commit commit-merge 6-b925cb6 commit1" r="6" cy="90" cx="310"></circle><circle class="commit 7-fa6c9e7 commit1" r="10" cy="90" cx="360"></circle><circle class="commit 8-ffd2120 commit4" r="10" cy="360" cx="410"></circle><circle class="commit 9-9c34c82 commit4" r="10" cy="360" cx="460"></circle><circle class="commit 10-d94dbc6 commit0" r="9" cy="0" cx="510"></circle><circle class="commit commit-merge 10-d94dbc6 commit0" r="6" cy="0" cx="510"></circle><circle class="commit 11-2712889 commit1" r="9" cy="90" cx="560"></circle><circle class="commit commit-merge 11-2712889 commit1" r="6" cy="90" cx="560"></circle><circle class="commit 12-167bf27 commit1" r="10" cy="90" cx="610"></circle><circle class="commit 13-2fdfe6d commit3" r="10" cy="270" cx="660"></circle><circle class="commit 14-80a2f9c commit1" r="10" cy="90" cx="710"></circle><circle class="commit 15-2302c3a commit1" r="10" cy="90" cx="760"></circle><circle class="commit 16-4d0102b commit3" r="9" cy="270" cx="810"></circle><circle class="commit commit-merge 16-4d0102b commit3" r="6" cy="270" cx="810"></circle><circle class="commit 17-781fb18 commit1" r="10" cy="90" cx="860"></circle><circle class="commit 18-0eba0d6 commit5" r="10" cy="450" cx="910"></circle><circle class="commit 19-0f1482f commit5" r="9" cy="450" cx="960"></circle><circle class="commit commit-merge 19-0f1482f commit5" r="6" cy="450" cx="960"></circle><circle class="commit 20-908681c commit5" r="10" cy="450" cx="1010"></circle><circle class="commit 21-4202750 commit1" r="9" cy="90" cx="1060"></circle><circle class="commit commit-merge 21-4202750 commit1" r="6" cy="90" cx="1060"></circle><circle class="commit 22-c8fb69b commit1" r="10" cy="90" cx="1110"></circle></g><g class="commit-labels"></g></svg></div>
+
+<h3 id="master"><code>master</code></h3>
+<ul>
+<li>Default branch name
+<ul>
+<li>legacy of BitKeeper</li>
+<li>Modern versions of git let user select</li>
+<li>Some prefer <code>main</code></li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-10">Distributed version control with git: a recap</h2>
+<h3 id="git-checkout"><code>git checkout</code></h3>
+<ul>
+<li>Moves <em>HEAD</em> across commits</li>
+<li>Used to switch <em>branches</em></li>
+<li>Can be used to create new <em>branches</em> (with <code>-b</code>)</li>
+</ul>
+<h3 id="detached-head"><em>detached HEAD</em></h3>
+<ul>
+<li>Special mode in which commits are not saved</li>
+<li>The system goes in <em>detached HEAD</em> when <em>HEAD</em> is not the last commit on a <em>branch</em></li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-11">Distributed version control with git: a recap</h2>
+<h3 id="git-branch"><code>git branch</code></h3>
+<ul>
+<li>Controls creation, visualization, and deletion (<code>-d</code>) of branches</li>
+</ul>
+<h3 id="git-merge"><code>git merge</code></h3>
+<ul>
+<li><strong>Unifies</strong> a target branch with the current branch</li>
+<li>Creates a <em>merge commit</em></li>
+<li>The merging algorithm is configurable</li>
+<li><strong>Conflicts</strong> must be solved manually</li>
+</ul>
+<h3 id="fast-forward"><em>fast-forward</em></h3>
+<ul>
+<li>A special merge mode applicable when a branch is <em>behind</em> another</li>
+<li>The target branch is <em>updated without a commit</em></li>
+<li>Active by default, can be disabled (<code>--no-ff</code>)</li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-12">Distributed version control with git: a recap</h2>
+<h3 id="remote"><em>Remote</em></h3>
+<ul>
+<li>(possibly remote) locations hosting copies of branches of this repository exist</li>
+</ul>
+<h3 id="git-remote"><code>git remote</code></h3>
+<ul>
+<li>Configures the <em>remotes</em></li>
+</ul>
+<h3 id="upstream-branch"><em>upstream branch</em></h3>
+<ul>
+<li>The default <em>remote branch</em> for network operations</li>
+<li>At most one per local branch</li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-13">Distributed version control with git: a recap</h2>
+<h3 id="git-clone"><code>git clone</code></h3>
+<ul>
+<li>Copies a repository from a possibly remote location.</li>
+<li>Alternative to <code>init</code></li>
+<li>Only imports the remote <em>default branch</em> (where the <code>HEAD</code> is)</li>
+<li>Automatically sets the local branch <em>upstream</em> to the cloned location.</li>
+</ul>
+</section><section>
+<h2 id="distributed-version-control-with-git-a-recap-14">Distributed version control with git: a recap</h2>
+<h3 id="git-fetch-remote"><code>git fetch &lt;remote&gt;</code></h3>
+<ul>
+<li><strong>Updates</strong> the state of <code>&lt;remote&gt;</code></li>
+<li>If remote is omitted, updates the state of the branch <em>upstream</em>’s <em>remote</em></li>
+</ul>
+<h3 id="git-pull-remote-branch"><code>git pull &lt;remote&gt; &lt;branch&gt;</code></h3>
+<ul>
+<li><strong>Shortcut</strong> for <code>git fetch &amp;&amp; git merge FETCH_HEAD</code></li>
+</ul>
+<h3 id="git-push-remote-branch"><code>git push &lt;remote&gt; &lt;branch&gt;</code></h3>
+<ul>
+<li>Sends local changes <em>remote</em> <em>branch</em></li>
+<li>Requires branches to <strong>share a root</strong></li>
+<li>If remote and branch are omitted, updates are sent to the <em>upstream</em></li>
+</ul>
+</section><section>
+<h2 id="advanced-git">Advanced git</h2>
+<p>Discussed in <strong>Software Process Engineering</strong></p>
+<ul>
+<li>Lightweight tags</li>
+<li>Signed commits</li>
+<li>Stash</li>
+<li>Submodules</li>
+<li>Bisection</li>
+<li>Rebase</li>
+<li>Squash</li>
+<li>Cherry-pick</li>
+<li>Hooks</li>
+<li>Custom git subcommands</li>
+</ul>
+</section><section>
+<h2 id="best-practices">Best practices</h2>
+<ul>
+<li>The <strong>CLI</strong> is your <em>truth</em>
+<ul>
+<li>Beware of the GUIs</li>
+</ul>
+</li>
+<li>Prepare an <em>ignore list</em> early
+<ul>
+<li>And <em>maintain it</em></li>
+<li>And maybe prepare it manually and don’t copy/paste it</li>
+</ul>
+</li>
+<li>When you have untracked files, <em>decide whether you want to track them or ignore them</em></li>
+<li>Be very careful with <em>what</em> you track</li>
+<li>Prepare an <em>attribute file</em></li>
+</ul>
+</section><section>
+<h2 id="github">GitHub</h2>
+<ul>
+<li>Hosting for git repositories</li>
+<li>Free for open source</li>
+<li>Some limitations for closed source</li>
+<li>Academic accounts</li>
+<li>De-facto standard for open source projects</li>
+<li>One static website per-project, per-user, and per-organization
+<ul>
+<li>first-class support for Jellyll (a Ruby framework for static website generation)</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<!-- this file includes generated content. Do not edit. Edit content/extra/pps-ci-introduction/_generator.md, instead. -->
+<h1 id="dvcs-workflows">DVCS: Workflows</h1>
+<blockquote>
+<p>with great power comes great responsibility</p>
+</blockquote>
+<p>and also</p>
+<blockquote>
+<p>power is nothing without control</p>
+</blockquote>
+<p>Elements to consider:</p>
+<ul>
+<li>How <em>large</em> is the team?</li>
+<li>How <em>complex</em> is the project?</li>
+<li>Do team members work <em>together</em> (in spacetime)?</li>
+<li>Do team members <em>trust</em> each other?</li>
+</ul>
+</section><section>
+<h2 id="trunk-based-like-development">Trunk-based(-like) development</h2>
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/git/dvcs-sink.svg" alt="Trunk-based development (like)"></p>
+</section><section>
+<h2 id="trunk-based-like-development-1">Trunk-based(-like) development</h2>
+<p>Single branch, shared truth repository, frequent merges</p>
+<ul>
+<li><em>Small</em> teams, <em>low-complexity</em> projects, <em>colocated</em> teams, <em>high</em> trust</li>
+<li>Typical of small company projects</li>
+</ul>
+</section><section>
+<h2 id="git-flow-classic">Git flow (classic)</h2>
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/git/dvcs-flow-sink.svg" alt="Git flow"></p>
+</section><section>
+<h2 id="git-flow-classic-1">Git flow (classic)</h2>
+<p>Multiple branches, shared truth repository</p>
+<ul>
+<li><em>Large</em> teams, <em>high-complexity</em> projects, <em>preferably colocated</em> teams, <em>high</em> trust</li>
+<li>Typical of large company projects</li>
+</ul>
+</section><section>
+<h2 id="git-flow-structure">Git flow structure</h2>
+<div class="mermaid" data-processed="true" pre-rendered="true"><svg aria-roledescription="gitGraph" role="graphics-document document" viewBox="-153.609375 -34.70000076293945 1861.609375 594.7000122070312" style="max-width: 1861.609375px;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="100%" id="my-svg"><style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .commit-id,#my-svg .commit-msg,#my-svg .branch-label{fill:lightgrey;color:lightgrey;font-family:'trebuchet ms',verdana,arial,sans-serif;font-family:var(--mermaid-font-family);}#my-svg .branch-label0{fill:#ffffff;}#my-svg .commit0{stroke:hsl(240, 100%, 46.2745098039%);fill:hsl(240, 100%, 46.2745098039%);}#my-svg .commit-highlight0{stroke:hsl(60, 100%, 3.7254901961%);fill:hsl(60, 100%, 3.7254901961%);}#my-svg .label0{fill:hsl(240, 100%, 46.2745098039%);}#my-svg .arrow0{stroke:hsl(240, 100%, 46.2745098039%);}#my-svg .branch-label1{fill:black;}#my-svg .commit1{stroke:hsl(60, 100%, 43.5294117647%);fill:hsl(60, 100%, 43.5294117647%);}#my-svg .commit-highlight1{stroke:rgb(0, 0, 160.5);fill:rgb(0, 0, 160.5);}#my-svg .label1{fill:hsl(60, 100%, 43.5294117647%);}#my-svg .arrow1{stroke:hsl(60, 100%, 43.5294117647%);}#my-svg .branch-label2{fill:black;}#my-svg .commit2{stroke:hsl(80, 100%, 46.2745098039%);fill:hsl(80, 100%, 46.2745098039%);}#my-svg .commit-highlight2{stroke:rgb(48.8333333334, 0, 146.5000000001);fill:rgb(48.8333333334, 0, 146.5000000001);}#my-svg .label2{fill:hsl(80, 100%, 46.2745098039%);}#my-svg .arrow2{stroke:hsl(80, 100%, 46.2745098039%);}#my-svg .branch-label3{fill:#ffffff;}#my-svg .commit3{stroke:hsl(210, 100%, 46.2745098039%);fill:hsl(210, 100%, 46.2745098039%);}#my-svg .commit-highlight3{stroke:rgb(146.5000000001, 73.2500000001, 0);fill:rgb(146.5000000001, 73.2500000001, 0);}#my-svg .label3{fill:hsl(210, 100%, 46.2745098039%);}#my-svg .arrow3{stroke:hsl(210, 100%, 46.2745098039%);}#my-svg .branch-label4{fill:black;}#my-svg .commit4{stroke:hsl(180, 100%, 46.2745098039%);fill:hsl(180, 100%, 46.2745098039%);}#my-svg .commit-highlight4{stroke:rgb(146.5000000001, 0, 0);fill:rgb(146.5000000001, 0, 0);}#my-svg .label4{fill:hsl(180, 100%, 46.2745098039%);}#my-svg .arrow4{stroke:hsl(180, 100%, 46.2745098039%);}#my-svg .branch-label5{fill:black;}#my-svg .commit5{stroke:hsl(150, 100%, 46.2745098039%);fill:hsl(150, 100%, 46.2745098039%);}#my-svg .commit-highlight5{stroke:rgb(146.5000000001, 0, 73.2500000001);fill:rgb(146.5000000001, 0, 73.2500000001);}#my-svg .label5{fill:hsl(150, 100%, 46.2745098039%);}#my-svg .arrow5{stroke:hsl(150, 100%, 46.2745098039%);}#my-svg .branch-label6{fill:black;}#my-svg .commit6{stroke:hsl(300, 100%, 46.2745098039%);fill:hsl(300, 100%, 46.2745098039%);}#my-svg .commit-highlight6{stroke:rgb(0, 146.5000000001, 0);fill:rgb(0, 146.5000000001, 0);}#my-svg .label6{fill:hsl(300, 100%, 46.2745098039%);}#my-svg .arrow6{stroke:hsl(300, 100%, 46.2745098039%);}#my-svg .branch-label7{fill:black;}#my-svg .commit7{stroke:hsl(0, 100%, 46.2745098039%);fill:hsl(0, 100%, 46.2745098039%);}#my-svg .commit-highlight7{stroke:rgb(0, 146.5000000001, 146.5000000001);fill:rgb(0, 146.5000000001, 146.5000000001);}#my-svg .label7{fill:hsl(0, 100%, 46.2745098039%);}#my-svg .arrow7{stroke:hsl(0, 100%, 46.2745098039%);}#my-svg .branch{stroke-width:1;stroke:#333333;stroke-dasharray:2;}#my-svg .commit-label{font-size:10px;fill:#000021;}#my-svg .commit-label-bkg{font-size:10px;fill:#ffffde;opacity:0.5;}#my-svg .tag-label{font-size:10px;fill:#131300;}#my-svg .tag-label-bkg{fill:#ECECFF;stroke:hsl(240, 60%, 86.2745098039%);}#my-svg .tag-hole{fill:#333;}#my-svg .commit-merge{stroke:#ECECFF;fill:#ECECFF;}#my-svg .commit-reverse{stroke:#ECECFF;fill:#ECECFF;stroke-width:3;}#my-svg .commit-highlight-inner{stroke:#ECECFF;fill:#ECECFF;}#my-svg .arrow{stroke-width:8;stroke-linecap:round;fill:none;}#my-svg .gitTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g></g><g class="commit-bullets"></g><g class="commit-labels"></g><g><line class="branch branch0" y2="0" x2="1700" y1="0" x1="0"></line><rect transform="translate(-19, -8.5)" height="21" width="67.5703125" y="-0.5" x="-83.5703125" ry="4" rx="4" class="branchLabelBkg label0"></rect><g class="branchLabel"><g transform="translate(-93.5703125, -9.5)" class="label branch-label0"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">master</tspan></text></g></g><line class="branch branch1" y2="90" x2="1700" y1="90" x1="0"></line><rect transform="translate(-19, 81.5)" height="21" width="74.1484375" y="-0.5" x="-90.1484375" ry="4" rx="4" class="branchLabelBkg label1"></rect><g class="branchLabel"><g transform="translate(-100.1484375, 80.5)" class="label branch-label1"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">develop</tspan></text></g></g><line class="branch branch2" y2="180" x2="1700" y1="180" x1="0"></line><rect transform="translate(-19, 171.5)" height="21" width="110.609375" y="-0.5" x="-126.609375" ry="4" rx="4" class="branchLabelBkg label2"></rect><g class="branchLabel"><g transform="translate(-136.609375, 170.5)" class="label branch-label2"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">release/1.0.0</tspan></text></g></g><line class="branch branch3" y2="270" x2="1700" y1="270" x1="0"></line><rect transform="translate(-19, 261.5)" height="21" width="94.6015625" y="-0.5" x="-110.6015625" ry="4" rx="4" class="branchLabelBkg label3"></rect><g class="branchLabel"><g transform="translate(-120.6015625, 260.5)" class="label branch-label3"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">feature/foo</tspan></text></g></g><line class="branch branch4" y2="360" x2="1700" y1="360" x1="0"></line><rect transform="translate(-19, 351.5)" height="21" width="96.375" y="-0.5" x="-112.375" ry="4" rx="4" class="branchLabelBkg label4"></rect><g class="branchLabel"><g transform="translate(-122.375, 350.5)" class="label branch-label4"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">hotfix/1.0.1</tspan></text></g></g><line class="branch branch5" y2="450" x2="1700" y1="450" x1="0"></line><rect transform="translate(-19, 441.5)" height="21" width="96.0546875" y="-0.5" x="-112.0546875" ry="4" rx="4" class="branchLabelBkg label5"></rect><g class="branchLabel"><g transform="translate(-122.0546875, 440.5)" class="label branch-label5"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">feature/bar</tspan></text></g></g><line class="branch branch6" y2="540" x2="1700" y1="540" x1="0"></line><rect transform="translate(-19, 531.5)" height="21" width="110.609375" y="-0.5" x="-126.609375" ry="4" rx="4" class="branchLabelBkg label6"></rect><g class="branchLabel"><g transform="translate(-136.609375, 530.5)" class="label branch-label6"><text><tspan class="row" x="0" dy="1em" xml:space="preserve">release/1.1.0</tspan></text></g></g></g><g class="commit-arrows"><path class="arrow arrow1" d="M 10 0 L 10 70 A 20 20, 0, 0, 0, 30 90 L 60 90"></path><path class="arrow arrow1" d="M 60 90 L 110 90"></path><path class="arrow arrow1" d="M 110 90 L 160 90"></path><path class="arrow arrow2" d="M 110 90 L 110 160 A 20 20, 0, 0, 0, 130 180 L 210 180"></path><path class="arrow arrow0" d="M 10 0 L 260 0"></path><path class="arrow arrow2" d="M 210 180 L 240 180 A 20 20, 0, 0, 0, 260 160 L 260 0"></path><path class="arrow arrow1" d="M 160 90 L 310 90"></path><path class="arrow arrow2" d="M 210 180 L 290 180 A 20 20, 0, 0, 0, 310 160 L 310 90"></path><path class="arrow arrow1" d="M 310 90 L 360 90"></path><path class="arrow arrow4" d="M 260 0 L 260 340 A 20 20, 0, 0, 0, 280 360 L 410 360"></path><path class="arrow arrow4" d="M 410 360 L 460 360"></path><path class="arrow arrow0" d="M 260 0 L 510 0"></path><path class="arrow arrow4" d="M 460 360 L 490 360 A 20 20, 0, 0, 0, 510 340 L 510 0"></path><path class="arrow arrow1" d="M 360 90 L 560 90"></path><path class="arrow arrow4" d="M 460 360 L 540 360 A 20 20, 0, 0, 0, 560 340 L 560 90"></path><path class="arrow arrow1" d="M 560 90 L 610 90"></path><path class="arrow arrow3" d="M 360 90 L 360 250 A 20 20, 0, 0, 0, 380 270 L 660 270"></path><path class="arrow arrow1" d="M 610 90 L 710 90"></path><path class="arrow arrow1" d="M 710 90 L 760 90"></path><path class="arrow arrow3" d="M 660 270 L 810 270"></path><path class="arrow arrow1" d="M 760 90 L 790 90 A 20 20, 0, 0, 1, 810 110 L 810 270"></path><path class="arrow arrow1" d="M 760 90 L 860 90"></path><path class="arrow arrow5" d="M 710 90 L 710 430 A 20 20, 0, 0, 0, 730 450 L 910 450"></path><path class="arrow arrow5" d="M 910 450 L 960 450"></path><path class="arrow arrow1" d="M 860 90 L 860 224 A 10 10, 0, 0, 0, 870 234 L 950 234 A 10 10, 0, 0, 1, 960 244 L 960 450"></path><path class="arrow arrow5" d="M 960 450 L 1010 450"></path><path class="arrow arrow1" d="M 860 90 L 1060 90"></path><path class="arrow arrow5" d="M 1010 450 L 1040 450 A 20 20, 0, 0, 0, 1060 430 L 1060 90"></path><path class="arrow arrow1" d="M 1060 90 L 1110 90"></path><path class="arrow arrow3" d="M 810 270 L 1160 270"></path><path class="arrow arrow3" d="M 1160 270 L 1210 270"></path><path class="arrow arrow1" d="M 1110 90 L 1110 152 A 10 10, 0, 0, 0, 1120 162 L 1200 162 A 10 10, 0, 0, 1, 1210 172 L 1210 270"></path><path class="arrow arrow3" d="M 1210 270 L 1260 270"></path><path class="arrow arrow1" d="M 1110 90 L 1310 90"></path><path class="arrow arrow3" d="M 1260 270 L 1290 270 A 20 20, 0, 0, 0, 1310 250 L 1310 90"></path><path class="arrow arrow1" d="M 1310 90 L 1360 90"></path><path class="arrow arrow6" d="M 1360 90 L 1360 520 A 20 20, 0, 0, 0, 1380 540 L 1410 540"></path><path class="arrow arrow1" d="M 1360 90 L 1460 90"></path><path class="arrow arrow6" d="M 1410 540 L 1510 540"></path><path class="arrow arrow0" d="M 510 0 L 1560 0"></path><path class="arrow arrow6" d="M 1510 540 L 1540 540 A 20 20, 0, 0, 0, 1560 520 L 1560 0"></path><path class="arrow arrow1" d="M 1460 90 L 1610 90"></path><path class="arrow arrow6" d="M 1510 540 L 1590 540 A 20 20, 0, 0, 0, 1610 520 L 1610 90"></path><path class="arrow arrow1" d="M 1610 90 L 1660 90"></path></g><g class="commit-bullets"><circle class="commit 0-4327805 commit0" r="10" cy="0" cx="10"></circle><circle class="commit 1-901a9b7 commit1" r="10" cy="90" cx="60"></circle><circle class="commit 2-2028c69 commit1" r="10" cy="90" cx="110"></circle><circle class="commit 3-456e6df commit1" r="10" cy="90" cx="160"></circle><circle class="commit 4-28a4b4e commit2" r="10" cy="180" cx="210"></circle><circle class="commit 5-57153b3 commit0" r="9" cy="0" cx="260"></circle><circle class="commit commit-merge 5-57153b3 commit0" r="6" cy="0" cx="260"></circle><circle class="commit 6-fc6c566 commit1" r="9" cy="90" cx="310"></circle><circle class="commit commit-merge 6-fc6c566 commit1" r="6" cy="90" cx="310"></circle><circle class="commit 7-ae7b7f1 commit1" r="10" cy="90" cx="360"></circle><circle class="commit 8-c05f25a commit4" r="10" cy="360" cx="410"></circle><circle class="commit 9-b37e369 commit4" r="10" cy="360" cx="460"></circle><circle class="commit 10-bd09443 commit0" r="9" cy="0" cx="510"></circle><circle class="commit commit-merge 10-bd09443 commit0" r="6" cy="0" cx="510"></circle><circle class="commit 11-0e4ee36 commit1" r="9" cy="90" cx="560"></circle><circle class="commit commit-merge 11-0e4ee36 commit1" r="6" cy="90" cx="560"></circle><circle class="commit 12-183f76b commit1" r="10" cy="90" cx="610"></circle><circle class="commit 13-3a29d03 commit3" r="10" cy="270" cx="660"></circle><circle class="commit 14-07a28ff commit1" r="10" cy="90" cx="710"></circle><circle class="commit 15-0a96fa9 commit1" r="10" cy="90" cx="760"></circle><circle class="commit 16-a95dbd7 commit3" r="9" cy="270" cx="810"></circle><circle class="commit commit-merge 16-a95dbd7 commit3" r="6" cy="270" cx="810"></circle><circle class="commit 17-191e258 commit1" r="10" cy="90" cx="860"></circle><circle class="commit 18-31395d4 commit5" r="10" cy="450" cx="910"></circle><circle class="commit 19-e088a48 commit5" r="9" cy="450" cx="960"></circle><circle class="commit commit-merge 19-e088a48 commit5" r="6" cy="450" cx="960"></circle><circle class="commit 20-5f14682 commit5" r="10" cy="450" cx="1010"></circle><circle class="commit 21-111d3de commit1" r="9" cy="90" cx="1060"></circle><circle class="commit commit-merge 21-111d3de commit1" r="6" cy="90" cx="1060"></circle><circle class="commit 22-87f4eba commit1" r="10" cy="90" cx="1110"></circle><circle class="commit 23-ef94c99 commit3" r="10" cy="270" cx="1160"></circle><circle class="commit 24-0662cc0 commit3" r="9" cy="270" cx="1210"></circle><circle class="commit commit-merge 24-0662cc0 commit3" r="6" cy="270" cx="1210"></circle><circle class="commit 25-ea612a2 commit3" r="10" cy="270" cx="1260"></circle><circle class="commit 26-1f85d77 commit1" r="9" cy="90" cx="1310"></circle><circle class="commit commit-merge 26-1f85d77 commit1" r="6" cy="90" cx="1310"></circle><circle class="commit 27-f1c4314 commit1" r="10" cy="90" cx="1360"></circle><circle class="commit 28-4b956f6 commit6" r="10" cy="540" cx="1410"></circle><circle class="commit 29-113a7d3 commit1" r="10" cy="90" cx="1460"></circle><circle class="commit 30-68cecb8 commit6" r="10" cy="540" cx="1510"></circle><circle class="commit 31-6f34b32 commit0" r="9" cy="0" cx="1560"></circle><circle class="commit commit-merge 31-6f34b32 commit0" r="6" cy="0" cx="1560"></circle><circle class="commit 32-d79487a commit1" r="9" cy="90" cx="1610"></circle><circle class="commit commit-merge 32-d79487a commit1" r="6" cy="90" cx="1610"></circle><circle class="commit 33-8bbedcf commit1" r="10" cy="90" cx="1660"></circle></g><g class="commit-labels"><polygon points="-31.0048828125,-17.2  
+      -31.0048828125,-21.2
+      -23.0048828125,-26.7
+      43.0048828125,-26.7
+      43.0048828125,-11.7
+      -23.0048828125,-11.7" class="tag-label-bkg"></polygon><circle class="tag-hole" r="1.5" cx="-27.0048828125" cy="-19.2"></circle><text x="-19.0048828125" class="tag-label" y="-16">initial commit</text><polygon points="236.66015625,-17.2  
+      236.66015625,-21.2
+      244.66015625,-26.7
+      275.33984375,-26.7
+      275.33984375,-11.7
+      244.66015625,-11.7" class="tag-label-bkg"></polygon><circle class="tag-hole" r="1.5" cx="240.66015625" cy="-19.2"></circle><text x="248.66015625" class="tag-label" y="-16">1.0.0</text><polygon points="486.66015625,-17.2  
+      486.66015625,-21.2
+      494.66015625,-26.7
+      525.33984375,-26.7
+      525.33984375,-11.7
+      494.66015625,-11.7" class="tag-label-bkg"></polygon><circle class="tag-hole" r="1.5" cx="490.66015625" cy="-19.2"></circle><text x="498.66015625" class="tag-label" y="-16">1.0.1</text><polygon points="1536.66015625,-17.2  
+      1536.66015625,-21.2
+      1544.66015625,-26.7
+      1575.33984375,-26.7
+      1575.33984375,-11.7
+      1544.66015625,-11.7" class="tag-label-bkg"></polygon><circle class="tag-hole" r="1.5" cx="1540.66015625" cy="-19.2"></circle><text x="1548.66015625" class="tag-label" y="-16">1.1.0</text></g></svg></div>
+</section><section>
+<h2 id="git-flow-feature-branches">Git flow: feature branches</h2>
+<p>sprouts from <code>develop</code> $\Rightarrow$ dies in <code>develop</code></p>
+<ul>
+<li>Should remain up-to-date with develop</li>
+<li>There can be multiple ongoing feature branches</li>
+</ul>
+<div class="mermaid" data-processed="true" pre-rendered="true"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2412 512" style="max-width: 512px;" role="graphics-document document" aria-roledescription="error"><style xmlns="http://www.w3.org/1999/xhtml">#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g></g><g><path class="error-icon" d="m411.313,123.313c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32-9.375,9.375-20.688-20.688c-12.484-12.5-32.766-12.5-45.25,0l-16,16c-1.261,1.261-2.304,2.648-3.31,4.051-21.739-8.561-45.324-13.426-70.065-13.426-105.867,0-192,86.133-192,192s86.133,192 192,192 192-86.133 192-192c0-24.741-4.864-48.327-13.426-70.065 1.402-1.007 2.79-2.049 4.051-3.31l16-16c12.5-12.492 12.5-32.758 0-45.25l-20.688-20.688 9.375-9.375 32.001-31.999zm-219.313,100.687c-52.938,0-96,43.063-96,96 0,8.836-7.164,16-16,16s-16-7.164-16-16c0-70.578 57.422-128 128-128 8.836,0 16,7.164 16,16s-7.164,16-16,16z"></path><path class="error-icon" d="m459.02,148.98c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l16,16c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16.001-16z"></path><path class="error-icon" d="m340.395,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16-16c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l15.999,16z"></path><path class="error-icon" d="m400,64c8.844,0 16-7.164 16-16v-32c0-8.836-7.156-16-16-16-8.844,0-16,7.164-16,16v32c0,8.836 7.156,16 16,16z"></path><path class="error-icon" d="m496,96.586h-32c-8.844,0-16,7.164-16,16 0,8.836 7.156,16 16,16h32c8.844,0 16-7.164 16-16 0-8.836-7.156-16-16-16z"></path><path class="error-icon" d="m436.98,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688l32-32c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32c-6.251,6.25-6.251,16.375-0.001,22.625z"></path><text class="error-text" x="1440" y="250" font-size="150px" style="text-anchor: middle;">Syntax error in text</text><text class="error-text" x="1250" y="400" font-size="100px" style="text-anchor: middle;">mermaid version 11.3.0</text></g></svg></div>
+</section><section>
+<h2 id="git-flow-release-branches">Git flow: release branches</h2>
+<p>sprouts from <code>develop</code> $\Rightarrow$ dies in <code>master</code> and <code>develop</code></p>
+<ul>
+<li>Pre-release changes (fixing hardcoded version numbers, changelogs, etc)</li>
+</ul>
+<div class="mermaid" data-processed="true" pre-rendered="true"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2412 512" style="max-width: 512px;" role="graphics-document document" aria-roledescription="error"><style xmlns="http://www.w3.org/1999/xhtml">#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g></g><g><path class="error-icon" d="m411.313,123.313c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32-9.375,9.375-20.688-20.688c-12.484-12.5-32.766-12.5-45.25,0l-16,16c-1.261,1.261-2.304,2.648-3.31,4.051-21.739-8.561-45.324-13.426-70.065-13.426-105.867,0-192,86.133-192,192s86.133,192 192,192 192-86.133 192-192c0-24.741-4.864-48.327-13.426-70.065 1.402-1.007 2.79-2.049 4.051-3.31l16-16c12.5-12.492 12.5-32.758 0-45.25l-20.688-20.688 9.375-9.375 32.001-31.999zm-219.313,100.687c-52.938,0-96,43.063-96,96 0,8.836-7.164,16-16,16s-16-7.164-16-16c0-70.578 57.422-128 128-128 8.836,0 16,7.164 16,16s-7.164,16-16,16z"></path><path class="error-icon" d="m459.02,148.98c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l16,16c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16.001-16z"></path><path class="error-icon" d="m340.395,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16-16c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l15.999,16z"></path><path class="error-icon" d="m400,64c8.844,0 16-7.164 16-16v-32c0-8.836-7.156-16-16-16-8.844,0-16,7.164-16,16v32c0,8.836 7.156,16 16,16z"></path><path class="error-icon" d="m496,96.586h-32c-8.844,0-16,7.164-16,16 0,8.836 7.156,16 16,16h32c8.844,0 16-7.164 16-16 0-8.836-7.156-16-16-16z"></path><path class="error-icon" d="m436.98,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688l32-32c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32c-6.251,6.25-6.251,16.375-0.001,22.625z"></path><text class="error-text" x="1440" y="250" font-size="150px" style="text-anchor: middle;">Syntax error in text</text><text class="error-text" x="1250" y="400" font-size="100px" style="text-anchor: middle;">mermaid version 11.3.0</text></g></svg></div>
+</section><section>
+<h2 id="git-flow-hotfix-branches">Git flow: hotfix branches</h2>
+<p>sprouts from <code>master</code> $\Rightarrow$ dies in <code>master</code> and <code>develop</code></p>
+<ul>
+<li>Fix errors that reached the mainline</li>
+</ul>
+<div class="mermaid" data-processed="true" pre-rendered="true"><svg id="my-svg" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2412 512" style="max-width: 512px;" role="graphics-document document" aria-roledescription="error"><style xmlns="http://www.w3.org/1999/xhtml">#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g></g><g><path class="error-icon" d="m411.313,123.313c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32-9.375,9.375-20.688-20.688c-12.484-12.5-32.766-12.5-45.25,0l-16,16c-1.261,1.261-2.304,2.648-3.31,4.051-21.739-8.561-45.324-13.426-70.065-13.426-105.867,0-192,86.133-192,192s86.133,192 192,192 192-86.133 192-192c0-24.741-4.864-48.327-13.426-70.065 1.402-1.007 2.79-2.049 4.051-3.31l16-16c12.5-12.492 12.5-32.758 0-45.25l-20.688-20.688 9.375-9.375 32.001-31.999zm-219.313,100.687c-52.938,0-96,43.063-96,96 0,8.836-7.164,16-16,16s-16-7.164-16-16c0-70.578 57.422-128 128-128 8.836,0 16,7.164 16,16s-7.164,16-16,16z"></path><path class="error-icon" d="m459.02,148.98c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l16,16c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16.001-16z"></path><path class="error-icon" d="m340.395,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688 6.25-6.25 6.25-16.375 0-22.625l-16-16c-6.25-6.25-16.375-6.25-22.625,0s-6.25,16.375 0,22.625l15.999,16z"></path><path class="error-icon" d="m400,64c8.844,0 16-7.164 16-16v-32c0-8.836-7.156-16-16-16-8.844,0-16,7.164-16,16v32c0,8.836 7.156,16 16,16z"></path><path class="error-icon" d="m496,96.586h-32c-8.844,0-16,7.164-16,16 0,8.836 7.156,16 16,16h32c8.844,0 16-7.164 16-16 0-8.836-7.156-16-16-16z"></path><path class="error-icon" d="m436.98,75.605c3.125,3.125 7.219,4.688 11.313,4.688 4.094,0 8.188-1.563 11.313-4.688l32-32c6.25-6.25 6.25-16.375 0-22.625s-16.375-6.25-22.625,0l-32,32c-6.251,6.25-6.251,16.375-0.001,22.625z"></path><text class="error-text" x="1440" y="250" font-size="150px" style="text-anchor: middle;">Syntax error in text</text><text class="error-text" x="1250" y="400" font-size="100px" style="text-anchor: middle;">mermaid version 11.3.0</text></g></svg></div>
+</section><section>
+<h2 id="forks-versus-branches">Forks versus branches</h2>
+<ul>
+<li>In Git, separate <em>development lines</em> are separate <em>branches</em></li>
+<li>However, everyone has a <em>copy</em> of the <em>same repository</em></li>
+<li>Git <em>hosting services</em> can <em>identify copies</em> of the same project belonging to different users</li>
+</ul>
+<p>These copies are called <strong>forks</strong></p>
+<ul>
+<li>Branches on one fork can be requested to be merged on another fork
+<ul>
+<li>With <strong>merge request</strong> (also called <strong>pull request</strong>, depending on the host)</li>
+</ul>
+</li>
+<li>Pull requests enable easier code review
+<ul>
+<li>Necessary when the developer <em>does not trust</em> the contributor</li>
+<li>But very useful anyway</li>
+</ul>
+</li>
+<li>Working with pull requests is <strong>not part of git</strong> and <em>requires host support</em>
+<ul>
+<li>GitHub, GitLab, and Bitbucket all support pull requests</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="single-branch-multiple-forks">Single branch, multiple forks</h2>
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/git/dvcs-fork.svg" alt="Trunk-based development (like)"></p>
+</section><section>
+<h2 id="single-branch-multiple-forks-1">Single branch, multiple forks</h2>
+<ul>
+<li>Single branch, multiple independent repository copies</li>
+<li><em>Unknown</em> team size, <em>low-complexity</em> projects, <em>sparse</em> teams, <em>low</em> trust</li>
+<li>Typical of <strong>small open-source projects</strong></li>
+</ul>
+</section><section>
+<h2 id="git-flow-over-multiple-forks">Git flow over multiple forks</h2>
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/git/dvcs-flow-fork.svg" alt="Trunk-based development (like)"></p>
+</section><section>
+<h2 id="git-flow-over-multiple-forks-1">Git flow over multiple forks</h2>
+<ul>
+<li>Multiple branches, multiple independent repository copies</li>
+<li><em>Unknown</em> team size, <em>high-complexity</em> projects, <em>sparse</em> teams, <em>low</em> trust</li>
+<li>Typical of <strong>complex open-source projects</strong></li>
+</ul>
+</section><section>
+<!-- this file includes generated content. Do not edit. Edit content/extra/pps-ci-introduction/_generator.md, instead. -->
+<h2 id="documenting-repositories">Documenting repositories</h2>
+<p>Documentation of a project is <strong>part of the project</strong></p>
+<ul>
+<li><strong>Documentation</strong> must stay in the same repository of the project</li>
+<li>However, it should be <em>accessible to non-developers</em></li>
+</ul>
+<h3 id="meet-github-pages">Meet GitHub Pages</h3>
+<ul>
+<li>GitHub provides an <em>automated</em> way to publish <em>webpages from <strong>Markdown</strong></em> text</li>
+<li>Markdown is a <em>human readable markup language</em>, <a href="https://learnxinyminutes.com/docs/markdown/">easy to learn</a>
+<ul>
+<li>These slides are written in Markdown</li>
+<li>(generation is a bit richer, but just to make the point)</li>
+</ul>
+</li>
+<li>Supports <em>Jekyll</em> (a Ruby framework for static website generation) out of the box
+<ul>
+<li>We will not discuss it today</li>
+<li>But maybe in Software Process Engineering…</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="setting-up-a-github-pages-website">Setting up a GitHub Pages website</h2>
+<p>Two possibilities:</p>
+<ol>
+<li>Select a branch to host the pages
+<ul>
+<li>Create an orphan branch with <code>git checkout --orphan &lt;branchname&gt;</code></li>
+<li>Write your website, one Markdown per page</li>
+<li>Push the new branch</li>
+</ul>
+</li>
+<li>Use a <code>docs/</code> folder in a root of some branch
+<ul>
+<li>Could be <code>master</code> or any other branch</li>
+</ul>
+</li>
+</ol>
+</section><section>
+<h2 id="setting-up-a-github-pages-website-1">Setting up a GitHub Pages website</h2>
+<p>Once done, enable GitHub pages on the repository settings:</p>
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/ci/ghpages-enable.png" alt="Enable GitHub Pages snapshot"></p>
+</section><section>
+<h2 id="github-pages-urls">GitHub Pages URLs</h2>
+<ul>
+<li>Repository web-pages are available at <code>https://&lt;username&gt;.github.io/&lt;reponame&gt;</code></li>
+<li>User web-pages are available at <code>https://&lt;username&gt;.github.io/</code>
+<ul>
+<li>They are generated from a repository named <code>&lt;username&gt;.github.io</code></li>
+</ul>
+</li>
+<li>Organization web-pages are available at <code>https://&lt;organization&gt;.github.io/</code>
+<ul>
+<li>They are generated from a repository named <code>&lt;organization&gt;.github.io</code></li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h1 id="build-systems-and-dependency-management">Build systems and dependency management</h1>
+</section><section>
+<!-- this file includes generated content. Do not edit. Edit content/extra/pps-ci-introduction/_generator.md, instead. -->
+<h2 id="the-build-life-cycle">The build “life cycle”</h2>
+<h4 id="not-to-be-confused-with-the-system-development-life-cycle-sdlc">(Not to be confused with the system development life cycle (SDLC))</h4>
+<p>The process of creating <em>tested deployable software artifacts</em>
+<br>
+from <em>source</em> code</p>
+<p>May include, depending on the system specifics:</p>
+<ul>
+<li><em>Source code manipulation</em> and generation</li>
+<li>Source code <em>quality assurance</em></li>
+<li><em>Dependency management</em></li>
+<li><em>Compilation</em>, linking</li>
+<li><em>Binary manipulation</em></li>
+<li><em>Test execution</em></li>
+<li>Test <em>quality assurance</em> (e.g., coverage)</li>
+<li>API <em>documentation</em></li>
+<li><em>Packaging</em></li>
+<li><em>Delivery</em></li>
+</ul>
+</section><section>
+<h2 id="lifecycle-styles">Lifecycle styles</h2>
+<ul>
+<li>
+<p><strong>Custom</strong>: select some phases that the product needs and perform them.</p>
+<ul>
+<li><em>Flexible and configurable</em>: tailored on each project’s needs</li>
+<li><em>Hard to adapt and port</em></li>
+</ul>
+</li>
+<li>
+<p><strong>Standard</strong>: run a sequence of pre-defined actions/phases.</p>
+<ul>
+<li><em>Portable and easy to understand</em>: replicated on every product</li>
+<li><em>Limited configuration options</em></li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="build-automation">Build automation</h2>
+<p>Automation of the build lifecycle</p>
+<ul>
+<li>In principle, the lifecycle could be executed manually</li>
+<li>In reality <em>time is precious</em> and <em>repetitivy is boring</em></li>
+</ul>
+<p>$\Rightarrow$ Create software that automates the building of some software!</p>
+<ul>
+<li>All those concerns that hold for sofware creation hold for build systems creation…</li>
+</ul>
+</section><section>
+<h2 id="build-automation-basics-and-styles">Build automation: basics and styles</h2>
+<p>Different lifecycle types generate different build automation <strong>styles</strong></p>
+<p><strong>Imperative</strong>: write a script that tells the system what to do to get
+from code to artifacts</p>
+<ul>
+<li><em>Examples</em>: make, cmake, Apache Ant</li>
+<li><em>Abstraction gap</em>: verbose, repetitive</li>
+<li>Configuration (<em>declarative</em>) and actionable (<em>imperative</em>) logics <em>mixed</em> together</li>
+<li>Highly <em>configurable</em></li>
+</ul>
+<p><strong>Declarative</strong>: adhere to some convention, customizing some settings</p>
+<ul>
+<li><em>Examples</em>: Apache Maven</li>
+<li>Separation between <em>what</em> to do and <em>how</em> to do it
+<ul>
+<li>The build system decides how to do the stuff</li>
+</ul>
+</li>
+<li><em>Configuration limited</em> by the provided options</li>
+</ul>
+</section><section>
+<h2 id="hybrid-automators">Hybrid automators</h2>
+<p>Create a <em>declarative infrastructure</em> upon an <em>imperative basis</em>, and
+<em>allow easy access to the underlying machinery</em></p>
+<p><strong>DSL</strong>s are helpful in this context: they can “hide” imperativity without ruling it out</p>
+<p>Still, many challenges remain open:</p>
+<ul>
+<li>How to reuse the build logic?
+<ul>
+<li>within a project, and among projects</li>
+</ul>
+</li>
+<li>How to structure multiple logical and interdependent parts?</li>
+</ul>
+</section><section>
+<h1 id="dependency-management">Dependency management</h1>
+<ul>
+<li>Any software <strong>depends</strong> on other software
+<ul>
+<li>The <em>runtime environment</em> (think of the Java Virtual Machine)</li>
+<li>The <em>core libraries</em> (e.g., <code>java.*</code>, or <code>scala.*</code>, or <code>kotlin.*</code>)</li>
+<li>Possibly <em>third-party libraries</em> (e.g., Google Guava, Apache Commons…)</li>
+<li>Possibly <em>external resources</em> (e.g., images, sounds, translation files…)</li>
+</ul>
+</li>
+<li>Normally, this <em>software depends on other software</em>
+<ul>
+<li>That <em>depends on other software</em>
+<ul>
+<li>That <em>depends on other software</em>
+<ul>
+<li>That <em>depends on other software</em>, and so on…</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>A normal applications has a <strong>tree</strong> of dependencies</li>
+</ul>
+</section><section>
+<h2 id="simple-example-rate-a-movie">Simple example: rate a movie</h2>
+<p>Example <strong>requirements</strong>:</p>
+<ul>
+<li><em>Visit</em> IMDb.org and rottentomatoes (Movie databases)</li>
+<li><em>Search</em> for a title of a movie or series (e.g., Breaking Bad)</li>
+<li><em>Print</em> all available information (director, year, ratings, …)</li>
+</ul>
+</section><section>
+<div id="mentimeter-container-66b4eb67105e9c1fa3916b9344d6b8ad/a62cf5c48ed8" style="position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;">
+    <iframe sandbox="allow-scripts allow-same-origin allow-presentation" allowfullscreen="true" allowtransparency="true" frameborder="0" height="315" src="https://www.mentimeter.com/app/presentation/66b4eb67105e9c1fa3916b9344d6b8ad/a62cf5c48ed8/embed" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" width="420">
+    </iframe>
+</div>
+<script>
+    if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
+        console.log("Printing detected. Disabling mentimeter.")
+        var todisable = document.getElementById("mentimeter-container-66b4eb67105e9c1fa3916b9344d6b8ad\/a62cf5c48ed8")
+        var parent = todisable.parentElement
+        todisable.remove()
+        var replacement = document.createTextNode(
+            "There was a Mentimeter pool here, but they get disabled when printing.\
+            You might be able to retrieve the results at:\
+            https://www.mentimeter.com/app/presentation/66b4eb67105e9c1fa3916b9344d6b8ad\/a62cf5c48ed8/"
+        )
+        parent.appendChild(replacement)
+    }
+</script>
+
+</section><section>
+<h2 id="actual-result">Actual result</h2>
+<span style="font-size: .7em">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">package</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">it.unibo.sampleapp</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">com.omertron.omdbapi.OmdbApi</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">com.omertron.omdbapi.tools.OmdbBuilder</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">org.slf4j.Logger</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">org.slf4j.LoggerFactory</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">java.util.Arrays</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import static</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">org.jooq.lambda.Unchecked.function</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#888">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#888"> * Monolitic application that fetches movie rates.
+</span></span></span><span style="display:flex;"><span><span style="color:#888"> */</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">RateAMovie</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>DEFAULT_MOVIE<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"Breaking Bad"</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>OMDB_API_KEY<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>System.<span style="color:#369">getenv</span>(<span style="color:#d20;background-color:#fff0f0">"OMDB_API_KEY"</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>Logger<span style="color:#bbb"> </span>LOGGER<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>LoggerFactory.<span style="color:#369">getLogger</span>(RateAMovie.<span style="color:#369">class</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">RateAMovie</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#888">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#888">     * Launches the application. Expects {@code OMDB_API_KEY} to be a valid environment variable.
+</span></span></span><span style="display:flex;"><span><span style="color:#888">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#888">     * @param args a string with the movie/series name.
+</span></span></span><span style="display:flex;"><span><span style="color:#888">     */</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">main</span>(<span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>String[]<span style="color:#bbb"> </span>args)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">if</span><span style="color:#bbb"> </span>(OMDB_API_KEY<span style="color:#bbb"> </span>==<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">null</span><span style="color:#bbb"> </span>||<span style="color:#bbb"> </span>OMDB_API_KEY.<span style="color:#369">isBlank</span>())<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>LOGGER.<span style="color:#369">error</span>(<span style="color:#d20;background-color:#fff0f0">"Invalid OMDB API Key '{}', set a valid API Key as env variable OMDB_API_KEY"</span>,<span style="color:#bbb"> </span>OMDB_API_KEY);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>System.<span style="color:#369">exit</span>(1);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>String[]<span style="color:#bbb"> </span>titles<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>args.<span style="color:#369">length</span><span style="color:#bbb"> </span>==<span style="color:#bbb"> </span>0<span style="color:#bbb"> </span>?<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>String[]<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>DEFAULT_MOVIE<span style="color:#bbb"> </span>}<span style="color:#bbb"> </span>:<span style="color:#bbb"> </span>args;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>OmdbApi<span style="color:#bbb"> </span>omdb<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>OmdbApi(OMDB_API_KEY);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>Arrays.<span style="color:#369">stream</span>(titles)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>.<span style="color:#369">map</span>(function(omdb::search))<span style="color:#bbb"> </span><span style="color:#888">// Exceptions become RuntimeExceptions</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>.<span style="color:#369">flatMap</span>(searchResult<span style="color:#bbb"> </span>-&gt;<span style="color:#bbb"> </span>searchResult.<span style="color:#369">getResults</span>().<span style="color:#369">stream</span>())<span style="color:#bbb"> </span><span style="color:#888">// get all results and flatten</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>.<span style="color:#369">map</span>(function(movie<span style="color:#bbb"> </span>-&gt;<span style="color:#bbb"> </span><span style="color:#888">// then get more details</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>OmdbBuilder().<span style="color:#369">setApiKey</span>(OMDB_API_KEY).<span style="color:#369">setPlotFull</span>().<span style="color:#369">setImdbId</span>(movie.<span style="color:#369">getImdbID</span>()).<span style="color:#369">build</span>())<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>.<span style="color:#369">map</span>(function(omdb::getInfo))<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>.<span style="color:#369">forEach</span>(movie<span style="color:#bbb"> </span>-&gt;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>LOGGER.<span style="color:#369">info</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span><span style="color:#d20;background-color:#fff0f0">"""
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    Directed by {}; {}; {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    Written by {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    Cast: {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    {} {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    IMDb {} (over {} votes), Rotten Tomatoes {}. {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    IMDb handle: {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    """</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getTitle</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getDirector</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>String.<span style="color:#369">join</span>(<span style="color:#d20;background-color:#fff0f0">", "</span>,<span style="color:#bbb"> </span>movie.<span style="color:#369">getCountries</span>()),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getYear</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getWriter</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getActors</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getRuntime</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getGenre</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getImdbRating</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getImdbVotes</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getTomatoRating</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getAwards</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getPlot</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getImdbID</span>()<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div></span>
+</section><section>
+<h2 id="the-trick-using-a-few-libraries">The trick: using a few libraries</h2>
+<ul>
+<li><strong>Jooq Jooλ</strong>
+<ul>
+<li>Unchecked lambda functions</li>
+</ul>
+</li>
+<li>A <strong>library for OMDB</strong>
+<ul>
+<li>Queries OMDB given a valid API key, hiding HTTP, communication, and parsing</li>
+</ul>
+</li>
+<li><strong>SLF4J + Logback</strong>
+<ul>
+<li>Logging for Java</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="actual-dependency-tree">Actual dependency tree</h2>
+<pre tabindex="0"><code>+--- com.omertron:API-OMDB:1.5
+|    +--- commons-codec:commons-codec:1.10
+|    +--- org.apache.commons:commons-lang3:3.4
+|    +--- com.fasterxml.jackson.core:jackson-core:2.8.7
+|    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.7
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.8.7
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.8.0 -&gt; 2.8.7
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.8.7
+|    +--- org.slf4j:slf4j-api:1.7.24 -&gt; 1.7.36
+|    \--- org.yamj:api-common:2.1
+|         +--- org.apache.httpcomponents:httpclient:4.5.3
+|         |    +--- org.apache.httpcomponents:httpcore:4.4.6
+|         |    +--- commons-logging:commons-logging:1.2
+|         |    \--- commons-codec:commons-codec:1.9 -&gt; 1.10
+|         \--- org.slf4j:slf4j-api:1.7.24 -&gt; 1.7.36
++--- org.jooq:jool:0.9.14
++--- org.slf4j:slf4j-api:1.7.36
+\--- ch.qos.logback:logback-classic:1.2.11
+     +--- ch.qos.logback:logback-core:1.2.11
+     \--- org.slf4j:slf4j-api:1.7.32 -&gt; 1.7.36
+</code></pre><ul>
+<li>few <em>direct</em> dependencies</li>
+<li>many <em>transitive</em> dependencies</li>
+</ul>
+<p>In large projects, <em>transitive</em> dependencies dominate</p>
+</section><section>
+<h2 id="towards-a-dependency-hell">Towards a <strong>dependency hell</strong></h2>
+<ul>
+<li>It’s common for non-toy projects to get past 50 dependencies</li>
+<li><em>Searching</em>, <em>downloading</em> and <em>verifying compatibility</em> by hand is unbearable</li>
+<li><strong>Version conflicts</strong> arise soon
+<ul>
+<li>one of your direct dependencies uses library A at version 1</li>
+<li>another uses library A at version 2</li>
+<li>$\Rightarrow$  <em>transitive dependency conflict</em> on A</li>
+</ul>
+</li>
+<li><strong>Upgrading</strong> by hand requires, <em>time</em>, <em>effort</em> and <em>tons of testing</em></li>
+</ul>
+</section><section>
+<h2 id="dealing-with-dependencies">Dealing with dependencies</h2>
+<p><strong>Source import</strong></p>
+<p>Duplication, more library code than business code, updates almost impossible, inconsistencies, unmaintainable</p>
+<p><strong>Binary import</strong></p>
+<p>Hard to update, <a href="https://bitbucket.org/danysk/exploded-repository-example">toxic for the VCS</a></p>
+<p><strong>Desiderata</strong></p>
+<ul>
+<li><em>Declarative</em> specification of libraries and versions</li>
+<li><em>Automatic retrieval</em></li>
+<li>Automatic <em>resolution of transitive dependencies</em></li>
+<li>Dependency <strong>scopes</strong>
+<ul>
+<li>You may need <em>compile-only</em>, <em>test-only</em>, and <em>runtime-only</em> dependencies</li>
+</ul>
+</li>
+<li>Customizable software <em>sources</em></li>
+</ul>
+</section><section>
+<h1 id="gradle">Gradle</h1>
+<p>A paradigmatic example of a hybrid automator:</p>
+<ul>
+<li>Written mostly in Java</li>
+<li>with an outer Groovy DSL</li>
+<li>…and, more recently, a Kotlin DSL</li>
+</ul>
+<h3 id="our-approach-to-gradle">Our approach to Gradle</h3>
+<ul>
+<li>We are going to learn <em>a bit of how to use</em> Gradle for <em>simple JVM projects</em>
+<ul>
+<li>Mostly by example</li>
+</ul>
+</li>
+<li>We are <strong>not</strong> going to <em>learn Gradle</em>
+<ul>
+<li>Again, this is done in Software Process Engineering for those interested</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="gradle-main-concepts">Gradle: main concepts</h2>
+<ul>
+<li><strong>Project</strong> – A collection of files composing the software
+<ul>
+<li>The <em>root</em> project can contain <em>subprojects</em></li>
+</ul>
+</li>
+<li><strong>Build file</strong> – A special file, with the build information
+<ul>
+<li>situated in the root directory of a project</li>
+<li>instructs Gradle on the organization of the project</li>
+</ul>
+</li>
+<li><strong>Dependency</strong> – A resource required by some operation.
+<ul>
+<li>May have dependencies itself</li>
+<li>Dependencies of dependencies are called <em>transitive</em> dependencies</li>
+</ul>
+</li>
+<li><strong>Configuration</strong> – A group of dependencies with <em>three roles</em>:
+<ol>
+<li><em>Declare</em> dependencies</li>
+<li><em>Resolve</em> dependency declarations to actual artifacts/resources</li>
+<li><em>Present</em> the dependencies to consumers in a suitable format</li>
+</ol>
+</li>
+<li><strong>Task</strong> – An atomic operation on the project, which can:
+<ul>
+<li>have input and output files</li>
+<li>depend on other tasks (can be executed only if those are completed)</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="gradle-under-the-hood">Gradle: under the hood</h2>
+<ul>
+<li>The Gradle build script is <em>a valid Kotlin script</em> (using the Gradle API)
+<ul>
+<li>(There is actually a kludge concerning the <code>plugins</code> and <code>buildscript</code> blocks)</li>
+</ul>
+</li>
+<li>Anything that has not a valid <em>Kotlin syntax</em> is not a valid Gradle build script</li>
+<li><em>Kotlin</em> and <em>Groovy</em> picked as they enable <em>easy DSL creation</em></li>
+<li>The <em>feeling</em> is to just have <em>to configure</em> an existing software
+<ul>
+<li><em>Declarative</em>, much like Maven plugins</li>
+</ul>
+</li>
+<li>When needed, it is easy to configure <em>custom behaviour</em>
+<ul>
+<li>fiddle with internals</li>
+<li>write in functional or imperative fashion</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="gradle-minimal-java-build">Gradle: minimal java build</h2>
+<ul>
+<li>By default, Gradle inherits the maven convention for source organization:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>+-- src <span style="color:#888"># All sources</span>
+</span></span><span style="display:flex;"><span>    +-- main <span style="color:#888"># One folder per "source set", all code in a source set shares dependencies</span>
+</span></span><span style="display:flex;"><span>    |   +-- java <span style="color:#888"># One folder per language</span>
+</span></span><span style="display:flex;"><span>    |   +-- kotlin
+</span></span><span style="display:flex;"><span>    |   +-- resources <span style="color:#888"># Resources go here</span>
+</span></span><span style="display:flex;"><span>    |   \-- scala
+</span></span><span style="display:flex;"><span>    \-- <span style="color:#038">test</span> <span style="color:#888"># Test sources are separated, different dependencies</span>
+</span></span><span style="display:flex;"><span>        +-- java <span style="color:#888"># Same structure as main</span>
+</span></span><span style="display:flex;"><span>        +-- kotlin
+</span></span><span style="display:flex;"><span>        +-- resources <span style="color:#888"># Resources go here</span>
+</span></span><span style="display:flex;"><span>        \-- scala
+</span></span></code></pre></div></section><section>
+<h2 id="gradle-minimal-java-build-1">Gradle: minimal java build</h2>
+<p><code>src/main/java/HelloWorld.java</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">HelloWorld</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">main</span>(String...<span style="color:#bbb"> </span>args)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>System.<span style="color:#369">out</span>.<span style="color:#369">println</span>(<span style="color:#d20;background-color:#fff0f0">"Hello, world!"</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div><p><code>build.gradle.kts</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>plugins { java }
+</span></span></code></pre></div><p>Yes, it’s a one-liner</p>
+</section><section>
+<h2 id="gradle-minimal-example-execution">Gradle: minimal example execution</h2>
+<ul>
+<li>The <code>gradle</code> command accepts the names of <em>tasks</em>  to execute as parameters</li>
+<li>The <code>java</code> plugin introduces several tasks:
+<ul>
+<li><code>compile&lt;source set&gt;&lt;language name&gt;</code> (e.g., <code>compileTestJava</code>): compiles a specific source set</li>
+<li><code>compile&lt;language name&gt;</code>: compiles all source sets of a language</li>
+<li><code>build</code>: runs all compilation tasks</li>
+<li><code>tasks</code>: displays available tasks
+<ul>
+<li>usually used as <code>tasks --all</code> to show also <em>uncategorized</em> tasks</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="dependency-management-in-gradle">Dependency management in Gradle</h2>
+<p><code>repositories</code></p>
+<ul>
+<li>Where to retrieve software from</li>
+</ul>
+<p>Well known repositories for Java and related technologies (including Scala):</p>
+<ul>
+<li>The Central Repository: <code>mavenCentral()</code> – de-facto standard</li>
+<li>Google Android Libraries: <code>google()</code></li>
+<li>✝ <del><code>jcenter()</code></del> sunsetted May 2021</li>
+<li>Jitpack: <code>maven { url("https://jitpack.io") }</code></li>
+</ul>
+</section><section>
+<h2 id="dependency-management-in-gradle-1">Dependency management in Gradle</h2>
+<p><code>dependencies</code></p>
+<ul>
+<li>Separated by <strong>scope</strong>
+<ul>
+<li>Scopes define <em>when</em> a dependency should be available
+<ul>
+<li><code>api</code> (libraries only): abstractions are exposed publicly and clients are expected to use them</li>
+<li><code>implementation</code>: used internally, clients should not care</li>
+<li><code>testImplementation</code>: used to compile and run tests</li>
+<li>(<code>test</code>)<code>compileOnly</code>: only available when compiling (typically used for annotations)</li>
+<li>(<code>test</code>)<code>runtimeOnly</code>: only required at runtime (typically used when components are loaded reflectively)</li>
+</ul>
+</li>
+<li>Scopes map to <strong>configurations</strong></li>
+</ul>
+</li>
+<li>Specified as <code>&lt;group&gt;:&lt;artifact&gt;:&lt;version&gt;</code>
+<ul>
+<li><code>+</code> is a special marker for “latest”</li>
+<li>Maven-style ranges supported (e.g., (1.2, 1.4])</li>
+</ul>
+</li>
+<li>Transitive dependencies are resolved automatically (if available in some repository)</li>
+</ul>
+</section><section>
+<h2 id="the-build-system-as-dependency">The build system as dependency</h2>
+<ul>
+<li>
+<p><em>no guarantee</em>  that automation written with some tool at version <code>X</code>, will work at version <code>Y</code>!</p>
+</li>
+<li>
+<p>$\Rightarrow$ <strong>The build system is itself a dependency</strong></p>
+</li>
+<li>
+<p>A global dependency on the build tool is <strong>hard to capture</strong></p>
+</li>
+<li>
+<p>Often, it becomes a <em>prerequisite expressed in natural language</em></p>
+<ul>
+<li>e.g., “you need Maven 3.6.1 to build this software”</li>
+</ul>
+</li>
+<li>
+<p><em>Critical</em> issues when different pieces of the same system depend on different build tool versions</p>
+</li>
+</ul>
+</section><section>
+<h2 id="the-gradle-wrapper">The Gradle wrapper</h2>
+<p>Gradle proposes a (partial) solution with the so-called <em>Gradle wrapper</em></p>
+<ul>
+<li><em>A minimal program</em> that simply downloads the version of gradle written in a configuration file</li>
+<li><em>Generable</em> with the built-in task <code>wrapper</code>
+<ul>
+<li><code>gradle wrapper --gradle-version=&lt;VERSION&gt;</code></li>
+</ul>
+</li>
+<li>Prepares scripts for bash and cmd to run Gradle at the specified version
+<ul>
+<li><code>gradlew</code></li>
+<li><code>gradlew.bat</code></li>
+</ul>
+</li>
+</ul>
+<p>The Gradle wrapper is <em><strong>the</strong> correct way</em> to use gradle, and we’ll be using it from now on.</p>
+</section><section>
+<h2 id="gradle-our-toy-example">Gradle: our toy example</h2>
+<p><code>src/main/java/it/unibo/sampleapp/RateAMovie.java</code></p>
+<span style="font-size: .5em">
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">package</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">it.unibo.sampleapp</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">com.omertron.omdbapi.OmdbApi</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">com.omertron.omdbapi.tools.OmdbBuilder</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">org.slf4j.Logger</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">org.slf4j.LoggerFactory</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">java.util.Arrays</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">import static</span><span style="color:#bbb"> </span><span style="color:#b06;font-weight:bold">org.jooq.lambda.Unchecked.function</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#888">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#888"> * Monolitic application that fetches movie rates.
+</span></span></span><span style="display:flex;"><span><span style="color:#888"> */</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">RateAMovie</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>DEFAULT_MOVIE<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#d20;background-color:#fff0f0">"Breaking Bad"</span>;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>String<span style="color:#bbb"> </span>OMDB_API_KEY<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>System.<span style="color:#369">getenv</span>(<span style="color:#d20;background-color:#fff0f0">"OMDB_API_KEY"</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>Logger<span style="color:#bbb"> </span>LOGGER<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>LoggerFactory.<span style="color:#369">getLogger</span>(RateAMovie.<span style="color:#369">class</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">private</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">RateAMovie</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#888">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#888">     * Launches the application. Expects {@code OMDB_API_KEY} to be a valid environment variable.
+</span></span></span><span style="display:flex;"><span><span style="color:#888">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#888">     * @param args a string with the movie/series name.
+</span></span></span><span style="display:flex;"><span><span style="color:#888">     */</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">main</span>(<span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>String[]<span style="color:#bbb"> </span>args)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">if</span><span style="color:#bbb"> </span>(OMDB_API_KEY<span style="color:#bbb"> </span>==<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">null</span><span style="color:#bbb"> </span>||<span style="color:#bbb"> </span>OMDB_API_KEY.<span style="color:#369">isBlank</span>())<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>LOGGER.<span style="color:#369">error</span>(<span style="color:#d20;background-color:#fff0f0">"Invalid OMDB API Key '{}', set a valid API Key as env variable OMDB_API_KEY"</span>,<span style="color:#bbb"> </span>OMDB_API_KEY);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>System.<span style="color:#369">exit</span>(1);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>String[]<span style="color:#bbb"> </span>titles<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span>args.<span style="color:#369">length</span><span style="color:#bbb"> </span>==<span style="color:#bbb"> </span>0<span style="color:#bbb"> </span>?<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>String[]<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span>DEFAULT_MOVIE<span style="color:#bbb"> </span>}<span style="color:#bbb"> </span>:<span style="color:#bbb"> </span>args;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#080;font-weight:bold">final</span><span style="color:#bbb"> </span>OmdbApi<span style="color:#bbb"> </span>omdb<span style="color:#bbb"> </span>=<span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>OmdbApi(OMDB_API_KEY);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>Arrays.<span style="color:#369">stream</span>(titles)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>.<span style="color:#369">map</span>(function(omdb::search))<span style="color:#bbb"> </span><span style="color:#888">// Exceptions become RuntimeExceptions</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>.<span style="color:#369">flatMap</span>(searchResult<span style="color:#bbb"> </span>-&gt;<span style="color:#bbb"> </span>searchResult.<span style="color:#369">getResults</span>().<span style="color:#369">stream</span>())<span style="color:#bbb"> </span><span style="color:#888">// get all results and flatten</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>.<span style="color:#369">map</span>(function(movie<span style="color:#bbb"> </span>-&gt;<span style="color:#bbb"> </span><span style="color:#888">// then get more details</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span><span style="color:#080;font-weight:bold">new</span><span style="color:#bbb"> </span>OmdbBuilder().<span style="color:#369">setApiKey</span>(OMDB_API_KEY).<span style="color:#369">setPlotFull</span>().<span style="color:#369">setImdbId</span>(movie.<span style="color:#369">getImdbID</span>()).<span style="color:#369">build</span>())<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>.<span style="color:#369">map</span>(function(omdb::getInfo))<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>.<span style="color:#369">forEach</span>(movie<span style="color:#bbb"> </span>-&gt;<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>LOGGER.<span style="color:#369">info</span>(<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span><span style="color:#d20;background-color:#fff0f0">"""
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    Directed by {}; {}; {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    Written by {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    Cast: {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    {} {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    IMDb {} (over {} votes), Rotten Tomatoes {}. {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    IMDb handle: {}
+</span></span></span><span style="display:flex;"><span><span style="color:#d20;background-color:#fff0f0">                    """</span>,<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getTitle</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getDirector</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>String.<span style="color:#369">join</span>(<span style="color:#d20;background-color:#fff0f0">", "</span>,<span style="color:#bbb"> </span>movie.<span style="color:#369">getCountries</span>()),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getYear</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getWriter</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getActors</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getRuntime</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getGenre</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getImdbRating</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getImdbVotes</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getTomatoRating</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getAwards</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getPlot</span>(),<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                    </span>movie.<span style="color:#369">getImdbID</span>()<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">                </span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">            </span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div></span>
+</section><section>
+<h2 id="gradle-our-toy-example-1">Gradle: our toy example</h2>
+<p><code>settings.gradle.kts</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>rootProject.name = <span style="color:#d20;background-color:#fff0f0">"sample-gradle-project"</span>
+</span></span></code></pre></div><p>(one-liner)</p>
+</section><section>
+<h2 id="gradle-our-toy-example-2">Gradle: our toy example</h2>
+<p><code>build.gradle.kts</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>plugins {
+</span></span><span style="display:flex;"><span>    java
+</span></span><span style="display:flex;"><span>    application
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>repositories { <span style="color:#888">// Where to search for dependencies
+</span></span></span><span style="display:flex;"><span><span style="color:#888"></span>    mavenCentral()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dependencies {
+</span></span><span style="display:flex;"><span>    <span style="color:#888">// Suppressions for SpotBugs
+</span></span></span><span style="display:flex;"><span><span style="color:#888"></span>    compileOnly(<span style="color:#d20;background-color:#fff0f0">"com.github.spotbugs:spotbugs-annotations:4.8.6"</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#888">// Maven dependencies are composed by a group name, a name and a version, separated by colons
+</span></span></span><span style="display:flex;"><span><span style="color:#888"></span>    implementation(<span style="color:#d20;background-color:#fff0f0">"com.omertron:API-OMDB:1.5"</span>)
+</span></span><span style="display:flex;"><span>    implementation(<span style="color:#d20;background-color:#fff0f0">"org.jooq:jool:0.9.15"</span>)
+</span></span><span style="display:flex;"><span>    implementation(<span style="color:#d20;background-color:#fff0f0">"org.slf4j:slf4j-api:2.0.16"</span>)
+</span></span><span style="display:flex;"><span>    runtimeOnly(<span style="color:#d20;background-color:#fff0f0">"ch.qos.logback:logback-classic:1.5.14"</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>application {
+</span></span><span style="display:flex;"><span>    mainClass.<span style="color:#080;font-weight:bold">set</span>(<span style="color:#d20;background-color:#fff0f0">"it.unibo.sampleapp.RateAMovie"</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></section><section>
+<h2 id="gradle-toy-example-execution">Gradle: toy example execution</h2>
+<ul>
+<li>The <code>application</code> plugin introduces a <code>run</code> task:
+<ul>
+<li>Depends on <code>build</code></li>
+<li>runs the specified main class passing the <code>runtimeClasspath</code> to the <code>-cp</code> option of <code>java</code></li>
+<li><code>./gradlew</code> run</li>
+</ul>
+</li>
+</ul>
+<p><strong>Note</strong>: exectution requires a valid OMDB API Key stored as an environment variable <code>OMDB_API_KEY</code></p>
+</section><section>
+<h2 id="gradle-multi-language-projects">Gradle: multi-language projects</h2>
+<p><code>src/main/groovy/HelloGroovy.groovy</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>println <span style="color:#d20;background-color:#fff0f0">"Hello, Groovy"</span>
+</span></span></code></pre></div><p><code>src/main/java/HelloWorld.java</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">HelloWorld</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-weight:bold">public</span><span style="color:#bbb"> </span><span style="color:#080;font-weight:bold">static</span><span style="color:#bbb"> </span><span style="color:#888;font-weight:bold">void</span><span style="color:#bbb"> </span><span style="color:#06b;font-weight:bold">main</span>(String...<span style="color:#bbb"> </span>args)<span style="color:#bbb"> </span>{<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span>System.<span style="color:#369">out</span>.<span style="color:#369">println</span>(<span style="color:#d20;background-color:#fff0f0">"Hello, world!"</span>);<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>}<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>}<span style="color:#bbb">
+</span></span></span></code></pre></div></section><section>
+<h2 id="gradle-multi-language-projects-1">Gradle: multi-language projects</h2>
+<p><code>src/main/kotlin/HelloKt.kt</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">fun</span> <span style="color:#06b;font-weight:bold">main</span>() { 
+</span></span><span style="display:flex;"><span>  println(<span style="color:#d20;background-color:#fff0f0">"Hello, world!"</span>) 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><code>src/main/scala/HelloScala.scala</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#555">@main</span> <span style="color:#080;font-weight:bold">def</span> main()<span style="color:#080;font-weight:bold">:</span> <span style="color:#888;font-weight:bold">Unit</span> = println(<span style="color:#d20;background-color:#fff0f0">"Hello Scala"</span>)
+</span></span></code></pre></div></section><section>
+<h2 id="gradle-multi-language-projects-2">Gradle: multi-language projects</h2>
+<p><code>build.gradle.kts</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>plugins {
+</span></span><span style="display:flex;"><span>    java
+</span></span><span style="display:flex;"><span>    scala
+</span></span><span style="display:flex;"><span>    groovy
+</span></span><span style="display:flex;"><span>    kotlin(<span style="color:#d20;background-color:#fff0f0">"jvm"</span>) version <span style="color:#d20;background-color:#fff0f0">"2.1.0"</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>repositories {
+</span></span><span style="display:flex;"><span>    mavenCentral()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>dependencies {
+</span></span><span style="display:flex;"><span>    implementation(<span style="color:#d20;background-color:#fff0f0">"org.codehaus.groovy:groovy:3.0.23"</span>)
+</span></span><span style="display:flex;"><span>    implementation(kotlin(<span style="color:#d20;background-color:#fff0f0">"stdlib"</span>))
+</span></span><span style="display:flex;"><span>    implementation(<span style="color:#d20;background-color:#fff0f0">"org.scala-lang:scala3-library_3:3.6.2"</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></section><section>
+<h1 id="quality-assurance">Quality Assurance</h1>
+<p><em>“It works”</em> <strong>is <em>not</em> good enough</strong></p>
+<p>(besides, the very notion of “it works” is rather debatable)</p>
+<ul>
+<li>Software quality should be <em>continuously assessed</em></li>
+<li>The assessment should <em>automatic</em> whenever possible</li>
+<li><strong>QA should be integrated in the build system!</strong>
+<ul>
+<li>It is fine to <em>fail the build</em> if quality criteria are not met</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="quality-assurance-levels">Quality Assurance: levels</h2>
+<ul>
+<li><strong>Static</strong>: the project is analyzed for defects without executing it or its components
+<ul>
+<li><em>Style</em> and <em>coherence</em></li>
+<li><em>Flawed programming</em> patterns
+<ul>
+<li>Known bugs, suboptimal programming, security flaws, …</li>
+</ul>
+</li>
+<li>Violations of the <em>DRY</em> principle</li>
+</ul>
+</li>
+<li><strong>Dynamic</strong>: the project (or some parts) are executed
+<ul>
+<li><em>Testing</em>
+<ul>
+<li>Multifaceted issue</li>
+<li>$\Rightarrow$ Plenty of detail in the upcoming lectures</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="quality-assurance-style-and-coherence">Quality Assurance: style and coherence</h2>
+<p>Automated checkers are also called <em>linters</em>, often provide an auto-formatting tool</p>
+<p><strong>Idiomatic</strong> and <strong>standardized</strong> code:</p>
+<ul>
+<li>reduces <em>complexity</em></li>
+<li>improves <em>understandandability</em></li>
+<li>prevents <em>style-changing commits</em> with <em>unintelligible diffs</em></li>
+<li>lowers the <em>maintenance</em> burden and related <em>costs</em></li>
+<li>simplifies <em>code reviews</em></li>
+</ul>
+<p>In <em>Java</em>:
+<a href="https://checkstyle.sourceforge.io/">Checkstyle</a>,
+<a href="https://pmd.github.io/">PMD</a></p>
+<p>In <em>Kotlin</em>:
+<a href="https://github.com/JetBrains/inspection-plugin">IDEA Inspection</a>,
+<a href="https://ktlint.github.io/">Ktlint</a>,
+<a href="https://detekt.dev/">Detekt</a></p>
+<p>In <em>Scala</em>:
+<a href="https://scalameta.org/scalafmt/">Scalafmt</a>,
+<a href="http://www.scalastyle.org/rules-1.0.0.html">Scalastyle</a>,
+<a href="https://www.wartremover.org/">Wartremover</a>,</p>
+</section><section>
+<h2 id="quality-assurance-flawed-programming-patterns">Quality Assurance: flawed programming patterns</h2>
+<p>Identification and reporting of <em>patterns</em> known to be <em>problematic</em></p>
+<ul>
+<li>Early-interception of <em>potential bugs</em></li>
+<li>Enforce <em>good programming principles</em></li>
+<li>Improves <em>performance</em></li>
+<li>Reduces <em>complexity</em></li>
+<li>Reduces <em>maintenance cost</em></li>
+</ul>
+<p>In <em>Java</em>:
+<a href="https://pmd.github.io/">PMD</a>,
+<a href="https://spotbugs.github.io/">SpotBugs</a></p>
+<p>In <em>Kotlin</em>:
+<a href="https://detekt.github.io/detekt/">Detekt</a>
+<a href="https://github.com/JetBrains/inspection-plugin">IDEA Inspection</a></p>
+<p>In <em>Scala</em>:
+<a href="htthttps://scalacenter.github.io/scalafix/">Scalafix</a>,
+<a href="http://www.wartremover.org/">Wartremover</a></p>
+</section><section>
+<h2 id="quality-assurance-violations-of-the-dry-principle">Quality Assurance: violations of the DRY principle</h2>
+<p>Code <em>replicated</em> rather than <em>reused</em></p>
+<ul>
+<li>improves <em>understandandability</em></li>
+<li>Reduces <em>maintenance cost</em></li>
+<li>simplifies <em>code reviews</em></li>
+</ul>
+<p>General advice: <strong>never copy/paste</strong> your code</p>
+<ul>
+<li>If you need to copy something, you probably need to <em>refactor</em> something</li>
+</ul>
+<p>Multi-language tool: <a href="https://pmd.github.io/latest/pmd_userdocs_cpd.html">Copy/Paste Detector (CPD)</a> (part of PMD)</p>
+</section><section>
+<h2 id="quality-assurance-testing-and-coverage">Quality Assurance: testing and coverage</h2>
+<p><strong>Automated</strong> software verification</p>
+<ul>
+<li>Unit level</li>
+<li>Integration testing</li>
+<li>End-to-end testing</li>
+</ul>
+<p>Extension of testing can be evaluated via <strong>coverage</strong>.</p>
+<ul>
+<li>Coverage tells you <em>how much code is <strong>untested</strong>, not how much is tested</em></li>
+</ul>
+<p>Several frameworks, recommended ones:</p>
+<ul>
+<li>Testing for <em>all JVM languages</em>: <a href="https://junit.org/junit5/docs/current/user-guide/">Junit/Jupiter (JUnit 5)</a></li>
+<li>Testing for <em>Kotlin</em>: <a href="https://kotest.io/">Kotest</a></li>
+<li>Testing for <em>Scala</em>: <a href="https://www.scalatest.org/">Scalatest</a></li>
+<li>Coverage for all JVM languages: <a href="https://www.eclemma.org/jacoco/">JaCoCo</a></li>
+<li>Coverage for Scala: <a href="http://scoverage.org/">Scoverage</a></li>
+</ul>
+</section><section>
+<h2 id="quality-assurance-junit--gradle">Quality Assurance: JUnit + Gradle</h2>
+<p><code>src/main/scala/it/unibo/test/Test.scala</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">package</span> <span style="color:#b06;font-weight:bold">it.unibo.test</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">trait</span> <span style="color:#b06;font-weight:bold">Sometrait</span><span style="color:#080;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#888;font-weight:bold">def</span> <span style="color:#888;font-weight:bold">f:</span> <span style="color:#888;font-weight:bold">Int</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-weight:bold">def</span> g<span style="color:#080;font-weight:bold">:</span> <span style="color:#888;font-weight:bold">Int</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">object</span> <span style="color:#b06;font-weight:bold">Someobject</span><span style="color:#080;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#888;font-weight:bold">def</span> <span style="color:#888;font-weight:bold">f</span> = <span style="color:#00d;font-weight:bold">10</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-weight:bold">def</span> g <span style="color:#080;font-weight:bold">=</span> <span style="color:#00d;font-weight:bold">77</span>
+</span></span><span style="display:flex;"><span>
+</span></span></code></pre></div>
+</section><section>
+<h2 id="quality-assurance-junit--gradle-1">Quality Assurance: JUnit + Gradle</h2>
+<p><code>src/test/scala/MyTest.scala</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">import</span> <span style="color:#b06;font-weight:bold">it.unibo.test.</span>{<span style="color:#b06;font-weight:bold">Someobject</span>, <span style="color:#b06;font-weight:bold">Sometrait</span>}
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">import</span> <span style="color:#b06;font-weight:bold">org.junit.jupiter.api.Assertions._</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">import</span> <span style="color:#b06;font-weight:bold">org.junit.jupiter.api.Test</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">MyTest</span><span style="color:#080;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#888;font-weight:bold">@Test</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-weight:bold">def</span> emptySetShouldHaveSizeZero()<span style="color:#080;font-weight:bold">:</span> <span style="color:#888;font-weight:bold">Unit</span> =
+</span></span><span style="display:flex;"><span>    assertEquals(<span style="color:#00d;font-weight:bold">0</span>, <span style="color:#b06;font-weight:bold">Set</span>.empty.size)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#555">@Test</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-weight:bold">def</span> thisTestIsActuallyUseless()<span style="color:#080;font-weight:bold">:</span> <span style="color:#888;font-weight:bold">Unit</span> =
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-weight:bold">val</span> someStub <span style="color:#080;font-weight:bold">=</span> <span style="color:#080;font-weight:bold">new</span> <span style="color:#b06;font-weight:bold">Sometrait</span><span style="color:#080;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#888;font-weight:bold">override</span> <span style="color:#888;font-weight:bold">def</span> <span style="color:#888;font-weight:bold">f:</span> <span style="color:#888;font-weight:bold">Int</span> = <span style="color:#00d;font-weight:bold">42</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#080;font-weight:bold">override</span> <span style="color:#080;font-weight:bold">def</span> g<span style="color:#080;font-weight:bold">:</span> <span style="color:#888;font-weight:bold">Int</span> = ???
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    assertEquals(<span style="color:#00d;font-weight:bold">42</span>, someStub.f)
+</span></span><span style="display:flex;"><span>    assertNotEquals(<span style="color:#b06;font-weight:bold">Someobject</span>.f, someStub.f)
+</span></span><span style="display:flex;"><span>
+</span></span></code></pre></div>
+</section><section>
+<h2 id="quality-assurance-junit--gradle-2">Quality Assurance: JUnit + Gradle</h2>
+<p><code>build.gradle.kts</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>plugins {
+</span></span><span style="display:flex;"><span>    java
+</span></span><span style="display:flex;"><span>    scala
+</span></span><span style="display:flex;"><span>    jacoco
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>repositories {
+</span></span><span style="display:flex;"><span>    mavenCentral()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dependencies {
+</span></span><span style="display:flex;"><span>    implementation(<span style="color:#d20;background-color:#fff0f0">"org.scala-lang:scala3-library_3:3.6.2"</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-weight:bold">val</span> <span style="color:#369;font-weight:bold">junitVersion</span> = <span style="color:#d20;background-color:#fff0f0">"5.11.4"</span>
+</span></span><span style="display:flex;"><span>    testImplementation(<span style="color:#d20;background-color:#fff0f0">"org.junit.jupiter:junit-jupiter-api:</span><span style="color:#33b;background-color:#fff0f0">$junitVersion</span><span style="color:#d20;background-color:#fff0f0">"</span>)
+</span></span><span style="display:flex;"><span>    testRuntimeOnly(<span style="color:#d20;background-color:#fff0f0">"org.junit.jupiter:junit-jupiter-engine:</span><span style="color:#33b;background-color:#fff0f0">$junitVersion</span><span style="color:#d20;background-color:#fff0f0">"</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#888">// Enables JUnit Platform (needed for JUnit 5)
+</span></span></span><span style="display:flex;"><span><span style="color:#888"></span>tasks.named&lt;Test&gt;(<span style="color:#d20;background-color:#fff0f0">"test"</span>) {
+</span></span><span style="display:flex;"><span>    useJUnitPlatform()
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+</section><section>
+<h2 id="quality-assurance-scalatest--scoverage">Quality Assurance: Scalatest <del>+ Scoverage</del></h2>
+<p>Let’s switch <em>testing framework</em> and enable <em>coverage</em></p>
+<p><code>src/main/scala/it/unibo/test/Test.scala</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">package</span> <span style="color:#b06;font-weight:bold">it.unibo.test</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">trait</span> <span style="color:#b06;font-weight:bold">Sometrait</span><span style="color:#080;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#888;font-weight:bold">def</span> <span style="color:#888;font-weight:bold">f:</span> <span style="color:#888;font-weight:bold">Int</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-weight:bold">def</span> g<span style="color:#080;font-weight:bold">:</span> <span style="color:#888;font-weight:bold">Int</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">object</span> <span style="color:#b06;font-weight:bold">Someobject</span><span style="color:#080;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#888;font-weight:bold">def</span> <span style="color:#888;font-weight:bold">f</span> = <span style="color:#00d;font-weight:bold">10</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#080;font-weight:bold">def</span> g <span style="color:#080;font-weight:bold">=</span> <span style="color:#00d;font-weight:bold">77</span></span></span></code></pre></div>
+</section><section>
+<h2 id="quality-assurance-scalatest--scoverage-1">Quality Assurance: Scalatest <del>+ Scoverage</del></h2>
+<p><code>src/test/scala/Test.scala</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#080;font-weight:bold">import</span> <span style="color:#b06;font-weight:bold">it.unibo.test.Sometrait</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">import</span> <span style="color:#b06;font-weight:bold">org.scalatest.funsuite.AnyFunSuite</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-weight:bold">class</span> <span style="color:#b06;font-weight:bold">MyTests</span> <span style="color:#080;font-weight:bold">extends</span> <span style="color:#b06;font-weight:bold">AnyFunSuite</span><span style="color:#080;font-weight:bold">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#888;font-weight:bold">test</span>(<span style="color:#a61717;background-color:#e3d2d2">"</span><span style="color:#888;font-weight:bold">An</span> <span style="color:#888;font-weight:bold">empty</span> <span style="color:#888;font-weight:bold">Set</span> <span style="color:#888;font-weight:bold">should</span> <span style="color:#888;font-weight:bold">have</span> <span style="color:#888;font-weight:bold">size</span> <span style="color:#a61717;background-color:#e3d2d2">0"</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-weight:bold">println</span>(<span style="color:#a61717;background-color:#e3d2d2">"</span><span style="color:#888;font-weight:bold">Test1</span><span style="color:#a61717;background-color:#e3d2d2">"</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#888;font-weight:bold">assert</span>(<span style="color:#888;font-weight:bold">Set.empty.isEmpty</span>)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span></code></pre></div>
+</section><section>
+<h2 id="quality-assurance-scalatest--scoverage-2">Quality Assurance: Scalatest <del>+ Scoverage</del></h2>
+<p><code>build.gradle.kts</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span>plugins {
+</span></span><span style="display:flex;"><span>    java
+</span></span><span style="display:flex;"><span>    scala
+</span></span><span style="display:flex;"><span>    id(<span style="color:#d20;background-color:#fff0f0">"com.github.maiflai.scalatest"</span>) version <span style="color:#d20;background-color:#fff0f0">"0.32"</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>repositories {
+</span></span><span style="display:flex;"><span>    mavenCentral()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dependencies {
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-weight:bold">val</span> <span style="color:#369;font-weight:bold">scalaVersion</span> = <span style="color:#d20;background-color:#fff0f0">"3.6.2"</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-weight:bold">val</span> <span style="color:#a61717;background-color:#e3d2d2">(</span><span style="color:#369;font-weight:bold">scalaMinor</span>, _) = requireNotNull(Regex(<span style="color:#d20;background-color:#fff0f0">"^(</span><span style="color:#04d;background-color:#fff0f0">\\</span><span style="color:#d20;background-color:#fff0f0">d+)(</span><span style="color:#04d;background-color:#fff0f0">\\</span><span style="color:#d20;background-color:#fff0f0">.</span><span style="color:#04d;background-color:#fff0f0">\\</span><span style="color:#d20;background-color:#fff0f0">d+)(</span><span style="color:#04d;background-color:#fff0f0">\\</span><span style="color:#d20;background-color:#fff0f0">.</span><span style="color:#04d;background-color:#fff0f0">\\</span><span style="color:#d20;background-color:#fff0f0">d+)?$"</span>).matchEntire(scalaVersion)).destructured
+</span></span><span style="display:flex;"><span>    <span style="color:#888">// https://mvnrepository.com/artifact/org.scala-lang/scala3-library
+</span></span></span><span style="display:flex;"><span><span style="color:#888"></span>    implementation(<span style="color:#d20;background-color:#fff0f0">"org.scala-lang:scala3-library_3:</span><span style="color:#33b;background-color:#fff0f0">${scalaVersion}</span><span style="color:#d20;background-color:#fff0f0">"</span>)
+</span></span><span style="display:flex;"><span>    testImplementation(<span style="color:#d20;background-color:#fff0f0">"org.scalatest:scalatest_</span><span style="color:#33b;background-color:#fff0f0">$scalaMinor</span><span style="color:#d20;background-color:#fff0f0">:3.2.12"</span>)
+</span></span><span style="display:flex;"><span>    testRuntimeOnly(<span style="color:#d20;background-color:#fff0f0">"com.vladsch.flexmark:flexmark-all:0.64.8"</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+</section><section>
+<h2 id="gradle-qa-execution">Gradle: QA execution</h2>
+<ul>
+<li>The <code>java</code> plugin (applied by the <code>scala</code> plugin under the hood) also introduces:
+<ul>
+<li><code>test</code>: a task that runs all tests</li>
+<li><code>check</code>: a task that runs the whole quality assurance suite</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="additional-checks-and-reportings">Additional checks and reportings</h2>
+<p>There exist a number of recommended services that provide additional QA and reports.</p>
+<p>Non exhaustive list:</p>
+<ul>
+<li><a href="https://codecov.io/">Codecov.io</a>
+<ul>
+<li>Code coverage</li>
+<li>Supports Jacoco XML reports</li>
+<li>Nice data reporting system</li>
+</ul>
+</li>
+<li><a href="https://sonarcloud.io/">Sonarcloud</a>
+<ul>
+<li>Multiple measures, covering reliability, security, maintainability, duplication, complexity…</li>
+</ul>
+</li>
+<li><a href="https://www.codacy.com/">Codacy</a>
+<ul>
+<li>Automated software QA for several languages</li>
+</ul>
+</li>
+<li><a href="https://www.codefactor.io/">Code Factor</a>
+<ul>
+<li>Automated software QA</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<!-- this file includes generated content. Do not edit. Edit content/extra/pps-ci-introduction/_generator.md, instead. -->
+<h1 id="continuous-integration">Continuous Integration</h1>
+<p>The practice of integrating code with a main development line <strong>continuously</strong>
+<br>
+<em>Verifying</em> that the build remains intact</p>
+<ul>
+<li>Requires <em>build automation</em> to be in place</li>
+<li>Requires <em>testing</em> to be in place</li>
+<li>Pivot point of the <em>DevOps</em> practices</li>
+<li>Historically introduced by the extreme programming (XP) community</li>
+<li>Now widespread in the larger DevOps community</li>
+</ul>
+</section><section>
+<h1 id="traditional-integration">Traditional integration</h1>
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/ci/integration-traditional.png" alt="integration-traditional"></p>
+</section><section>
+<h1 id="the-integration-hell">The Integration Hell</h1>
+<ul>
+<li>Traditional software development takes several months for <em>“integrating”</em> a couple of years of development</li>
+<li>The longer there is no integrated project, the higher the <strong>risk</strong></li>
+</ul>
+</section><section>
+<h1 id="continuous-integration-1">Continuous integration</h1>
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/ci/integration-continuous.png" alt="integration-traditional"></p>
+</section><section>
+<h2 id="microreleases-and-protoduction">Microreleases and protoduction</h2>
+<ul>
+<li>High frequency integration may lead to high frequency releases
+<ul>
+<li>Possibly, <em>one per commit</em></li>
+<li>Of course, <em>versioning</em> must be appropriate…</li>
+</ul>
+</li>
+</ul>
+<p>Traditionally, <strong>protoduction</strong> is jargon for a <em>prototype that ends up in production</em></p>
+<div style="display:inline-block;vertical-align:top;">
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/ci/protoduction.jpg" alt=""></p>
+</div>
+<div style="display:inline-block;">
+<ul>
+<li>Traditionally used with a <em>negative</em> meaning
+<ul>
+<li>It implied software
+<ul>
+<li><em>unfinished</em>,</li>
+<li><em>unpolished</em>,</li>
+<li><em>badly designed</em></li>
+</ul>
+</li>
+<li>Very common, unfortunately</li>
+</ul>
+</li>
+<li>This si different in a continuously integrated environment
+<ul>
+<li><em>Incrementality</em> is fostered</li>
+<li>Partial features are <em>up to date</em> with the mainline</li>
+</ul>
+</li>
+</ul>
+</div>
+</section><section>
+<h2 id="intensive-operations-should-be-elsewhere">Intensive operations should be elsewhere</h2>
+<ul>
+<li>The build process should be <em>rich</em> and <em>fast</em></li>
+<li>Operations requiring a long time should be <em>automated</em>
+<ul>
+<li>And run somewhere else than devs’ PCs</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/DanySK/shared-slides/6824b93d3d52b841386a744f57953a73ccb67378/ci/compiling.png" alt=""></p>
+</section><section>
+<h2 id="continuous-integration-software">Continuous integration software</h2>
+<p>Software that promotes CI practices should:</p>
+<ul>
+<li>Provide <em>clean environments</em> for compilation/testing</li>
+<li>Provide a <em>wide range</em> of environments
+<ul>
+<li>Matching the relevant specifications of the actual targets</li>
+</ul>
+</li>
+<li>High degree of <em>configurability</em></li>
+<li>Possibly, <em>declarative configuration</em></li>
+<li>A <em>notification system</em> to alert about failures or issues</li>
+<li>Support for <em>authentication</em> and deployment to external services</li>
+</ul>
+<p><strong>Plenty</strong> of integrators on the market</p>
+<p>Circle CI, Travis CI, Werker, done.io, Codefresh, Codeship, Bitbucket Pipelines, GitHub Actions, GitLab CI/CD Pipelines, JetBrains TeamCity…</p>
+</section><section>
+<!-- this file includes generated content. Do not edit. Edit content/extra/pps-ci-introduction/_generator.md, instead. -->
+<h1 id="core-concepts">Core concepts</h1>
+<p>Naming and organization is variable across platforms, but <em>in general</em>:</p>
+<ul>
+<li>One or more <strong>pipelines</strong> can be associated to <strong>events</strong>
+<ul>
+<li>For instance, a <em>new commit</em>, an update to a <em>pull request</em>, or a <em>timeout</em></li>
+</ul>
+</li>
+<li>Every pipeline is composed of a <strong>sequence</strong> of <strong>operations</strong></li>
+<li>Every <strong>operation</strong> could be composed of sequential or parallel <strong>sub-operations</strong></li>
+<li>How many hierarchical levels are available depends on the specific platform
+<ul>
+<li>GitHub Actions: <em>workflow</em> $\Rightarrow$ <em>job</em> $\Rightarrow$ <em>step</em></li>
+<li>Travis CI: <em>build</em> $\Rightarrow$ <em>stage</em> $\Rightarrow$ <em>job</em>  $\Rightarrow$ <em>phase</em></li>
+</ul>
+</li>
+<li>Execution happens in a <strong>fresh system</strong> (virtual machine or container)
+<ul>
+<li>Often containers inside virtual machines</li>
+<li>The specific point of the hierarchy at which the VM/container is spawned depends on the CI platform</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="pipeline-design">Pipeline design</h2>
+<p>In essence, designing a CI system is designing a software construction, verification, and delivery <em>pipeline</em>
+with the abstractions provided by the selected provider.</p>
+<ol>
+<li><strong>Think</strong> of all the operations required starting from one or more <em>blank</em> VMs
+<ul>
+<li>OS configuration</li>
+<li>Software installation</li>
+<li>Project checkout</li>
+<li>Compilation</li>
+<li>Testing</li>
+<li>Secrets configuration</li>
+<li>Delivery</li>
+<li>…</li>
+</ul>
+</li>
+<li><strong>Organize</strong> them in a dependency graph</li>
+<li><strong>Model</strong> the graph with the provided CI tooling</li>
+</ol>
+<p>Configuration can grow complex, and is usually stored in a YAML file
+<br>
+(but there are exceptions, JetBrains TeamCity uses a Kotlin DSL).</p>
+</section><section>
+<h2 id="ci-in-github-actions">CI in GitHub Actions</h2>
+<ul>
+<li>Very <em>open-source friendly</em></li>
+<li>Integrated in GitHub</li>
+<li><em>Less mature</em> than other integrators
+<ul>
+<li>My personal feeling is that it was built <em>bottom-up</em>…</li>
+</ul>
+</li>
+<li>Some questionable limitations</li>
+<li>A lot of parallelism (20 concurrent jobs, 5 for MacOS X)</li>
+</ul>
+</section><section>
+<h2 id="ci-in-github-actions-1">CI in GitHub Actions</h2>
+<p><strong>step</strong></p>
+<ul>
+<li>A (<em>possibly named</em>) <em>command</em> or <em>sequence of commands</em></li>
+<li>Can be executed on the virtual machine or inside a container</li>
+<li>Defines <em>success</em> or <em>failure</em>
+<ul>
+<li>Usually, the return value of the last command</li>
+</ul>
+</li>
+</ul>
+<p><strong>action</strong></p>
+<ul>
+<li>A <em>reusable step</em>
+<ul>
+<li>DRY in CI $\Rightarrow$ Software Process Engineering</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="ci-in-github-actions-2">CI in GitHub Actions</h2>
+<p><strong>job</strong></p>
+<ul>
+<li>A <em>sequence of steps</em> that run in parallel</li>
+<li>Executed on a <em>virtual machine</em></li>
+<li>A job is <em>successful</em> if all its steps are successful</li>
+<li>Multiple jobs can be spawned at once via <em>matrix expansion</em>
+<ul>
+<li>e.g., spawn one job for each OS and version of the JVM</li>
+<li>CI Matrix expansion $\Rightarrow$ Software Process Engineering</li>
+</ul>
+</li>
+</ul>
+<p><strong>workflow</strong></p>
+<ul>
+<li>A <em>named sequence of steps</em></li>
+<li>There can be multiple workflows per repository
+<ul>
+<li>DRY/Reusability in Software Process Engineering</li>
+</ul>
+</li>
+<li>Workflows are <em>isolated</em></li>
+</ul>
+</section><section>
+<h2 id="github-actions-configuration">GitHub Actions: Configuration</h2>
+<p>Workflows are configured in the <code>.github/workflows/</code> folder of the repository</p>
+<ul>
+<li>One <strong>YAML</strong> file per <em>workflow</em></li>
+<li>GHA YAML is (sic) <em>non-standard</em>
+<ul>
+<li>DRY is limited: <em><strong>no</strong> anchors</em>, <em><strong>no</strong> merge keys</em></li>
+</ul>
+</li>
+<li>In the following, I assume you know YAML
+<ul>
+<li>You can <a href="https://learnxinyminutes.com/docs/yaml/">learn it in minutes</a></li>
+<li>Just remember that anchors and merge keys are not supported</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h2 id="github-actions-triggering-event">GitHub Actions: Triggering event</h2>
+<p>Workflows <em>react</em> to <a href="https://docs.github.com/en/actions/reference/events-that-trigger-workflows">events</a></p>
+<ul>
+<li>Events that trigger a workflow are specified under the <code>on</code> key</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#b06;font-weight:bold">on</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#b06;font-weight:bold">push</span>:<span style="color:#bbb"> </span><span style="color:#888"># Trigger the workflow on push</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#b06;font-weight:bold">branches</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- main<span style="color:#bbb"> </span><span style="color:#888"># but only for the main branch</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#b06;font-weight:bold">pull_request</span>:<span style="color:#bbb"> </span><span style="color:#888"># Also trigger for pull requests</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#b06;font-weight:bold">branches</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- main<span style="color:#bbb"> </span><span style="color:#888"># but only for the main branch</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#b06;font-weight:bold">page_build</span>:<span style="color:#bbb"> </span><span style="color:#888"># Also trigger on page_build</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#b06;font-weight:bold">release</span>:<span style="color:#bbb"> </span><span style="color:#888"># Also trigger on release...</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#b06;font-weight:bold">types</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- created<span style="color:#bbb"> </span><span style="color:#888"># ...created</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#b06;font-weight:bold">schedule</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span>- <span style="color:#b06;font-weight:bold">cron</span>:<span style="color:#bbb">  </span><span style="color:#d20;background-color:#fff0f0">'*/30 5,17 * * *'</span><span style="color:#bbb"> </span><span style="color:#888"># Cron syntax (see crontab.guru)</span><span style="color:#bbb">
+</span></span></span></code></pre></div></section><section>
+<h2 id="github-actions-environment-preparation">GitHub Actions: Environment preparation</h2>
+<p>GitHub actions job run on a <em>fresh virtual machine</em></p>
+<ul>
+<li>The <em>operating system</em> can be selected (Windows, Ubuntu, MacOS X)
+<ul>
+<li>Multi OS builds $\Rightarrow$ Software Process Engineering</li>
+</ul>
+</li>
+<li>The repository needs to be <em>cloned manually</em></li>
+<li>Any operation should be <em>configured manually</em></li>
+</ul>
+<p>Rather than <em>convention over configuration</em>, GHA use <strong>actions</strong> as a form of configuration reuse</p>
+<ul>
+<li>Actions can be found on the <a href="https://github.com/marketplace?type=actions">GH marketplace</a></li>
+<li>Developing new actions $\Rightarrow$ Software Process Engineering</li>
+</ul>
+</section><section>
+<h2 id="github-actions-a-simple-gradle-build">GitHub Actions: a simple gradle build</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="nohighlight" data-noescape=""><span style="display:flex;"><span><span style="color:#b06;font-weight:bold">name</span>:<span style="color:#bbb"> </span>Clone Repository<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#b06;font-weight:bold">on</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#b06;font-weight:bold">push</span>:<span style="color:#bbb"> </span><span style="color:#888"># On every push on any branch</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#b06;font-weight:bold">jobs</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#b06;font-weight:bold">Build</span>:<span style="color:#bbb"> </span><span style="color:#888"># Job name</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#b06;font-weight:bold">runs-on</span>:<span style="color:#bbb"> </span>ubuntu-latest<span style="color:#bbb"> </span><span style="color:#888"># Operating system selection</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#b06;font-weight:bold">env</span>:<span style="color:#bbb"> </span><span style="color:#888"># Environment can be controlled at the job or step level</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#b06;font-weight:bold">TERM</span>:<span style="color:#bbb"> </span>dumb<span style="color:#bbb"> </span><span style="color:#888"># Sets the environment variable TERM to "dumb"</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#b06;font-weight:bold">steps</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- <span style="color:#b06;font-weight:bold">name</span>:<span style="color:#bbb"> </span>Checkout<span style="color:#bbb"> </span><span style="color:#888"># custom name Checkout the repository</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#b06;font-weight:bold">uses</span>:<span style="color:#bbb"> </span>actions/checkout@v2<span style="color:#bbb"> </span><span style="color:#888"># Action implemented in this repository, tag "2"</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- <span style="color:#b06;font-weight:bold">uses</span>:<span style="color:#bbb"> </span>joschi/setup-jdk@v2.3.0<span style="color:#bbb"> </span><span style="color:#888"># Action implemented in repository "joschi/setup-jdk" tag "2.3.0"</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#b06;font-weight:bold">with</span>:<span style="color:#bbb"> </span><span style="color:#888"># Actions parameters (action name omitted)</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">          </span><span style="color:#b06;font-weight:bold">java-version</span>:<span style="color:#bbb"> </span><span style="color:#00d;font-weight:bold">15</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- <span style="color:#b06;font-weight:bold">name</span>:<span style="color:#bbb"> </span>Build<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">        </span><span style="color:#b06;font-weight:bold">run</span>:<span style="color:#bbb"> </span>./gradlew check<span style="color:#bbb">
+</span></span></span></code></pre></div></section><section>
+<h1 id="automated-delivery">Automated delivery</h1>
+<p>Once the <em>reference environment</em> in CI completed the software construction and testing,
+it should <strong>sign</strong> and then <strong>deliver</strong> the result.</p>
+<ul>
+<li>Possibly, even <strong>deploy</strong> the result, putting it at work</li>
+</ul>
+<h3 id="some-delivery-targets">Some delivery targets</h3>
+<ul>
+<li><a href="https://docs.github.com/en/github/administering-a-repository/about-releases">GitHub releases</a>
+<ul>
+<li>Retract, language agnostic, good for releases</li>
+</ul>
+</li>
+<li><a href="https://search.maven.org/">Sonatype OSSRH (a.k.a. <em>Maven Central</em>)</a>
+<ul>
+<li>De-facto standard for JVM products, no retract policy</li>
+</ul>
+</li>
+<li><a href="https://github.com/features/packages">GitHub packages</a>
+<ul>
+<li>No retract, authentication required also in read mode, immature</li>
+</ul>
+</li>
+<li><del>JFrog Bintray</del> <a href="https://jfrog.com/blog/into-the-sunset-bintray-jcenter-gocenter-and-chartcenter/">✝ 2021-05-01</a>
+<ul>
+<li><del>Maven Central + other stuff</del></li>
+</ul>
+</li>
+</ul>
+<p>In <a href="https://github.com/AlchemistSimulator/Alchemist/tree/3535e1b42097c86c6d5d3662fff554558381e5fc">this repository</a>,
+delivery is enabled towards all the aforementioned destinations</p>
+</section><section>
+<h1 id="no-retract">No-retract</h1>
+<p>Your error will remain in the repositories <em>forever</em> and you will <em>never</em> be able to
+fix it, you will need to <em>create a new release</em> with a <em>different version number</em>.</p>
+<h3 id="why-no-retract-an-anecdote"><strong>Why no-retract? An anecdote</strong></h3>
+<blockquote>
+<p>In March 2016, Azer Koçulu unpublished more than 250 of his modules
+from NPM, which is a popular package manager used by Javascript
+projects to install dependencies, because he was asked to rename the
+module <code>Kik</code>, whose name is the same of an instant messaging app that
+wanted to publish a homonym module.
+Unfortunately, one of those dependencies was <code>left-pad</code>, a <em>11-line-long</em>
+Javascript module, used by <em>thousands</em> of projects. This brought
+breackages throughout many Javascript products (most notably Node and
+Babel). NPM had to un-unpublish <code>left-pad</code>.</p>
+</blockquote>
+</section><section>
+<h2 id="picking-version-numbers">Picking version numbers</h2>
+<blockquote>
+<p>Without compliance to some sort of formal specification, version
+numbers are essentially useless for dependency management. By
+giving a name and clear definition to the above ideas, it becomes
+easy to communicate your intentions to the users of your software.</p>
+</blockquote>
+<h3 id="semantic-versioninghttpsemverorg"><a href="http://semver.org/">Semantic versioning</a></h3>
+<ul>
+<li>Formally described, RFC-style</li>
+<li>Three levels plus optional: <code>MAJOR.MINOR.PATCH[-OTHER][+BUILD]</code>
+<ul>
+<li><code>MAJOR</code> — Any incompatible API change
+<ul>
+<li>Major <code>0</code> is for initial development: anything may change at any time.</li>
+</ul>
+</li>
+<li><code>MINOR</code> — Add functionality in a backwards-compatible manner</li>
+<li><code>PATCH</code> — Backwards-compatible bug fixes</li>
+<li><code>OTHER</code> — Optionally decorates the version with additional information.</li>
+<li><code>BUILD</code> — Optionally decorates the version with build information.</li>
+</ul>
+</li>
+<li>First release: <code>0.1.0</code>, <code>1.0.0</code> formalizes the API</li>
+</ul>
+</section>
+
+  
+
+
+</div>
+      
+
+    </div>
+<script type="text/javascript" src="/reveal-hugo/object-assign.js"></script>
+
+<a href="/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
+
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"height":"1080","history":true,"mermaid":[{"fontFamily":"Inconsolata","gitGraph":{"mainBranchName":"master","rotateCommitLabel":true},"startOnLoad":false,"theme":"default","useMaxWidth":false}],"pdfseparatefragments":false,"slide_number":true,"theme":"white","transition":"slide","transition_speed":"fast","width":"1920"}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"},"transition":"slide","transition_speed":"fast"}</script>
+
+<script src="/reveal-js/dist/reveal.js"></script>
+
+
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/zoom/zoom.js"></script>
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+  
+  
+  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+
+
+
+
+<script type="text/javascript">
+  
+  
+  function camelize(map) {
+    if (map) {
+      Object.keys(map).forEach(function(k) {
+        newK = k.replace(/(\_\w)/g, function(m) { return m[1].toUpperCase() });
+        if (newK != k) {
+          map[newK] = map[k];
+          delete map[k];
+        }
+      });
+    }
+    return map;
+  }
+
+  var revealHugoDefaults = { center: true, controls: true, history: true, progress: true, transition: "slide" };
+
+  var revealHugoPlugins = {
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+   };
+  var revealHugoSiteParams = JSON.parse(document.getElementById('reveal-hugo-site-params').innerHTML);
+  var revealHugoPageParams = JSON.parse(document.getElementById('reveal-hugo-page-params').innerHTML);
+  
+  var options = Object.assign({},
+    camelize(revealHugoDefaults),
+    camelize(revealHugoSiteParams),
+    camelize(revealHugoPageParams),
+    camelize(revealHugoPlugins));
+  Reveal.initialize(options);
+</script>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+  
+    
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+    
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+    
+  
+  
+
+  
+  
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.3/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({"fontFamily":"Inconsolata","gitGraph":{"mainBranchName":"master","rotateCommitLabel":true},"startOnLoad":false,"theme":"default","useMaxWidth":false});
+
+    let render = (event) => {
+      let mermaidElems = event.currentSlide.querySelectorAll('.mermaid');
+      if (!mermaidElems.length){
+          return
+      }
+      mermaidElems.forEach(mermaidElem => {
+          let processed = mermaidElem.getAttribute('data-processed');
+          if (!processed){
+              
+              mermaid.init(undefined, mermaidElem);
+          }
+      });
+    };
+    
+    render({currentSlide: Reveal.getCurrentSlide()});
+
+    Reveal.on('slidechanged', render);
+    Reveal.on('ready', render);
+  </script>
+
+
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+</script>
+
+<script type="text/javascript" id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+<script>
+  if (/.*?(\?|&)print-pdf/.test(window.location.toString())) {
+      var ytVideos = document.getElementsByTagName("iframe")
+      for (let i = 0; i < ytVideos.length; i++) {
+          var videoFrame = ytVideos[i]
+          var isYouTube = /^https?:\/\/(www.)youtube\.com\/.*/.test(videoFrame.src)
+          if (isYouTube) {
+              var div = videoFrame.parentElement
+              var parent = div.parentElement
+              videoFrame.remove()
+              div.remove()
+              var p = document.createElement('p')
+              p.append(
+                  document.createTextNode(
+                      "There was an embedded video here, but it is disabled in the printed version of the slides."
+                  )
+              )
+              p.append(document.createElement('br'))
+              p.append(document.createTextNode("Visit instead:"))
+              p.append(document.createElement('br'))
+              const anchor1 = document.createElement('a');
+              anchor1.href = videoFrame.src;
+              anchor1.textContent = videoFrame.src;
+              p.append(anchor1);
+              p.append(document.createElement('br'))
+              const altSrc = videoFrame.src.replace(
+                  /(^https?:\/\/(www.)youtube\.com)\/(embed\/)(\w+).*/,
+                  "https://www.youtube.com/watch?v=$4"
+              );
+              const anchor2 = document.createElement('a');
+              anchor2.href = altSrc;
+              anchor2.textContent = altSrc;
+              p.append(document.createTextNode("or:"))
+              p.append(document.createElement('br'))
+              p.append(anchor2);
+              p.append(document.createElement('br'))
+              p.append(document.createTextNode("to watch the content."))
+              parent.appendChild(p)
+          }
+      }
+  }
+</script>
+
+    
+  
+
+</body></html>
