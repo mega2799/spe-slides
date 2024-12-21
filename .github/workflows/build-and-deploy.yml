@@ -64,7 +64,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
         uses: JamesIves/github-pages-deploy-action@v4.7.2
         with:
-          token: ${{ secrets.DEPLOYMENT_TOKEN }}
+          # token: ${{ secrets.DEPLOYMENT_TOKEN }}
           branch: master
           folder: build
           #   repository-name: unibo-spe/unibo-spe.github.io
