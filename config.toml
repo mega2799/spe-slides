@@ -1,4 +1,4 @@
-baseURL = "https://unibo-spe.github.io/"
+baseURL = "https://mega2799.github.io/"
 languageCode = "en-us"
 title = "Software Process Engineering"
 disableKinds = ["sitemap", "RSS"]
