@@ -1,4 +1,4 @@
-baseURL = "https://mega2799.github.io/"
+baseURL = "https://mega2799.github.io/spe-slides"
 languageCode = "en-us"
 title = "Software Process Engineering"
 disableKinds = ["sitemap", "RSS"]
