@@ -67,4 +67,4 @@ jobs:
           # token: ${{ secrets.DEPLOYMENT_TOKEN }}
           branch: page
           folder: build
-          repository-name: mega2799/spe-slides.io
+          repository-name: mega2799/spe-slides
