@@ -67,4 +67,4 @@ jobs:
           token: ${{ secrets.DEPLOYMENT_TOKEN }}
           branch: master
           folder: build
-          repository-name: unibo-spe/unibo-spe.github.io
+          # repository-name: unibo-spe/unibo-spe.github.io
