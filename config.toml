@@ -49,7 +49,9 @@ style = "pastie"
 
 [[params.reveal_hugo.mermaid]]
 startOnLoad = false
-theme = "default"
+#theme = "default"
+theme = "dark"
+
 fontFamily = "Inconsolata"
 useMaxWidth = false
 
