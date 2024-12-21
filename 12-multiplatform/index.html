@@ -5,15 +5,15 @@
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/reveal-js/dist/reset.css">
-<link rel="stylesheet" href="/reveal-js/dist/reveal.css">
-  <link rel="stylesheet" href="/css/custom-theme.min.f2c7adbc4e1966516650f994979920854f1f6804d229d73c7cb5f507ac9e61f7.css" id="theme"><link rel="stylesheet" href="/highlight-js/default.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="/spe-slides/reveal-js/dist/reset.css">
+<link rel="stylesheet" href="/spe-slides/reveal-js/dist/reveal.css">
+  <link rel="stylesheet" href="/spe-slides/css/custom-theme.min.f2c7adbc4e1966516650f994979920854f1f6804d229d73c7cb5f507ac9e61f7.css" id="theme"><link rel="stylesheet" href="/spe-slides/highlight-js/default.min.css">
 <link rel="stylesheet" href="https://raw.githubusercontent.com/DanySK/css-blur-animation/master/blur.css">
 <link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oxygen Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu Mono" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<script src="https://mega2799.github.io//plantuml.js"></script>
+<script src="https://mega2799.github.io/spe-slides//plantuml.js"></script>
 
   </head>
   <body>
@@ -674,7 +674,7 @@ and the <strong>runtime</strong> supporting the execution of those applications<
 <p><strong>Abstraction gap</strong> $\approx$ the space among the <strong>problem</strong> and the prior functionalities offered by a <strong>platform</strong>.
 Ideally, the bigger the space the more <em>effort</em> is required to build the solution</p>
 </blockquote>
-<figure><img src="/12-multiplatform/abstraction-gap.svg" width="70%">
+<figure><img src="/spe-slides/12-multiplatform/abstraction-gap.svg" width="70%">
 </figure>
 </section><section>
 <h2 id="how-platform-affects-the-implementation-phase">How platform affects the <strong>implementation</strong> phase</h2>
@@ -686,7 +686,7 @@ Ideally, the bigger the space the more <em>effort</em> is required to build the 
 <p>… as well as the API of any <strong>third-party library</strong> available for that platform</p>
 </li>
 </ul>
-<figure><img src="/12-multiplatform/third-party.svg" width="80%">
+<figure><img src="/spe-slides/12-multiplatform/third-party.svg" width="80%">
 </figure>
 </section><section>
 <h2 id="how-platform-affects-the-testing-phase">How platform affects the <strong>testing</strong> phase</h2>
@@ -993,7 +993,7 @@ Ideally, the bigger the space the more <em>effort</em> is required to build the 
 </ol>
 </section><section>
 <h2 id="write-once-build-anywhere-concept">Write once, build anywhere (concept)</h2>
-<figure><img src="/12-multiplatform/write-once-build-everywhere.svg" width="70%">
+<figure><img src="/spe-slides/12-multiplatform/write-once-build-everywhere.svg" width="70%">
 </figure>
 </section><section>
 <h2 id="write-once-build-anywhere-explanation">Write once, build anywhere (explanation)</h2>
@@ -1068,7 +1068,7 @@ Ideally, the bigger the space the more <em>effort</em> is required to build the 
 <blockquote>
 <p>The abstraction gap of the common code is as wide as the one of the platform having the widest abstraction gap</p>
 </blockquote>
-<figure><img src="/12-multiplatform/abstraction-gap-mp.svg" width="50%">
+<figure><img src="/spe-slides/12-multiplatform/abstraction-gap-mp.svg" width="50%">
 </figure>
 </section><section>
 <h2 id="write-once-build-anywhere-strategy">Write once, build anywhere (strategy)</h2>
@@ -1091,7 +1091,7 @@ Ideally, the bigger the space the more <em>effort</em> is required to build the 
 </ol>
 </section><section>
 <h2 id="write-first-wrap-elsewhere-concept">Write first, wrap elsewhere (concept)</h2>
-<figure><img src="/12-multiplatform/write-first-wrap-elsewhere.svg" width="70%">
+<figure><img src="/spe-slides/12-multiplatform/write-first-wrap-elsewhere.svg" width="70%">
 </figure>
 </section><section>
 <h2 id="write-first-wrap-elsewhere-explanation">Write first, wrap elsewhere (explanation)</h2>
@@ -1670,7 +1670,7 @@ Ideally, the bigger the space the more <em>effort</em> is required to build the 
 </ul>
 </li>
 </ul>
-<figure><img src="/12-multiplatform/expect-actual.png" width="50%">
+<figure><img src="/spe-slides/12-multiplatform/expect-actual.png" width="50%">
 </figure>
 
 </section><section>
@@ -3671,7 +3671,7 @@ AbstractParser &lt;|-- StringParser
 <p>the only major difference is that <strong>Java classes</strong> and objects are <em>closed</em> and <strong>cannot be modified</strong></p>
 </li>
 </ul>
-<figure><img src="/12-multiplatform/jpype-types.png" alt="Java classes vs. Python classes in JPype" width="50%">
+<figure><img src="/spe-slides/12-multiplatform/jpype-types.png" alt="Java classes vs. Python classes in JPype" width="50%">
 </figure>
 
 </section><section>
@@ -3692,7 +3692,7 @@ AbstractParser &lt;|-- StringParser
 </li>
 </ul>
 <!-- ![Java exceptions vs. Python exceptions in JPype](./jpype-exceptions.png) -->
-<figure><img src="/12-multiplatform/jpype-exceptions.png" alt="Java exceptions vs. Python exceptions in JPype" width="50%">
+<figure><img src="/spe-slides/12-multiplatform/jpype-exceptions.png" alt="Java exceptions vs. Python exceptions in JPype" width="50%">
 </figure>
 
 </section><section>
@@ -3712,7 +3712,7 @@ AbstractParser &lt;|-- StringParser
 <p>each primitive Java type is <strong>exposed</strong> in JPype (<code>jpype.JBoolean</code>, <code>.JByte</code>, <code>.JChar</code>, <code>.JShort</code>, <code>.JInt</code>, <code>.JLong</code>, <code>.JFloat</code>, <code>.JDouble</code>).</p>
 </li>
 </ul>
-<figure><img src="/12-multiplatform/jpype-primitives.png" alt="Java primitives vs. Python primitives in JPype" width="50%">
+<figure><img src="/spe-slides/12-multiplatform/jpype-primitives.png" alt="Java primitives vs. Python primitives in JPype" width="50%">
 </figure>
 
 </section><section>
@@ -3735,7 +3735,7 @@ AbstractParser &lt;|-- StringParser
 <p>when comparing or using strings as dictionary keys, all <code>JString</code> objects should be converted to Python</p>
 </li>
 </ul>
-<figure><img src="/12-multiplatform/jpype-strings.png" alt="Java strings vs. Python strings in JPype" width="50%">
+<figure><img src="/spe-slides/12-multiplatform/jpype-strings.png" alt="Java strings vs. Python strings in JPype" width="50%">
 </figure>
 
 </section><section>
@@ -3755,7 +3755,7 @@ AbstractParser &lt;|-- StringParser
 <p>passing a <strong>slide</strong> of a Python list to Java will create a <strong>copy</strong> of the sub-list</p>
 </li>
 </ul>
-<figure><img src="/12-multiplatform/jpype-arrays.png" alt="Java arrays vs. Python lists in JPype" width="50%">
+<figure><img src="/spe-slides/12-multiplatform/jpype-arrays.png" alt="Java arrays vs. Python lists in JPype" width="50%">
 </figure>
 
 </section><section>
@@ -3781,7 +3781,7 @@ AbstractParser &lt;|-- StringParser
 <p>Java’s <code>List</code>s support Python’s <strong>lists</strong> syntax by overriding <code>__getitem__</code> and <code>__setitem__</code></p>
 </li>
 </ul>
-<figure><img src="/12-multiplatform/jpype-collections.png" alt="Java collections vs. Python collections in JPype" width="50%">
+<figure><img src="/spe-slides/12-multiplatform/jpype-collections.png" alt="Java collections vs. Python collections in JPype" width="50%">
 </figure>
 
 </section><section>
@@ -3798,13 +3798,13 @@ AbstractParser &lt;|-- StringParser
 <p>Python <strong>lambda expressions</strong> can be cast’d to Java’s <strong>functional interfaces</strong></p>
 </li>
 </ul>
-<figure><img src="/12-multiplatform/jpype-implements.png" alt="Implementing Java interfaces in Python" width="50%">
+<figure><img src="/spe-slides/12-multiplatform/jpype-implements.png" alt="Implementing Java interfaces in Python" width="50%">
 </figure>
 
 </section><section>
 <h2 id="jpype-type-conversion-model-pt-1">JPype type conversion model (pt. 1)</h2>
 <p>Overview on the <a href="https://jpype.readthedocs.io/en/latest/userguide.html#type-matching">official documentation</a></p>
-<figure><img src="/12-multiplatform/jpype-conversions.png" alt="Explicit and implicit type conversions in JPype" width="70%">
+<figure><img src="/spe-slides/12-multiplatform/jpype-conversions.png" alt="Explicit and implicit type conversions in JPype" width="70%">
 </figure>
 
 </section><section>
@@ -4386,28 +4386,28 @@ jdk4py==17.0.7.0
       
 
     </div>
-<script type="text/javascript" src="/reveal-hugo/object-assign.js"></script>
+<script type="text/javascript" src="/spe-slides/reveal-hugo/object-assign.js"></script>
 
-<a href="/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
+<a href="/spe-slides/reveal-js/dist/print/" id="print-location" style="display: none;"></a>
 
 <script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"height":"1080","history":true,"mermaid":[{"fontFamily":"Inconsolata","gitGraph":{"mainBranchName":"master","rotateCommitLabel":true},"startOnLoad":false,"theme":"default","useMaxWidth":false}],"pdfseparatefragments":false,"slide_number":true,"theme":"white","transition":"slide","transition_speed":"fast","width":"1920"}</script>
 <script type="application/json" id="reveal-hugo-page-params">{"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"}}</script>
 
-<script src="/reveal-js/dist/reveal.js"></script>
+<script src="/spe-slides/reveal-js/dist/reveal.js"></script>
 
 
   
   
-  <script type="text/javascript" src="/reveal-js/plugin/markdown/markdown.js"></script>
+  <script type="text/javascript" src="/spe-slides/reveal-js/plugin/markdown/markdown.js"></script>
   
-  <script type="text/javascript" src="/reveal-js/plugin/highlight/highlight.js"></script>
+  <script type="text/javascript" src="/spe-slides/reveal-js/plugin/highlight/highlight.js"></script>
   
-  <script type="text/javascript" src="/reveal-js/plugin/zoom/zoom.js"></script>
+  <script type="text/javascript" src="/spe-slides/reveal-js/plugin/zoom/zoom.js"></script>
   
-  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+  <script type="text/javascript" src="/spe-slides/reveal-js/plugin/notes/notes.js"></script>
   
   
-  <script type="text/javascript" src="/reveal-js/plugin/notes/notes.js"></script>
+  <script type="text/javascript" src="/spe-slides/reveal-js/plugin/notes/notes.js"></script>
 
 
 
