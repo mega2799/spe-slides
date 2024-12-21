@@ -30,7 +30,7 @@ slide_number = true
 transition = "slide"
 transition_speed = "fast"
 custom_theme = "custom-theme.scss"
-custom_theme_compile = true
+custom_theme_compile = false
 width = '1920'
 height = '1080'
 
